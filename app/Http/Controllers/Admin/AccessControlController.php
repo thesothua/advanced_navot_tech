@@ -27,8 +27,8 @@ class AccessControlController extends Controller
         $recent_role_assignments = DB::table('model_has_roles')
             ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
             ->join('users', 'model_has_roles.model_id', '=', 'users.id')
-            ->select('users.name as user_name', 'roles.name as role_name', 'model_has_roles.created_at')
-            ->orderBy('model_has_roles.created_at', 'desc')
+            ->select('users.name as user_name', 'roles.name as role_name')
+            // ->orderBy('model_has_roles.created_at', 'desc')
             ->limit(10)
             ->get();
 
