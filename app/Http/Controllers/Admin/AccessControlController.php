@@ -32,7 +32,12 @@ class AccessControlController extends Controller
             ->limit(10)
             ->get();
 
-        return view('admin.access-control.index', compact('stats', 'recent_role_assignments'));
+        // Add the missing variables that the view expects
+        $roles = Role::withCount('users')->get();
+        $permissions = Permission::all();
+        $totalUsers = User::count();
+
+        return view('admin.access-control.index', compact('stats', 'recent_role_assignments', 'roles', 'permissions', 'totalUsers'));
     }
 
     /**
