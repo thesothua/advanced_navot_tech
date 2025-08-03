@@ -114,6 +114,16 @@
                             </a>
                         </li>
                         @endrole
+                        
+                        @role('super-admin')
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.access-control.*') ? 'active' : '' }}" 
+                               href="{{ route('admin.access-control.index') }}">
+                                <i class="fas fa-shield-alt me-2"></i>
+                                Access Control
+                            </a>
+                        </li>
+                        @endrole
                     </ul>
                     
                     <hr class="text-white">
