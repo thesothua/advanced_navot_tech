@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\AccessControlController;
 
 // Public routes
 Route::get('/', function () {
@@ -54,6 +55,14 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::middleware(['role:super-admin'])->group(function () {
         Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
         Route::post('settings', [SettingController::class, 'update'])->name('settings.update');
+    });
+    
+    // Access Control Management (Super Admin only)
+    Route::middleware(['role:super-admin'])->prefix('access-control')->name('access-control.')->group(function () {
+        Route::get('/', [AccessControlController::class, 'index'])->name('index');
+        Route::get('/roles', [AccessControlController::class, 'roles'])->name('roles');
+        Route::get('/permissions', [AccessControlController::class, 'permissions'])->name('permissions');
+        Route::get('/user-permissions', [AccessControlController::class, 'userPermissions'])->name('user-permissions');
     });
 });
 
