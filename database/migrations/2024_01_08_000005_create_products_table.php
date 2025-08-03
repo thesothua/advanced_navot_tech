@@ -17,7 +17,7 @@ return new class extends Migration
             $table->decimal('sale_price', 10, 2)->nullable();
             $table->integer('stock')->default(0);
             $table->string('sku')->unique()->nullable();
-            $table->foreignId('brand_id')->constrained()->onDelete('cascade');
+            $table->foreignId('brand_id')->nullable()->constrained()->onDelete('set null');
             $table->boolean('is_active')->default(true);
             $table->boolean('is_featured')->default(false);
             $table->json('meta_data')->nullable();

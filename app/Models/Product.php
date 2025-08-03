@@ -67,7 +67,13 @@ class Product extends Model implements HasMedia
     {
         $this->addMediaConversion('thumb')
             ->width(50)
-            ->height(50);
+            ->height(50)
+            ->sharpen(10);
+            
+        $this->addMediaConversion('medium')
+            ->width(300)
+            ->height(300)
+            ->sharpen(10);
     }
 
     public function getRouteKeyName(): string

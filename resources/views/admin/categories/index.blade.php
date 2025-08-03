@@ -12,60 +12,48 @@
 
 <div class="card">
     <div class="card-body">
-        @if($categories->count() > 0)
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Slug</th>
-                            <th>Products Count</th>
-                            <th>Status</th>
-                            <th>Sort Order</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($categories as $category)
-                        <tr>
-                            <td>{{ $category->name }}</td>
-                            <td>{{ $category->slug }}</td>
-                            <td>{{ $category->products_count }}</td>
-                            <td>
-                                @if($category->is_active)
-                                    <span class="badge bg-success">Active</span>
-                                @else
-                                    <span class="badge bg-secondary">Inactive</span>
-                                @endif
-                            </td>
-                            <td>{{ $category->sort_order }}</td>
-                            <td>
-                                <a href="{{ route('admin.categories.show', $category) }}" class="btn btn-sm btn-outline-info">
-                                    <i class="fas fa-eye"></i>
-                                </a>
-                                <a href="{{ route('admin.categories.edit', $category) }}" class="btn btn-sm btn-outline-primary">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <form action="{{ route('admin.categories.destroy', $category) }}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="d-flex justify-content-center">
-                {{ $categories->links() }}
-            </div>
-        @else
-            <p class="text-muted text-center">No categories found.</p>
-        @endif
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered" id="categories-table" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Slug</th>
+                        <th>Products Count</th>
+                        <th>Status</th>
+                        <th>Sort Order</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
     </div>
 </div>
-@endsection 
+@endsection
+
+@push('scripts')
+<!-- Include DataTables JS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
+<script>
+$(function () {
+    $('#categories-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: '{{ route('admin.categories.index') }}',
+        columns: [
+            { data: 'image', name: 'image', orderable: false, searchable: false },
+            { data: 'name', name: 'name' },
+            { data: 'slug', name: 'slug' },
+            { data: 'products_count', name: 'products_count', orderable: true, searchable: false },
+            { data: 'status', name: 'status' },
+            { data: 'sort_order', name: 'sort_order' },
+            { data: 'action', name: 'action', orderable: false, searchable: false }
+        ]
+    });
+});
+</script>
+@endpush 

@@ -14,35 +14,35 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        //  $products = Product::with(['media','brand', 'categories'])->paginate(10);
-        // return view('admin.products.index', compact('products')); 
-
-
         if ($request->ajax()) {
-            $products = Product::with(['brand', 'categories'])->select('products.*');
+            $products = Product::with(['brand', 'categories', 'media'])->select('products.*');
     
             return DataTables::of($products)
                 ->addIndexColumn()
                 ->addColumn('image', function ($product) {
-                    $url = $product->getFirstMediaUrl('images', 'thumb'); // or use null instead of 'thumb' if no conversion
-                
-                    if (! $url) {
-                        return '<img src="https://via.placeholder.com/50x50?text=No+Image" alt="no image" width="50" height="50">';
+                    $media = $product->getFirstMedia('images');
+                    
+                    if (!$media) {
+                        return '<img src="https://via.placeholder.com/50x50?text=No+Image" alt="no image" width="50" height="50" class="rounded">';
                     }
-                
-                    return '<img src="' . $url . '" alt="' . e($product->name ?? 'Product') . '" width="50" height="50">';
+                    
+                    // Use full URL for proper image display
+                    $url = $media->getUrl();
+                    return '<img src="' . $url . '" alt="' . e($product->name ?? 'Product') . '" width="50" height="50" class="rounded">';
                 })
-                ->editColumn('price', fn ($product) => '₹ ' . number_format($product->price))
+                ->editColumn('price', fn ($product) => '₹ ' . number_format($product->price, 2))
                 ->addColumn('brand', fn ($product) => $product->brand?->name ?? '-')
                 ->addColumn('categories', function ($product) {
-                    return $product->categories->pluck('name')->implode(', ');
+                    return $product->categories->pluck('name')->implode(', ') ?: '-';
                 })
                 ->addColumn('status', function ($product) {
-                    return $product->is_active ? 'ACTIVE' : 'INACTIVE';
+                    $badgeClass = $product->is_active ? 'bg-success' : 'bg-secondary';
+                    $status = $product->is_active ? 'ACTIVE' : 'INACTIVE';
+                    return '<span class="badge ' . $badgeClass . '">' . $status . '</span>';
                 })
                 ->addColumn('action', function ($product) {
-                    $show = '<a href="' . route('admin.products.show', $product->slug) . '" class="btn btn-sm btn-outline-info mr-1">View</a>';
-                    $edit = '<a href="' . route('admin.products.edit', $product->slug) . '" class="btn btn-sm btn-outline-primary mr-1">Edit</a>';
+                    $show = '<a href="' . route('admin.products.show', $product->slug) . '" class="btn btn-sm btn-outline-info me-1">View</a>';
+                    $edit = '<a href="' . route('admin.products.edit', $product->slug) . '" class="btn btn-sm btn-outline-primary me-1">Edit</a>';
                     $delete = '<form method="POST" action="' . route('admin.products.destroy', $product->slug) . '" style="display:inline-block;">'
                         . csrf_field()
                         . method_field('DELETE')
@@ -50,13 +50,11 @@ class ProductController extends Controller
                         . '</form>';
                     return $show . ' ' . $edit . ' ' . $delete;
                 })
-                ->rawColumns(['image', 'action'])
+                ->rawColumns(['image', 'status', 'action'])
                 ->make(true);
         }
     
-        return view('admin.products.index'); // Blade file for listing
-
-
+        return view('admin.products.index');
     }
 
     public function create()
@@ -102,7 +100,7 @@ class ProductController extends Controller
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                $product->addMedia($image)->toMediaCollection('images');
+                $product->addMedia($image)->toMediaCollection('images', 'public');
             }
         }
 
@@ -125,13 +123,13 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $request->validate([
-            // 'name' => 'required|string|max:255|unique:products,name' . $product->id,
+            'name' => 'required|string|max:255|unique:products,name,' . $product->id,
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'sale_price' => 'nullable|numeric|min:0',
             'stock' => 'required|integer|min:0',
             'sku' => 'nullable|string|unique:products,sku,' . $product->id,
-            'brand_id' => 'required|exists:brands,id',
+            'brand_id' => 'nullable|exists:brands,id',
             'category_ids' => 'array',
             'category_ids.*' => 'exists:categories,id',
             'is_active' => 'boolean',
@@ -147,7 +145,7 @@ class ProductController extends Controller
             'sale_price' => $request->sale_price,
             'stock' => $request->stock,
             'sku' => $request->sku,
-            'brand_id' => $request->brand_id,
+            'brand_id' => $request->brand_id ?? null,
             'is_active' => $request->boolean('is_active', true),
             'is_featured' => $request->boolean('is_featured', false),
         ]);
@@ -180,7 +178,7 @@ class ProductController extends Controller
         ]);
 
         foreach ($request->file('images') as $image) {
-            $product->addMedia($image)->toMediaCollection('images');
+            $product->addMedia($image)->toMediaCollection('images', 'public');
         }
 
         return back()->with('success', 'Images uploaded successfully.');

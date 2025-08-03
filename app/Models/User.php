@@ -54,4 +54,12 @@ class User extends Authenticatable implements HasMedia
         $this->addMediaCollection('avatar')
             ->singleFile();
     }
+
+    public function registerMediaConversions(\Spatie\MediaLibrary\MediaCollections\Models\Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->width(50)
+            ->height(50)
+            ->sharpen(10);
+    }
 }
