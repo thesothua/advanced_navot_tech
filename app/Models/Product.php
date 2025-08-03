@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Support\Str;
+use Spatie\MediaLibrary\MediaCollections\Models\Media; // ✅ CORRECT ONE
 
 class Product extends Model implements HasMedia
 {
@@ -60,6 +61,13 @@ class Product extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('images');
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->width(50)
+            ->height(50);
     }
 
     public function getRouteKeyName(): string

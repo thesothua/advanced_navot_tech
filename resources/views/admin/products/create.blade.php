@@ -55,9 +55,9 @@
             </div>
 
             <div class="mb-3">
-                <label for="brand_id" class="form-label">Brand *</label>
+                <label for="brand_id" class="form-label">Brand</label>
                 <select class="form-select @error('brand_id') is-invalid @enderror" 
-                        id="brand_id" name="brand_id" required>
+                        id="brand_id" name="brand_id">
                     <option value="">Select Brand</option>
                     @foreach($brands as $brand)
                         <option value="{{ $brand->id }}" {{ old('brand_id') == $brand->id ? 'selected' : '' }}>

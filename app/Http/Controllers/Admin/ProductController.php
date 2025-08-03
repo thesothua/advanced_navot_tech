@@ -8,13 +8,55 @@ use App\Models\Category;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Yajra\DataTables\Facades\DataTables;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::with(['brand', 'categories'])->paginate(10);
-        return view('admin.products.index', compact('products'));
+        //  $products = Product::with(['media','brand', 'categories'])->paginate(10);
+        // return view('admin.products.index', compact('products')); 
+
+
+        if ($request->ajax()) {
+            $products = Product::with(['brand', 'categories'])->select('products.*');
+    
+            return DataTables::of($products)
+                ->addIndexColumn()
+                ->addColumn('image', function ($product) {
+                    $url = $product->getFirstMediaUrl('images', 'thumb'); // or use null instead of 'thumb' if no conversion
+                
+                    if (! $url) {
+                        return '<img src="https://via.placeholder.com/50x50?text=No+Image" alt="no image" width="50" height="50">';
+                    }
+                
+                    return '<img src="' . $url . '" alt="' . e($product->name ?? 'Product') . '" width="50" height="50">';
+                })
+                ->editColumn('price', fn ($product) => '₹ ' . number_format($product->price))
+                ->addColumn('brand', fn ($product) => $product->brand?->name ?? '-')
+                ->addColumn('categories', function ($product) {
+                    return $product->categories->pluck('name')->implode(', ');
+                })
+                ->addColumn('status', function ($product) {
+                    return $product->is_active ? 'ACTIVE' : 'INACTIVE';
+                })
+                ->addColumn('action', function ($product) {
+                    $show = '<a href="' . route('admin.products.show', $product->slug) . '" class="btn btn-sm btn-outline-info mr-1">View</a>';
+                    $edit = '<a href="' . route('admin.products.edit', $product->slug) . '" class="btn btn-sm btn-outline-primary mr-1">Edit</a>';
+                    $delete = '<form method="POST" action="' . route('admin.products.destroy', $product->slug) . '" style="display:inline-block;">'
+                        . csrf_field()
+                        . method_field('DELETE')
+                        . '<button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm(\'Are you sure?\')">Delete</button>'
+                        . '</form>';
+                    return $show . ' ' . $edit . ' ' . $delete;
+                })
+                ->rawColumns(['image', 'action'])
+                ->make(true);
+        }
+    
+        return view('admin.products.index'); // Blade file for listing
+
+
     }
 
     public function create()
@@ -27,13 +69,13 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|unique:products,name|string|max:255',
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'sale_price' => 'nullable|numeric|min:0',
             'stock' => 'required|integer|min:0',
             'sku' => 'nullable|string|unique:products,sku',
-            'brand_id' => 'required|exists:brands,id',
+            'brand_id' => 'nullable|exists:brands,id',
             'category_ids' => 'array',
             'category_ids.*' => 'exists:categories,id',
             'is_active' => 'boolean',
@@ -49,7 +91,7 @@ class ProductController extends Controller
             'sale_price' => $request->sale_price,
             'stock' => $request->stock,
             'sku' => $request->sku,
-            'brand_id' => $request->brand_id,
+            'brand_id' => $request->brand_id ?? null,
             'is_active' => $request->boolean('is_active', true),
             'is_featured' => $request->boolean('is_featured', false),
         ]);
@@ -83,7 +125,7 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            // 'name' => 'required|string|max:255|unique:products,name' . $product->id,
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'sale_price' => 'nullable|numeric|min:0',
@@ -116,7 +158,7 @@ class ProductController extends Controller
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                $product->addMedia($image)->toMediaCollection('images');
+                $product->addMedia($image)->toMediaCollection('images' , 'public');
             }
         }
 
