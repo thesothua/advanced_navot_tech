@@ -8,13 +8,48 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Illuminate\Validation\Rules;
+use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::with('roles')->paginate(10);
-        return view('admin.users.index', compact('users'));
+        if ($request->ajax()) {
+            $users = User::with(['roles', 'media'])->select('users.*');
+    
+            return DataTables::of($users)
+                ->addIndexColumn()
+                ->addColumn('avatar', function ($user) {
+                    $media = $user->getFirstMedia('avatar');
+                    
+                    if (!$media) {
+                        return '<img src="https://via.placeholder.com/50x50?text=' . strtoupper(substr($user->name, 0, 1)) . '" alt="avatar" width="50" height="50" class="rounded-circle">';
+                    }
+                    
+                    $url = $media->getUrl();
+                    return '<img src="' . $url . '" alt="' . e($user->name ?? 'User') . '" width="50" height="50" class="rounded-circle">';
+                })
+                ->addColumn('roles', function ($user) {
+                    return $user->roles->pluck('name')->map(function($role) {
+                        return '<span class="badge bg-primary">' . $role . '</span>';
+                    })->implode(' ') ?: '<span class="text-muted">No roles</span>';
+                })
+                ->editColumn('created_at', fn ($user) => $user->created_at->format('M d, Y'))
+                ->addColumn('action', function ($user) {
+                    $show = '<a href="' . route('admin.users.show', $user->id) . '" class="btn btn-sm btn-outline-info me-1">View</a>';
+                    $edit = '<a href="' . route('admin.users.edit', $user->id) . '" class="btn btn-sm btn-outline-primary me-1">Edit</a>';
+                    $delete = '<form method="POST" action="' . route('admin.users.destroy', $user->id) . '" style="display:inline-block;">'
+                        . csrf_field()
+                        . method_field('DELETE')
+                        . '<button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm(\'Are you sure?\')">Delete</button>'
+                        . '</form>';
+                    return $show . ' ' . $edit . ' ' . $delete;
+                })
+                ->rawColumns(['avatar', 'roles', 'action'])
+                ->make(true);
+        }
+    
+        return view('admin.users.index');
     }
 
     public function create()
