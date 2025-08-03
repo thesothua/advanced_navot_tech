@@ -226,6 +226,10 @@ class AccessControlController extends Controller
         $permission = Permission::findById($request->permission_id);
         $user->givePermissionTo($permission);
 
+        if ($request->expectsJson()) {
+            return response()->json(['success' => true, 'message' => 'Permission assigned to user successfully.']);
+        }
+
         return back()->with('success', 'Permission assigned to user successfully.');
     }
 
@@ -240,6 +244,10 @@ class AccessControlController extends Controller
 
         $permission = Permission::findById($request->permission_id);
         $user->revokePermissionTo($permission);
+
+        if ($request->expectsJson()) {
+            return response()->json(['success' => true, 'message' => 'Permission revoked from user successfully.']);
+        }
 
         return back()->with('success', 'Permission revoked from user successfully.');
     }
@@ -258,6 +266,10 @@ class AccessControlController extends Controller
         $roles = Role::whereIn('id', $roleIds)->get();
         
         $user->syncRoles($roles);
+
+        if ($request->expectsJson()) {
+            return response()->json(['success' => true, 'message' => 'User roles updated successfully.']);
+        }
 
         return back()->with('success', 'User roles updated successfully.');
     }
