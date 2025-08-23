@@ -241,11 +241,21 @@ class ProductController extends Controller
         return back()->with('success', 'Images uploaded successfully.');
     }
 
-    public function deleteImage(Product $product, $mediaId)
+    public function deleteImage($mediaId)
     {
-        $media = $product->media()->findOrFail($mediaId);
-        $media->delete();
+        try {
+            $media = \Spatie\MediaLibrary\MediaCollections\Models\Media::findOrFail($mediaId);
+            $media->delete();
 
-        return back()->with('success', 'Image deleted successfully.');
+            return response()->json([
+                'success' => true,
+                'message' => 'Image deleted successfully.'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error deleting image: ' . $e->getMessage()
+            ], 500);
+        }
     }
 } 

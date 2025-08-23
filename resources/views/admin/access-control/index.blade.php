@@ -90,18 +90,18 @@
                             Manage Roles
                         </a>
                     </div>
-                    <div class="col-md-3 mb-3">
+                    <!-- <div class="col-md-3 mb-3">
                         <a href="{{ route('admin.access-control.permissions') }}" class="btn btn-success w-100">
                             <i class="fas fa-key me-2"></i>
                             Manage Permissions
                         </a>
-                    </div>
-                    <div class="col-md-3 mb-3">
+                    </div> -->
+                    <!-- <div class="col-md-3 mb-3">
                         <a href="{{ route('admin.access-control.user-permissions') }}" class="btn btn-warning w-100">
                             <i class="fas fa-user-shield me-2"></i>
                             User Permissions
                         </a>
-                    </div>
+                    </div> -->
                     <div class="col-md-3 mb-3">
                         <a href="{{ route('admin.users.index') }}" class="btn btn-info w-100">
                             <i class="fas fa-users me-2"></i>
@@ -136,7 +136,7 @@
                             @forelse($roles as $role)
                             <tr>
                                 <td>
-                                    <span class="badge bg-primary">{{ ucfirst($role->name) }}</span>
+                                    <span class="badge bg-danger">{{ ucfirst($role->name) }}</span>
                                 </td>
                                 <td>{{ $role->users_count }}</td>
                                 <td>{{ $role->created_at->format('M d, Y') }}</td>

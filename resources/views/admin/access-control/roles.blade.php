@@ -3,7 +3,7 @@
 @section('content')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Manage Roles</h1>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createRoleModal">
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#createRoleModal">
         <i class="fas fa-plus me-2"></i>Create New Role
     </button>
 </div>
@@ -45,7 +45,7 @@
                             @forelse($roles as $role)
                             <tr id="role-{{ $role->id }}">
                                 <td>
-                                    <span class="badge bg-primary">{{ ucfirst($role->name) }}</span>
+                                    <span class="badge bg-danger">{{ ucfirst($role->name) }}</span>
                                 </td>
                                 <td>{{ $role->guard_name }}</td>
                                 <td>{{ $role->users_count }}</td>
@@ -131,7 +131,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Create Role</button>
+                    <button type="submit" class="btn btn-danger">Create Role</button>
                 </div>
             </form>
         </div>
@@ -157,7 +157,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Update Role</button>
+                    <button type="submit" class="btn btn-danger">Update Role</button>
                 </div>
             </form>
         </div>
@@ -194,7 +194,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Update Permissions</button>
+                    <button type="submit" class="btn btn-dander">Update Permissions</button>
                 </div>
             </form>
         </div>

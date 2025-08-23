@@ -209,7 +209,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Update Permission</button>
+                    <button type="submit" class="btn btn-danger">Update Permission</button>
                 </div>
             </form>
         </div>

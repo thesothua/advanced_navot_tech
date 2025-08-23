@@ -3,7 +3,7 @@
 @section('content')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Edit Category</h1>
-    <a href="{{ route('admin.categories.index') }}" class="btn btn-sm btn-secondary">
+    <a href="{{ route('admin.categories.index') }}" class="btn btn-sm btn-danger">
         <i class="fas fa-arrow-left"></i> Back
     </a>
 </div>
@@ -66,7 +66,7 @@
             </div>
 
             <div class="text-end">
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-danger">
                     <i class="fas fa-save"></i> Update Category
                 </button>
             </div>

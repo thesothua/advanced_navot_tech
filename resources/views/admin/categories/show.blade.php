@@ -4,10 +4,10 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Category Details</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
-        <a href="{{ route('admin.categories.edit', $category) }}" class="btn btn-sm btn-primary me-2">
+        <a href="{{ route('admin.categories.edit', $category) }}" class="btn btn-sm btn-danger me-2">
             <i class="fas fa-edit"></i> Edit
         </a>
-        <a href="{{ route('admin.categories.index') }}" class="btn btn-sm btn-secondary">
+        <a href="{{ route('admin.categories.index') }}" class="btn btn-sm btn-danger">
             <i class="fas fa-arrow-left"></i> Back
         </a>
     </div>
@@ -98,7 +98,7 @@
             </div>
             <div class="card-body">
                 <div class="d-grid gap-2">
-                    <a href="{{ route('admin.categories.edit', $category) }}" class="btn btn-primary">
+                    <a href="{{ route('admin.categories.edit', $category) }}" class="btn btn-danger">
                         <i class="fas fa-edit"></i> Edit Category
                     </a>
                     <form action="{{ route('admin.categories.destroy', $category) }}" method="POST" class="d-grid">
