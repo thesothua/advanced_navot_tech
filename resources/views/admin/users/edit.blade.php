@@ -50,7 +50,7 @@
             <div class="mb-3">
                 <label for="roles" class="form-label">Roles</label>
                 <select class="form-select @error('roles') is-invalid @enderror" 
-                        id="roles" name="roles[]" multiple>
+                        id="roles" name="roles[]">
                     @foreach($roles as $role)
                         <option value="{{ $role->name }}" 
                                 {{ in_array($role->name, old('roles', $user->roles->pluck('name')->toArray())) ? 'selected' : '' }}>

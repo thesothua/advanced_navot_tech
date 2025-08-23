@@ -80,4 +80,26 @@ class Product extends Model implements HasMedia
     {
         return 'slug';
     }
+
+    /**
+     * Get the primary image URL for datatable display
+     */
+    public function getImageUrlAttribute(): string
+    {
+        $media = $this->getFirstMedia('images');
+        
+        if (!$media) {
+            return 'https://via.placeholder.com/50x50?text=No+Image';
+        }
+
+        // Try to get the full URL first
+        $url = $media->getFullUrl();
+        
+        // If that fails, construct manually
+        if (!$url || !filter_var($url, FILTER_VALIDATE_URL)) {
+            $url = asset('storage/' . $media->id . '/' . $media->file_name);
+        }
+        
+        return $url;
+    }
 } 

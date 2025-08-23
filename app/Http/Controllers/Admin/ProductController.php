@@ -20,15 +20,8 @@ class ProductController extends Controller
             return DataTables::of($products)
                 ->addIndexColumn()
                 ->addColumn('image', function ($product) {
-                    $media = $product->getFirstMedia('images');
-                    
-                    if (!$media) {
-                        return '<img src="https://via.placeholder.com/50x50?text=No+Image" alt="no image" width="50" height="50" class="rounded">';
-                    }
-                    
-                    // Use full URL for proper image display
-                    $url = $media->getUrl();
-                    return '<img src="' . $url . '" alt="' . e($product->name ?? 'Product') . '" width="50" height="50" class="rounded">';
+                    $url = $product->image_url;
+                    return '<img src="' . $url . '" alt="' . e($product->name ?? 'Product') . '" width="50" height="50" class="rounded" onerror="this.src=\'https://via.placeholder.com/50x50?text=Error\'">';
                 })
                 ->editColumn('price', fn ($product) => '₹ ' . number_format($product->price, 2))
                 ->addColumn('brand', fn ($product) => $product->brand?->name ?? '-')

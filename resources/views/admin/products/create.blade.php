@@ -36,7 +36,7 @@
                     <div class="mb-3">
                         <label for="price" class="form-label">Price *</label>
                         <input type="number" step="0.01" class="form-control @error('price') is-invalid @enderror" 
-                               id="price" name="price" value="{{ old('price') }}" required>
+                               id="price" name="price" value="{{ old('price') }}" >
                         @error('price')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -46,7 +46,7 @@
                     <div class="mb-3">
                         <label for="stock" class="form-label">Stock *</label>
                         <input type="number" class="form-control @error('stock') is-invalid @enderror" 
-                               id="stock" name="stock" value="{{ old('stock', 0) }}" required>
+                               id="stock" name="stock" value="{{ old('stock', 0) }}" >
                         @error('stock')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -73,7 +73,7 @@
             <div class="mb-3">
                 <label for="category_ids" class="form-label">Categories</label>
                 <select class="form-select @error('category_ids') is-invalid @enderror" 
-                        id="category_ids" name="category_ids[]" multiple>
+                        id="category_ids" name="category_ids[]">
                     @foreach($categories as $category)
                         <option value="{{ $category->id }}" 
                                 {{ in_array($category->id, old('category_ids', [])) ? 'selected' : '' }}>

@@ -12,7 +12,7 @@
                 <h5 class="card-title mb-0">Profile Information</h5>
             </div>
             <div class="card-body">
-                <form method="post" action="{{ route('profile.update') }}">
+                <form method="post" action="{{ route('admin.profile.update') }}">
                     @csrf
                     @method('patch')
 
@@ -117,7 +117,7 @@
                 <h5 class="card-title mb-0 text-danger">Danger Zone</h5>
             </div>
             <div class="card-body">
-                <form method="post" action="{{ route('profile.destroy') }}" onsubmit="return confirm('Are you sure you want to delete your account? This action cannot be undone.')">
+                <form method="post" action="{{ route('admin.profile.destroy') }}" onsubmit="return confirm('Are you sure you want to delete your account? This action cannot be undone.')">
                     @csrf
                     @method('delete')
 

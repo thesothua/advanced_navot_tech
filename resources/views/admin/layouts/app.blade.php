@@ -114,6 +114,15 @@
                             </a>
                         </li>
                         @endrole
+                        @role('super-admin')
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}" 
+                               href="{{ route('admin.settings.index') }}">
+                                <i class="fas fa-cog me-2"></i>
+                                Notifications
+                            </a>
+                        </li>
+                        @endrole
                         
                         @role('super-admin')
                         <li class="nav-item">
@@ -129,7 +138,7 @@
                     <hr class="text-white">
                     
                     <div class="text-center">
-                        <small class="text-muted">Logged in as: {{ auth()->user()->name }}</small>
+                        <small class="text-white">Logged in as: {{ auth()->user()->name }}</small>
                     </div>
                 </div>
             </nav>
@@ -150,7 +159,7 @@
                                     {{ auth()->user()->name }}
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('admin.profile.edit') }}">Profile</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li>
                                         <form method="POST" action="{{ route('logout') }}">
