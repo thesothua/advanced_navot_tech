@@ -31,13 +31,13 @@ class UserController extends Controller
                 })
                 ->addColumn('roles', function ($user) {
                     return $user->roles->pluck('name')->map(function($role) {
-                        return '<span class="badge bg-primary">' . $role . '</span>';
+                        return '<span class="badge bg-danger">' . $role . '</span>';
                     })->implode(' ') ?: '<span class="text-muted">No roles</span>';
                 })
                 ->editColumn('created_at', fn ($user) => $user->created_at->format('M d, Y'))
                 ->addColumn('action', function ($user) {
                     $show = '<a href="' . route('admin.users.show', $user->id) . '" class="btn btn-sm btn-outline-info me-1">View</a>';
-                    $edit = '<a href="' . route('admin.users.edit', $user->id) . '" class="btn btn-sm btn-outline-primary me-1">Edit</a>';
+                    $edit = '<a href="' . route('admin.users.edit', $user->id) . '" class="btn btn-sm btn-outline-danger me-1">Edit</a>';
                     $delete = '<form method="POST" action="' . route('admin.users.destroy', $user->id) . '" style="display:inline-block;">'
                         . csrf_field()
                         . method_field('DELETE')

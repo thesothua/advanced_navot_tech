@@ -7,7 +7,7 @@
         <a href="{{ route('admin.products.edit', $product) }}" class="btn btn-sm btn-danger me-2">
             <i class="fas fa-edit"></i> Edit
         </a>
-        <a href="{{ route('admin.products.index') }}" class="btn btn-sm btn-secondary">
+        <a href="{{ route('admin.products.index') }}" class="btn btn-sm btn-danger">
             <i class="fas fa-arrow-left"></i> Back
         </a>
     </div>

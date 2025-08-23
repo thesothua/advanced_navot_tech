@@ -51,6 +51,29 @@
         .stats-card.success { border-left-color: #28a745; }
         .stats-card.warning { border-left-color: #ffc107; }
         .stats-card.danger { border-left-color: #dc3545; }
+
+
+ 
+        .page-item.active .page-link {
+        color: #fff !important;
+        background-color: #dc3545 !important;
+        /* border-color: #000 !important;  */
+    }
+
+    .page-link {
+        color: #dc3545 !important;
+        background-color: #fff !important;
+        border: 1px solid #dee2e6 !important; 
+    }
+
+    .page-link:hover {
+        color: #fff !important;
+        background-color: #dc3545 !important;
+        /* border-color: #000 !important;  */
+    }
+
+
+
     </style>
 </head>
 <body>

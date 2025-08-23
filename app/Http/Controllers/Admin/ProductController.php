@@ -95,9 +95,9 @@ class ProductController extends Controller
                     return $product->created_at ? $product->created_at->format('M d, Y') : '-';
                 })
                 ->addColumn('action', function ($product) {
-                    $show = '<a href="' . route('admin.products.show', $product->id) . '" class="btn btn-sm btn-outline-info me-1">View</a>';
-                    $edit = '<a href="' . route('admin.products.edit', $product->id) . '" class="btn btn-sm btn-outline-primary me-1">Edit</a>';
-                    $delete = '<form method="POST" action="' . route('admin.products.destroy', $product->id) . '" style="display:inline-block;">'
+                    $show = '<a href="' . route('admin.products.show', $product->slug) . '" class="btn btn-sm btn-outline-info me-1">View</a>';
+                    $edit = '<a href="' . route('admin.products.edit', $product->slug) . '" class="btn btn-sm btn-outline-primary me-1">Edit</a>';
+                    $delete = '<form method="POST" action="' . route('admin.products.destroy', $product->slug) . '" style="display:inline-block;">'
                         . csrf_field()
                         . method_field('DELETE')
                         . '<button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm(\'Are you sure?\')">Delete</button>'
