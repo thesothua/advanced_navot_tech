@@ -8,11 +8,11 @@
 <!-- Statistics Cards -->
 <div class="row mb-4">
     <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card stats-card primary h-100 py-2">
+        <div class="card stats-card danger h-100 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                             Total Users</div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $stats['total_users'] }}</div>
                     </div>
@@ -93,7 +93,7 @@
                                     <h6 class="mb-1">{{ $product->name }}</h6>
                                     <small class="text-muted">{{ $product->brand->name ?? 'N/A' }}</small>
                                 </div>
-                                <span class="badge bg-primary">${{ number_format($product->price, 2) }}</span>
+                                <span class="badge bg-danger">${{ number_format($product->price, 2) }}</span>
                             </div>
                         </div>
                         @endforeach

@@ -94,6 +94,7 @@ class Product extends Model implements HasMedia
 
         // Try to get the full URL first
         $url = $media->getFullUrl();
+      
         
         // If that fails, construct manually
         if (!$url || !filter_var($url, FILTER_VALIDATE_URL)) {

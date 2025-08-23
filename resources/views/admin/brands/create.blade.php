@@ -60,7 +60,7 @@
             </div>
 
             <div class="text-end">
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-danger">
                     <i class="fas fa-save"></i> Create Brand
                 </button>
             </div>

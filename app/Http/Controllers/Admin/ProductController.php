@@ -12,6 +12,50 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ProductController extends Controller
 {
+    // public function index(Request $request)
+    // {
+    //     if ($request->ajax()) {
+    //         $products = Product::with(['brand', 'categories', 'media'])->select('products.*');
+
+
+
+    
+    //         return DataTables::of($products)
+    //             ->addIndexColumn()
+    //             ->addColumn('image', function ($product) {
+    //                 $url = $product->image_url;
+
+    //                 // dd($url);
+    //                 return '<img src="' . $url . '" alt="' . e($product->name ?? 'Product') . '" width="50" height="50" class="rounded" onerror="this.src=\'https://via.placeholder.com/50x50?text=Error\'">';
+    //             })
+    //             ->editColumn('price', fn ($product) => '₹ ' . number_format($product->price, 2))
+    //             ->addColumn('brand', fn ($product) => $product->brand?->name ?? '-')
+    //             ->addColumn('categories', function ($product) {
+    //                 return $product->categories->pluck('name')->implode(', ') ?: '-';
+    //             })
+    //             ->addColumn('status', function ($product) {
+    //                 $badgeClass = $product->is_active ? 'bg-success' : 'bg-secondary';
+    //                 $status = $product->is_active ? 'ACTIVE' : 'INACTIVE';
+    //                 return '<span class="badge ' . $badgeClass . '">' . $status . '</span>';
+    //             })
+    //             ->addColumn('action', function ($product) {
+    //                 $show = '<a href="' . route('admin.products.show', $product->slug) . '" class="btn btn-sm btn-outline-info me-1">View</a>';
+    //                 $edit = '<a href="' . route('admin.products.edit', $product->slug) . '" class="btn btn-sm btn-outline-primary me-1">Edit</a>';
+    //                 $delete = '<form method="POST" action="' . route('admin.products.destroy', $product->slug) . '" style="display:inline-block;">'
+    //                     . csrf_field()
+    //                     . method_field('DELETE')
+    //                     . '<button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm(\'Are you sure?\')">Delete</button>'
+    //                     . '</form>';
+    //                 return $show . ' ' . $edit . ' ' . $delete;
+    //             })
+    //             ->rawColumns(['image', 'status', 'action'])
+    //             ->make(true);
+    //     }
+    
+    //     return view('admin.products.index');
+    // }
+
+
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -20,28 +64,45 @@ class ProductController extends Controller
             return DataTables::of($products)
                 ->addIndexColumn()
                 ->addColumn('image', function ($product) {
-                    $url = $product->image_url;
-                    return '<img src="' . $url . '" alt="' . e($product->name ?? 'Product') . '" width="50" height="50" class="rounded" onerror="this.src=\'https://via.placeholder.com/50x50?text=Error\'">';
+
+                    $media = $product->getFirstMedia('images');
+
+                    if (!$media) {
+                        // Placeholder with first letter of product name
+                        $firstLetter = strtoupper(substr($product->name ?? 'P', 0, 1));
+                        return '<img src="https://via.placeholder.com/50x50?text=' . $firstLetter . '" 
+                                    alt="image" width="50" height="50" class="rounded-circle">';
+                    }
+    
+                    $url =  $media->getFullUrl();
+
+               
+                    return '<img src="' . e($url) . '" 
+                                alt="' . e($product->name ?? 'Product') . '" 
+                                width="50" height="50" class="rounded-circle">';
                 })
                 ->editColumn('price', fn ($product) => '₹ ' . number_format($product->price, 2))
-                ->addColumn('brand', fn ($product) => $product->brand?->name ?? '-')
-                ->addColumn('categories', function ($product) {
-                    return $product->categories->pluck('name')->implode(', ') ?: '-';
-                })
+                            ->addColumn('brand', fn ($product) => $product->brand?->name ?? '-')
+                            ->addColumn('categories', function ($product) {
+                                return $product->categories->pluck('name')->implode(', ') ?: '-';
+                            })
                 ->addColumn('status', function ($product) {
                     $badgeClass = $product->is_active ? 'bg-success' : 'bg-secondary';
                     $status = $product->is_active ? 'ACTIVE' : 'INACTIVE';
                     return '<span class="badge ' . $badgeClass . '">' . $status . '</span>';
                 })
+                ->editColumn('created_at', function ($product) {
+                    return $product->created_at ? $product->created_at->format('M d, Y') : '-';
+                })
                 ->addColumn('action', function ($product) {
-                    $show = '<a href="' . route('admin.products.show', $product->slug) . '" class="btn btn-sm btn-outline-info me-1">View</a>';
-                    $edit = '<a href="' . route('admin.products.edit', $product->slug) . '" class="btn btn-sm btn-outline-primary me-1">Edit</a>';
-                    $delete = '<form method="POST" action="' . route('admin.products.destroy', $product->slug) . '" style="display:inline-block;">'
+                    $show = '<a href="' . route('admin.products.show', $product->id) . '" class="btn btn-sm btn-outline-info me-1">View</a>';
+                    $edit = '<a href="' . route('admin.products.edit', $product->id) . '" class="btn btn-sm btn-outline-primary me-1">Edit</a>';
+                    $delete = '<form method="POST" action="' . route('admin.products.destroy', $product->id) . '" style="display:inline-block;">'
                         . csrf_field()
                         . method_field('DELETE')
                         . '<button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm(\'Are you sure?\')">Delete</button>'
                         . '</form>';
-                    return $show . ' ' . $edit . ' ' . $delete;
+                    return $show . $edit . $delete;
                 })
                 ->rawColumns(['image', 'status', 'action'])
                 ->make(true);
@@ -49,6 +110,9 @@ class ProductController extends Controller
     
         return view('admin.products.index');
     }
+    
+
+
 
     public function create()
     {

@@ -4,7 +4,7 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Product Details</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
-        <a href="{{ route('admin.products.edit', $product) }}" class="btn btn-sm btn-primary me-2">
+        <a href="{{ route('admin.products.edit', $product) }}" class="btn btn-sm btn-danger me-2">
             <i class="fas fa-edit"></i> Edit
         </a>
         <a href="{{ route('admin.products.index') }}" class="btn btn-sm btn-secondary">
@@ -59,7 +59,7 @@
             </div>
             <div class="card-body">
                 <div class="d-grid gap-2">
-                    <a href="{{ route('admin.products.edit', $product) }}" class="btn btn-primary">
+                    <a href="{{ route('admin.products.edit', $product) }}" class="btn btn-danger">
                         <i class="fas fa-edit"></i> Edit Product
                     </a>
                     <form action="{{ route('admin.products.destroy', $product) }}" method="POST" class="d-grid">
