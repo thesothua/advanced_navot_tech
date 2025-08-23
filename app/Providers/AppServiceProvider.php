@@ -19,6 +19,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Register view composer for global settings
+        View::composer(['layouts.app', 'admin.layouts.app'], \App\View\Composers\SettingsComposer::class);
+        
         View::composer('*', function ($view) {
             $view->with('categories', \App\Models\Category::where('is_active', 1)->get());
         });

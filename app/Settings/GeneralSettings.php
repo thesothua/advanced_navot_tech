@@ -22,4 +22,20 @@ class GeneralSettings extends Settings
     {
         return 'general';
     }
-} 
+
+    /**
+     * Get the logo URL
+     */
+    public function getLogoUrl(): ?string
+    {
+        return $this->logo ? asset('storage/' . $this->logo) : null;
+    }
+
+    /**
+     * Get the favicon URL
+     */
+    public function getFaviconUrl(): ?string
+    {
+        return $this->favicon ? asset('storage/' . $this->favicon) : null;
+    }
+}

@@ -5,7 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }} - Admin</title>
+    <title>{{ $globalSettings->site_name ?? config('app.name', 'Laravel') }} - Admin</title>
+    
+    <!-- Favicon -->
+    @if($globalSettings->favicon ?? false)
+        <link rel="icon" type="image/x-icon" href="{{ asset('storage/' . $globalSettings->favicon) }}">
+    @else
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    @endif
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -53,7 +60,10 @@
             <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse">
                 <div class="position-sticky pt-3">
                     <div class="text-center mb-4">
-                        <h4 class="text-white">Admin Panel</h4>
+                        @if($globalSettings->logo ?? false)
+                            <img src="{{ asset('storage/' . $globalSettings->logo) }}" alt="{{ $globalSettings->site_name ?? 'Logo' }}" class="img-fluid mb-2" style="max-height: 40px;">
+                        @endif
+                        <h4 class="text-white">{{ $globalSettings->site_name ?? 'Admin Panel' }}</h4>
                     </div>
                     
                     <ul class="nav flex-column">

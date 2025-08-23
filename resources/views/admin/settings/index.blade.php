@@ -157,11 +157,17 @@
                 <p><strong>Contact Phone:</strong> {{ $settings->contact_phone ?? 'Not set' }}</p>
                 
                 @if($settings->logo ?? false)
-                    <p><strong>Logo:</strong> <a href="{{ $settings->logo }}" target="_blank">View Logo</a></p>
+                    <div class="mb-3">
+                        <strong>Current Logo:</strong><br>
+                        <img src="{{ asset('storage/' . $settings->logo) }}" alt="Current Logo" class="img-thumbnail mt-2" style="max-height: 100px;">
+                    </div>
                 @endif
                 
                 @if($settings->favicon ?? false)
-                    <p><strong>Favicon:</strong> <a href="{{ $settings->favicon }}" target="_blank">View Favicon</a></p>
+                    <div class="mb-3">
+                        <strong>Current Favicon:</strong><br>
+                        <img src="{{ asset('storage/' . $settings->favicon) }}" alt="Current Favicon" class="img-thumbnail mt-2" style="max-height: 32px;">
+                    </div>
                 @endif
             </div>
         </div>

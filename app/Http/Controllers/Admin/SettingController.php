@@ -42,6 +42,18 @@ class SettingController extends Controller
         $settings->instagram_url = $request->instagram_url;
         $settings->linkedin_url = $request->linkedin_url;
         
+        // Handle logo upload
+        if ($request->hasFile('logo')) {
+            $logoPath = $request->file('logo')->store('settings', 'public');
+            $settings->logo = $logoPath;
+        }
+        
+        // Handle favicon upload
+        if ($request->hasFile('favicon')) {
+            $faviconPath = $request->file('favicon')->store('settings', 'public');
+            $settings->favicon = $faviconPath;
+        }
+        
         $settings->save();
 
         return redirect()->route('admin.settings.index')

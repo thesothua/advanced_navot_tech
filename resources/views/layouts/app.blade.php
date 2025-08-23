@@ -5,7 +5,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ $globalSettings->site_name ?? config('app.name', 'Laravel') }}</title>
+        
+        <!-- Meta Description -->
+        @if($globalSettings->site_description ?? false)
+            <meta name="description" content="{{ $globalSettings->site_description }}">
+        @endif
+        
+        <!-- Favicon -->
+        @if($globalSettings->favicon ?? false)
+            <link rel="icon" type="image/x-icon" href="{{ asset('storage/' . $globalSettings->favicon) }}">
+        @else
+            <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+        @endif
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
