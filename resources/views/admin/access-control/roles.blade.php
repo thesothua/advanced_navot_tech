@@ -102,13 +102,9 @@
                     <div class="mb-3">
                         <label for="name" class="form-label">Role Name</label>
                         <input type="text" class="form-control" id="name" name="name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="guard_name" class="form-label">Guard Name</label>
-                        <select class="form-control" id="guard_name" name="guard_name" required>
-                            <option value="web">Web</option>
-                            <option value="api">API</option>
-                        </select>
+                        <small class="form-text text-muted">
+                            Use lowercase with hyphens (e.g., content-manager, product-editor)
+                        </small>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Permissions</label>
@@ -194,7 +190,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-dander">Update Permissions</button>
+                    <button type="submit" class="btn btn-danger">Update Permissions</button>
                 </div>
             </form>
         </div>

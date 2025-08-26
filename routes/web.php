@@ -65,27 +65,12 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::middleware(['role:super-admin'])->prefix('access-control')->name('access-control.')->group(function () {
         Route::get('/', [AccessControlController::class, 'index'])->name('index');
         Route::get('/roles', [AccessControlController::class, 'roles'])->name('roles');
-        Route::get('/permissions', [AccessControlController::class, 'permissions'])->name('permissions');
-        Route::get('/user-permissions', [AccessControlController::class, 'userPermissions'])->name('user-permissions');
 
-        // Role management
+        // Role management with permissions
         Route::post('/roles', [AccessControlController::class, 'storeRole'])->name('roles.store');
         Route::put('/roles/{role}', [AccessControlController::class, 'updateRole'])->name('roles.update');
         Route::delete('/roles/{role}', [AccessControlController::class, 'destroyRole'])->name('roles.destroy');
         Route::get('/roles/{role}/permissions', [AccessControlController::class, 'getRolePermissions'])->name('roles.permissions');
-
-        // Permission management
-        Route::post('/permissions', [AccessControlController::class, 'storePermission'])->name('permissions.store');
-        Route::put('/permissions/{permission}', [AccessControlController::class, 'updatePermission'])->name('permissions.update');
-        Route::delete('/permissions/{permission}', [AccessControlController::class, 'destroyPermission'])->name('permissions.destroy');
-
-        // User role/permission management
-        Route::post('/users/{user}/roles', [AccessControlController::class, 'assignUserRole'])->name('users.assign-role');
-        Route::delete('/users/{user}/roles', [AccessControlController::class, 'removeUserRole'])->name('users.remove-role');
-        Route::put('/users/{user}/roles', [AccessControlController::class, 'syncUserRoles'])->name('users.sync-roles');
-        Route::post('/users/{user}/permissions', [AccessControlController::class, 'assignUserPermission'])->name('users.assign-permission');
-        Route::delete('/users/{user}/permissions', [AccessControlController::class, 'revokeUserPermission'])->name('users.revoke-permission');
-        Route::get('/users/{user}/roles-permissions', [AccessControlController::class, 'getUserRolesPermissions'])->name('users.roles-permissions');
     });
 
     // ===================== profile route

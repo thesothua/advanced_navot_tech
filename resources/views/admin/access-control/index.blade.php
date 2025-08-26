@@ -84,26 +84,14 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-3 mb-3">
-                        <a href="{{ route('admin.access-control.roles') }}" class="btn btn-primary w-100">
+                    <div class="col-md-6 mb-3">
+                        <a href="{{ route('admin.access-control.roles') }}" class="btn btn-danger w-100">
                             <i class="fas fa-user-tag me-2"></i>
-                            Manage Roles
+                            Manage Roles & Permissions
                         </a>
                     </div>
-                    <!-- <div class="col-md-3 mb-3">
-                        <a href="{{ route('admin.access-control.permissions') }}" class="btn btn-success w-100">
-                            <i class="fas fa-key me-2"></i>
-                            Manage Permissions
-                        </a>
-                    </div> -->
-                    <!-- <div class="col-md-3 mb-3">
-                        <a href="{{ route('admin.access-control.user-permissions') }}" class="btn btn-warning w-100">
-                            <i class="fas fa-user-shield me-2"></i>
-                            User Permissions
-                        </a>
-                    </div> -->
-                    <div class="col-md-3 mb-3">
-                        <a href="{{ route('admin.users.index') }}" class="btn btn-info w-100">
+                    <div class="col-md-6 mb-3">
+                        <a href="{{ route('admin.users.index') }}" class="btn btn-danger w-100">
                             <i class="fas fa-users me-2"></i>
                             Manage Users
                         </a>
