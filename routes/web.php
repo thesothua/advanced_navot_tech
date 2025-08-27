@@ -39,11 +39,11 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     });
 
     // Product Management
-    Route::middleware(['permission:manage-products'])->group(function () {
+    // Route::middleware(['permission:manage-products'])->group(function () {
         Route::resource('products', ProductController::class);
         Route::post('products/{product}/upload-images', [ProductController::class, 'uploadImages'])->name('products.upload-images');
         Route::delete('products/images/{media}', [ProductController::class, 'deleteImage'])->name('products.delete-image');
-    });
+    // });
 
     // Category Management
     Route::middleware(['permission:manage-categories'])->group(function () {

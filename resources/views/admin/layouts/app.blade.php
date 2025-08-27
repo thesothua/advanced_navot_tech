@@ -108,7 +108,7 @@
                         </li>
                         @endrole
                         
-                        @can('manage-products')
+                        {{-- @can('manage-products') --}}
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('admin.products.*') ? 'active' : '' }}" 
                                href="{{ route('admin.products.index') }}">
@@ -116,7 +116,7 @@
                                 Products
                             </a>
                         </li>
-                        @endcan
+                        {{-- @endcan --}}
                         
                         @can('manage-categories')
                         <li class="nav-item">
