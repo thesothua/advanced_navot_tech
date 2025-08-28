@@ -1,17 +1,19 @@
 @extends('welcome')
 
-@section('title', 'Products')
+@section('title', $category->name)
 
 @section('content')
     <div class="container py-4">
         <div class="row mb-4">
             <div class="col-md-12">
-                <h2>Our Products</h2>
-                <p class="lead">Browse our collection of high-quality products</p>
+                <h2>{{ $category->name }}</h2>
+                @if($category->description)
+                    <p class="lead">{{ $category->description }}</p>
+                @endif
             </div>
         </div>
 
-        @if(isset($products) && $products->count() > 0)
+        @if($products->count() > 0)
             <div class="row">
                 @foreach($products as $product)
                     <div class="col-md-4 mb-4">
@@ -26,9 +28,9 @@
                             @endif
                             <div class="card-body">
                                 <h5 class="card-title">{{ $product->name }}</h5>
-                                <p class="card-text text-danger fw-bold">₹{{ number_format($product->price, 2) }}</p>
+                                <!-- <p class="card-text text-danger fw-bold">₹{{ number_format($product->price, 2) }}</p> -->
                                 @if($product->sale_price)
-                                    <!-- <p class="card-text"><span class="text-decoration-line-through">₹{{ number_format($product->price, 2) }}</span> <span class="text-danger fw-bold">₹{{ number_format($product->sale_price, 2) }}</span></p> -->
+                                    <p class="card-text"><span class="text-decoration-line-through">₹{{ number_format($product->price, 2) }}</span> <span class="text-danger fw-bold">₹{{ number_format($product->sale_price, 2) }}</span></p>
                                 @endif
                                 <p class="card-text">{{ Str::limit($product->description, 100) }}</p>
                             </div>
@@ -48,7 +50,7 @@
             </div>
         @else
             <div class="alert alert-info">
-                No products available at the moment.
+                No products found in this category.
             </div>
         @endif
     </div>

@@ -19,8 +19,11 @@ Route::get('/', function () {
 });
 
 Route::view('/about', 'about')->name('about');
-Route::view('/products', 'products')->name('products');
+Route::get('/products', [App\Http\Controllers\ProductController::class, 'index'])->name('products');
 Route::view('/contact', 'contact')->name('contact');
+
+// Public category routes
+Route::get('/categories/{category:slug}', [App\Http\Controllers\CategoryController::class, 'show'])->name('categories.show');
 
 // Test route to check if basic functionality works
 
@@ -39,11 +42,11 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     });
 
     // Product Management
-    // Route::middleware(['permission:manage-products'])->group(function () {
+    Route::middleware(['permission:manage-products'])->group(function () {
         Route::resource('products', ProductController::class);
         Route::post('products/{product}/upload-images', [ProductController::class, 'uploadImages'])->name('products.upload-images');
         Route::delete('products/images/{media}', [ProductController::class, 'deleteImage'])->name('products.delete-image');
-    // });
+    });
 
     // Category Management
     Route::middleware(['permission:manage-categories'])->group(function () {

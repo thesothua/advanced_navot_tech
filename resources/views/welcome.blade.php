@@ -22,7 +22,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-danger shadow-sm fixed-top py-3 mb-5">
         <div class="container">
             <a class="navbar-brand fw-bold text-white" href="/">
-               <img src="{{ asset('logo/mylogo.png') }}" width="40" alt="logo" class="img-fluid rounded shadow-sm"> <i class="bi bi-shield-shaded me-2"></i>Advanced Novat Tech
+               <img src="{{ asset('logo/mylogo.png') }}" width="40" alt="logo" class="img-fluid rounded shadow-sm"> <i class="bi bi-shield-shaded me-2"></i>Advanced Nova Tech
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNav">
@@ -55,7 +55,7 @@
                             aria-labelledby="navbarDropdown">
                             @forelse($categories ?? [] as $category)
                                 <li>
-                                    <a class="dropdown-item" href="{{ url('/category/' . $category->slug) }}">
+                                    <a class="dropdown-item" href="{{ url('/categories/' . $category->slug) }}">
                                         {{ $category->name }}
                                     </a>
                                 </li>
@@ -149,6 +149,19 @@
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize all dropdowns
+            var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
+            var dropdownList = dropdownElementList.map(function(dropdownToggleEl) {
+                return new bootstrap.Dropdown(dropdownToggleEl);
+            });
+            
+            // Debug log
+            console.log('Dropdowns initialized:', dropdownList.length);
+        });
+    </script>
     
 
 

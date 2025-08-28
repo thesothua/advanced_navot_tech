@@ -51,7 +51,9 @@ class AccessControlController extends Controller
         ]);
 
         if ($request->has('permissions')) {
-            $role->syncPermissions($request->permissions);
+            // Convert permission IDs to integers to avoid string comparison issues
+            $permissionIds = array_map('intval', $request->permissions);
+            $role->syncPermissions($permissionIds);
         }
 
         return back()->with('success', 'Role created successfully.');
@@ -72,7 +74,9 @@ class AccessControlController extends Controller
             'name' => $request->name
         ]);
 
-        $role->syncPermissions($request->permissions ?? []);
+        // Convert permission IDs to integers to avoid string comparison issues
+        $permissionIds = $request->has('permissions') ? array_map('intval', $request->permissions) : [];
+        $role->syncPermissions($permissionIds);
 
         return back()->with('success', 'Role updated successfully.');
     }
@@ -98,8 +102,27 @@ class AccessControlController extends Controller
     public function getRolePermissions(Role $role)
     {
         return response()->json([
-            'permissions' => $role->permissions->pluck('id')
+            'permissions' => $role->permissions->pluck('id')->map(function($id) {
+                return (int)$id;
+            })
         ]);
+    }
+
+    /**
+     * Manage permissions for a role
+     */
+    public function managePermissions(Request $request, Role $role)
+    {
+        $request->validate([
+            'permissions' => 'array',
+            'permissions.*' => 'exists:permissions,id'
+        ]);
+
+        // Convert permission IDs to integers to avoid string comparison issues
+        $permissionIds = $request->has('permissions') ? array_map('intval', $request->permissions) : [];
+        $role->syncPermissions($permissionIds);
+
+        return back()->with('success', 'Permissions updated successfully.');
     }
 
 }
