@@ -18,77 +18,166 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <!-- Scripts -->
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 
+    <!-- Google Fonts -->    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
+        :root {
+            --primary: #0d6efd;
+            /* --primary: #dc3545; */
+            --secondary: #6c757d;
+            --success: #198754;
+            --info: #0dcaf0;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --sidebar-bg: #212529;
+            --sidebar-hover: rgba(255, 255, 255, 0.1);
+            --sidebar-active: var(--danger);
+            --card-border-radius: 0.5rem;
+            --transition-speed: 0.3s;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f7fb;
+        }
+        
+        /* Sidebar */
         .sidebar {
+            background-color: var(--sidebar-bg);
             min-height: 100vh;
-            background: #343a40;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            transition: all var(--transition-speed);
         }
-
+        
+        .sidebar-brand {
+            padding: 1.5rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
         .sidebar .nav-link {
-            color: #adb5bd;
+            color: rgba(255, 255, 255, 0.65);
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.375rem;
+            margin: 0.125rem 0.75rem;
+            transition: all var(--transition-speed);
+            font-weight: 500;
+            font-size: 0.9rem;
         }
-
+        
         .sidebar .nav-link:hover {
-            color: #fff;
+            color: rgba(255, 255, 255, 0.95);
+            background-color: var(--sidebar-hover);
+            transform: translateX(5px);
         }
-
+        
         .sidebar .nav-link.active {
             color: #fff;
-            background: #495057;
+            background-color: var(--sidebar-active);
+            box-shadow: 0 0.125rem 0.25rem rgba(13, 110, 253, 0.2);
         }
-
-        .main-content {
-            background: #f8f9fa;
-            min-height: 100vh;
+        
+        .sidebar .nav-link i {
+            width: 1.25rem;
+            text-align: center;
         }
-
+        
+        /* Cards */
         .card {
-            border: none;
-            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            border-radius: var(--card-border-radius);
+            transition: transform 0.2s, box-shadow 0.2s;
+            overflow: hidden;
         }
-
-        .stats-card {
-            border-left: 4px solid;
+        
+        /* .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+        } */
+        
+        .card-header {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            font-weight: 600;
         }
-
-        .stats-card.primary {
-            border-left-color: #007bff;
+        
+        .icon-circle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
         }
-
-        .stats-card.success {
-            border-left-color: #28a745;
+        
+        .icon-square {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
         }
-
-        .stats-card.warning {
-            border-left-color: #ffc107;
-        }
-
-        .stats-card.danger {
-            border-left-color: #dc3545;
-        }
-
-
-
+        
+        /* Pagination */
         .page-item.active .page-link {
-            color: #fff !important;
-            background-color: #dc3545 !important;
-            /* border-color: #000 !important;  */
+            background-color: var(--primary);
+            border-color: var(--primary);
         }
-
+        
         .page-link {
-            color: #dc3545 !important;
-            background-color: #fff !important;
-            border: 1px solid #dee2e6 !important;
+            color: var(--primary);
         }
-
+        
         .page-link:hover {
-            color: #fff !important;
-            background-color: #dc3545 !important;
-            /* border-color: #000 !important;  */
+            color: #0a58ca;
+        }
+        
+        /* Buttons */
+        .btn {
+            font-weight: 500;
+            border-radius: 0.375rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        /* Tables */
+        .table {
+            border-color: #f0f0f0;
+        }
+        
+        .table thead th {
+            background-color: rgba(0, 0, 0, 0.02);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Content wrapper */
+        .content-wrapper {
+            background-color: #fff;
+            border-radius: var(--card-border-radius);
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
         }
     </style>
 </head>
@@ -99,20 +188,20 @@
             <!-- Sidebar -->
             <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse">
                 <div class="position-sticky pt-3">
-                    <div class="text-center mb-4">
+                    <div class="sidebar-brand text-center">
                         @if ($globalSettings->logo ?? false)
                             <img src="{{ asset('storage/' . $globalSettings->logo) }}"
                                 alt="{{ $globalSettings->site_name ?? 'Logo' }}" class="img-fluid mb-2"
-                                style="max-height: 40px;">
+                                style="max-height: 50px;">
                         @endif
-                        <h4 class="text-white">{{ $globalSettings->site_name ?? 'Admin Panel' }}</h4>
+                        <h4 class="text-white fw-bold mb-0">{{ $globalSettings->site_name ?? 'Admin Panel' }}</h4>
                     </div>
 
-                    <ul class="nav flex-column">
+                    <ul class="nav flex-column mt-4">
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}"
                                 href="{{ route('admin.dashboard') }}">
-                                <i class="fas fa-tachometer-alt me-2"></i>
+                                <i class="fas fa-gauge-high me-2"></i>
                                 Dashboard
                             </a>
                         </li>
@@ -121,13 +210,19 @@
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}"
                                     href="{{ route('admin.users.index') }}">
-                                    <i class="fas fa-users me-2"></i>
+                                    <i class="fas fa-users-gear me-2"></i>
                                     Users
                                 </a>
                             </li>
                         @endrole
 
-                         @can('manage-products') 
+                        <li class="nav-item mt-2">
+                            <div class="text-uppercase text-white-50 px-3 py-2" style="font-size: 0.75rem; font-weight: 600;">
+                                <i class="fas fa-store me-2"></i> Catalog
+                            </div>
+                        </li>
+
+                        @can('manage-products') 
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('admin.products.*') ? 'active' : '' }}"
                                 href="{{ route('admin.products.index') }}">
@@ -135,7 +230,7 @@
                                 Products
                             </a>
                         </li>
-                         @endcan 
+                        @endcan 
 
                         @can('manage-categories')
                             <li class="nav-item">
@@ -157,20 +252,26 @@
                             </li>
                         @endcan
 
+                        <li class="nav-item mt-2">
+                            <div class="text-uppercase text-white-50 px-3 py-2" style="font-size: 0.75rem; font-weight: 600;">
+                                <i class="fas fa-gear me-2"></i> System
+                            </div>
+                        </li>
+
                         @role('super-admin')
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}"
                                     href="{{ route('admin.settings.index') }}">
-                                    <i class="fas fa-cog me-2"></i>
+                                    <i class="fas fa-sliders me-2"></i>
                                     Settings
                                 </a>
                             </li>
                         @endrole
                         @role('super-admin')
                             <li class="nav-item">
-                                <a class="nav-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}"
+                                <a class="nav-link {{ request()->routeIs('admin.notifications.*') ? 'active' : '' }}"
                                     href="{{ route('admin.settings.index') }}">
-                                    <i class="fas fa-cog me-2"></i>
+                                    <i class="fas fa-bell me-2"></i>
                                     Notifications
                                 </a>
                             </li>
@@ -180,23 +281,31 @@
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.access-control.*') ? 'active' : '' }}"
                                     href="{{ route('admin.access-control.index') }}">
-                                    <i class="fas fa-shield-alt me-2"></i>
+                                    <i class="fas fa-shield-halved me-2"></i>
                                     Access Control
                                 </a>
                             </li>
                         @endrole
                     </ul>
 
-                    <hr class="text-white">
+                    <hr class="text-white-50 my-4">
 
-                    <div class="text-center">
-                        <small class="text-white">Logged in as: {{ auth()->user()->name }}</small>
+                    <div class="px-3 py-2">
+                        <div class="d-flex align-items-center text-white-50">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-circle-user fa-fw fa-lg me-2"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-2">
+                                <div class="small fw-semibold">{{ auth()->user()->name }}</div>
+                                <div class="small opacity-75">{{ auth()->user()->roles->first()->name ?? 'User' }}</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </nav>
 
             <!-- Main content -->
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
+            <main class="col-md-9 ms-sm-auto col-lg-10 main-content">
                 <!-- Top navbar -->
                 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
                     <div class="container-fluid">
@@ -204,16 +313,30 @@
                             data-bs-target=".sidebar">
                             <span class="navbar-toggler-icon"></span>
                         </button>
+                        
+                        <!-- <h1 class="h4 mb-0 text-primary fw-bold d-none d-sm-block">@yield('title', 'Dashboard')</h1> -->
 
                         <div class="navbar-nav ms-auto">
-                            <div class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown">
-                                    <i class="fas fa-user me-1"></i>
-                                    {{ auth()->user()->name }}
+                            <div class="position-relative me-3 d-none d-md-block">
+                                <a href="#" class="btn btn-light position-relative" data-bs-toggle="tooltip" title="Notifications">
+                                    <i class="fas fa-bell"></i>
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        3
+                                    </span>
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{{ route('admin.profile.edit') }}">Profile</a>
+                            </div>
+                            <div class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button"
+                                    data-bs-toggle="dropdown">
+                                    <i class="fas fa-user-circle me-2"></i>
+                                    <span class="d-none d-md-inline">{{ auth()->user()->name }}</span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end shadow">
+                                    <li><a class="dropdown-item" href="{{ route('admin.profile.edit') }}">
+                                        <i class="fas fa-user me-2"></i> Profile</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">
+                                        <i class="fas fa-cog me-2"></i> Settings</a>
                                     </li>
                                     <li>
                                         <hr class="dropdown-divider">
@@ -221,7 +344,9 @@
                                     <li>
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
-                                            <button type="submit" class="dropdown-item">Logout</button>
+                                            <button type="submit" class="dropdown-item">
+                                                <i class="fas fa-sign-out-alt me-2"></i> Logout
+                                            </button>
                                         </form>
                                     </li>
                                 </ul>
@@ -233,15 +358,15 @@
                 <!-- Page content -->
                 <div class="container-fluid">
                     @if (session('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ session('success') }}
+                        <div class="alert alert-success alert-dismissible fade show shadow-sm border-start border-success border-4" role="alert">
+                            <i class="fas fa-check-circle me-2"></i> {{ session('success') }}
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
                     @endif
 
                     @if (session('error'))
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            {{ session('error') }}
+                        <div class="alert alert-danger alert-dismissible fade show shadow-sm border-start border-danger border-4" role="alert">
+                            <i class="fas fa-exclamation-circle me-2"></i> {{ session('error') }}
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
                     @endif

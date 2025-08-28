@@ -8,68 +8,76 @@
 <!-- Statistics Cards -->
 <div class="row mb-4">
     <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card stats-card danger h-100 py-2">
+        <div class="card border-0 shadow-sm h-100">
             <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                            Total Users</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $stats['total_users'] }}</div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-uppercase fw-semibold text-primary mb-1 small">Total Users</h6>
+                        <h2 class="mb-0 fw-bold">{{ $stats['total_users'] }}</h2>
                     </div>
-                    <div class="col-auto">
-                        <i class="fas fa-users fa-2x text-gray-300"></i>
+                    <div class="icon-circle bg-primary bg-opacity-10 p-3 rounded-circle">
+                        <i class="fas fa-users fa-lg text-primary"></i>
                     </div>
+                </div>
+                <div class="mt-3 small text-success">
+                    <i class="fas fa-arrow-up me-1"></i> 12% increase this month
                 </div>
             </div>
         </div>
     </div>
 
     <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card stats-card success h-100 py-2">
+        <div class="card border-0 shadow-sm h-100">
             <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            Total Products</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $stats['total_products'] }}</div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-uppercase fw-semibold text-success mb-1 small">Total Products</h6>
+                        <h2 class="mb-0 fw-bold">{{ $stats['total_products'] }}</h2>
                     </div>
-                    <div class="col-auto">
-                        <i class="fas fa-box fa-2x text-gray-300"></i>
+                    <div class="icon-circle bg-success bg-opacity-10 p-3 rounded-circle">
+                        <i class="fas fa-box fa-lg text-success"></i>
                     </div>
+                </div>
+                <div class="mt-3 small text-success">
+                    <i class="fas fa-arrow-up me-1"></i> 8% increase this month
                 </div>
             </div>
         </div>
     </div>
 
     <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card stats-card warning h-100 py-2">
+        <div class="card border-0 shadow-sm h-100">
             <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            Active Products</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $stats['active_products'] }}</div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-uppercase fw-semibold text-warning mb-1 small">Active Products</h6>
+                        <h2 class="mb-0 fw-bold">{{ $stats['active_products'] }}</h2>
                     </div>
-                    <div class="col-auto">
-                        <i class="fas fa-check-circle fa-2x text-gray-300"></i>
+                    <div class="icon-circle bg-warning bg-opacity-10 p-3 rounded-circle">
+                        <i class="fas fa-check-circle fa-lg text-warning"></i>
                     </div>
+                </div>
+                <div class="mt-3 small text-success">
+                    <i class="fas fa-arrow-up me-1"></i> 5% increase this month
                 </div>
             </div>
         </div>
     </div>
 
     <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card stats-card danger h-100 py-2">
+        <div class="card border-0 shadow-sm h-100">
             <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                            Featured Products</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $stats['featured_products'] }}</div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-uppercase fw-semibold text-danger mb-1 small">Featured Products</h6>
+                        <h2 class="mb-0 fw-bold">{{ $stats['featured_products'] }}</h2>
                     </div>
-                    <div class="col-auto">
-                        <i class="fas fa-star fa-2x text-gray-300"></i>
+                    <div class="icon-circle bg-danger bg-opacity-10 p-3 rounded-circle">
+                        <i class="fas fa-star fa-lg text-danger"></i>
                     </div>
+                </div>
+                <div class="mt-3 small text-success">
+                    <i class="fas fa-arrow-up me-1"></i> 3% increase this month
                 </div>
             </div>
         </div>
@@ -78,58 +86,83 @@
 
 <!-- Recent Data -->
 <div class="row">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="card-title mb-0">Recent Products</h5>
+    <div class="col-md-6 mb-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0 fw-bold">Recent Products</h5>
+                <a href="{{ route('admin.products.index') }}" class="btn btn-sm btn-outline-primary">View All</a>
             </div>
-            <div class="card-body">
+            <div class="card-body p-0">
                 @if($recent_products->count() > 0)
                     <div class="list-group list-group-flush">
                         @foreach($recent_products as $product)
-                        <div class="list-group-item">
+                        <div class="list-group-item border-start-0 border-end-0">
                             <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <h6 class="mb-1">{{ $product->name }}</h6>
-                                    <small class="text-muted">{{ $product->brand->name ?? 'N/A' }}</small>
+                                <div class="d-flex align-items-center">
+                                    <div class="icon-square bg-light text-primary me-3 p-2 rounded">
+                                        <i class="fas fa-box"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-1 fw-semibold">{{ $product->name }}</h6>
+                                        <div class="d-flex align-items-center small">
+                                            <span class="badge bg-light text-secondary me-2">{{ $product->brand->name ?? 'N/A' }}</span>
+                                            <span class="text-muted"><i class="fas fa-clock me-1"></i> {{ $product->created_at->diffForHumans() }}</span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <span class="badge bg-danger">${{ number_format($product->price, 2) }}</span>
+                                <span class="badge bg-primary rounded-pill">${{ number_format($product->price, 2) }}</span>
                             </div>
                         </div>
                         @endforeach
                     </div>
                 @else
-                    <p class="text-muted">No products found.</p>
+                    <div class="text-center py-5">
+                        <i class="fas fa-box fa-3x text-light mb-3"></i>
+                        <p class="text-muted">No products found.</p>
+                    </div>
                 @endif
             </div>
         </div>
     </div>
 
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="card-title mb-0">Recent Users</h5>
+    <div class="col-md-6 mb-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0 fw-bold">Recent Users</h5>
+                <a href="{{ route('admin.users.index') }}" class="btn btn-sm btn-outline-primary">View All</a>
             </div>
-            <div class="card-body">
+            <div class="card-body p-0">
                 @if($recent_users->count() > 0)
                     <div class="list-group list-group-flush">
                         @foreach($recent_users as $user)
-                        <div class="list-group-item">
+                        <div class="list-group-item border-start-0 border-end-0">
                             <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <h6 class="mb-1">{{ $user->name }}</h6>
-                                    <small class="text-muted">{{ $user->email }}</small>
+                                <div class="d-flex align-items-center">
+                                    <div class="icon-square bg-light text-primary me-3 p-2 rounded-circle">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-1 fw-semibold">{{ $user->name }}</h6>
+                                        <div class="d-flex align-items-center small">
+                                            <span class="text-muted">{{ $user->email }}</span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <small class="text-muted">{{ $user->created_at->format('M d, Y') }}</small>
+                                <div class="text-end">
+                                    <span class="badge bg-light text-dark">{{ $user->created_at->format('M d, Y') }}</span>
+                                </div>
                             </div>
                         </div>
                         @endforeach
                     </div>
                 @else
-                    <p class="text-muted">No users found.</p>
+                    <div class="text-center py-5">
+                        <i class="fas fa-users fa-3x text-light mb-3"></i>
+                        <p class="text-muted">No users found.</p>
+                    </div>
                 @endif
             </div>
         </div>
     </div>
 </div>
-@endsection 
+@endsection
