@@ -45,33 +45,39 @@
                 <div class="card border-0 shadow-sm rounded-3 mb-4 p-4">
                     <div class="card-body">
                         <h4 class="fw-bold mb-4">Our Office</h4>
+                        @if(app(\App\Settings\GeneralSettings::class)->address)
                         <div class="d-flex align-items-center mb-3">
                             <div class="contact-icon bg-danger text-white rounded-circle me-3">
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
                             <div>
                                 <h6 class="fw-bold mb-1">Address</h6>
-                                <p class="text-muted mb-0">Bhubaneswar, Odisha, India</p>
+                                <p class="text-muted mb-0">{{ app(\App\Settings\GeneralSettings::class)->address }}</p>
                             </div>
                         </div>
+                        @endif
+                        @if(app(\App\Settings\GeneralSettings::class)->contact_email)
                         <div class="d-flex align-items-center mb-3">
                             <div class="contact-icon bg-danger text-white rounded-circle me-3">
                                 <i class="fas fa-envelope"></i>
                             </div>
                             <div>
                                 <h6 class="fw-bold mb-1">Email</h6>
-                                <p class="text-muted mb-0">support@firesafety.com</p>
+                                <p class="text-muted mb-0">{{ app(\App\Settings\GeneralSettings::class)->contact_email }}</p>
                             </div>
                         </div>
+                        @endif
+                        @if(app(\App\Settings\GeneralSettings::class)->contact_phone)
                         <div class="d-flex align-items-center mb-3">
                             <div class="contact-icon bg-danger text-white rounded-circle me-3">
                                 <i class="fas fa-phone"></i>
                             </div>
                             <div>
                                 <h6 class="fw-bold mb-1">Phone</h6>
-                                <p class="text-muted mb-0">+91 98765 43210</p>
+                                <p class="text-muted mb-0">{{ app(\App\Settings\GeneralSettings::class)->contact_phone }}</p>
                             </div>
                         </div>
+                        @endif
                         <div class="d-flex align-items-center">
                             <div class="contact-icon bg-danger text-white rounded-circle me-3">
                                 <i class="fas fa-clock"></i>
@@ -100,10 +106,18 @@
         <div class="text-center mt-5" data-aos="fade-up">
             <h4 class="fw-bold mb-4">Follow Us</h4>
             <div class="social-links">
-                <a href="#" class="social-link bg-danger text-white"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="social-link bg-danger text-white"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social-link bg-danger text-white"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" class="social-link bg-danger text-white"><i class="fab fa-instagram"></i></a>
+                @if(app(\App\Settings\GeneralSettings::class)->facebook_url)
+                    <a href="{{ app(\App\Settings\GeneralSettings::class)->facebook_url }}" class="social-link bg-danger text-white" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                @endif
+                @if(app(\App\Settings\GeneralSettings::class)->twitter_url)
+                    <a href="{{ app(\App\Settings\GeneralSettings::class)->twitter_url }}" class="social-link bg-danger text-white" target="_blank"><i class="fab fa-twitter"></i></a>
+                @endif
+                @if(app(\App\Settings\GeneralSettings::class)->linkedin_url)
+                    <a href="{{ app(\App\Settings\GeneralSettings::class)->linkedin_url }}" class="social-link bg-danger text-white" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                @endif
+                @if(app(\App\Settings\GeneralSettings::class)->instagram_url)
+                    <a href="{{ app(\App\Settings\GeneralSettings::class)->instagram_url }}" class="social-link bg-danger text-white" target="_blank"><i class="fab fa-instagram"></i></a>
+                @endif
             </div>
         </div>
     </div>

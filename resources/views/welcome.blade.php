@@ -203,9 +203,15 @@
                 <!-- Contact -->
                 <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
                     <h5 class="text-uppercase fw-bold text-danger">Contact Us</h5>
-                    <p><i class="fas fa-map-marker-alt me-2"></i> Bhubaneswar, Odisha, India</p>
-                    <p><i class="fas fa-envelope me-2"></i> support@firesafety.com</p>
-                    <p><i class="fas fa-phone me-2"></i> +91 98765 43210</p>
+                    @if(app(\App\Settings\GeneralSettings::class)->address)
+                        <p><i class="fas fa-map-marker-alt me-2"></i> {{ app(\App\Settings\GeneralSettings::class)->address }}</p>
+                    @endif
+                    @if(app(\App\Settings\GeneralSettings::class)->contact_email)
+                        <p><i class="fas fa-envelope me-2"></i> {{ app(\App\Settings\GeneralSettings::class)->contact_email }}</p>
+                    @endif
+                    @if(app(\App\Settings\GeneralSettings::class)->contact_phone)
+                        <p><i class="fas fa-phone me-2"></i> {{ app(\App\Settings\GeneralSettings::class)->contact_phone }}</p>
+                    @endif
                     <p><i class="fas fa-clock me-2"></i> Mon - Sat: 9:00 AM – 6:00 PM</p>
                 </div>
 
@@ -222,10 +228,18 @@
 
                 <div class="col-md-5 col-lg-4 text-md-right">
                     <!-- Social icons -->
-                    <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="text-white me-3"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                    @if(app(\App\Settings\GeneralSettings::class)->facebook_url)
+                        <a href="{{ app(\App\Settings\GeneralSettings::class)->facebook_url }}" class="text-white me-3" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    @endif
+                    @if(app(\App\Settings\GeneralSettings::class)->twitter_url)
+                        <a href="{{ app(\App\Settings\GeneralSettings::class)->twitter_url }}" class="text-white me-3" target="_blank"><i class="fab fa-twitter"></i></a>
+                    @endif
+                    @if(app(\App\Settings\GeneralSettings::class)->linkedin_url)
+                        <a href="{{ app(\App\Settings\GeneralSettings::class)->linkedin_url }}" class="text-white me-3" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    @endif
+                    @if(app(\App\Settings\GeneralSettings::class)->instagram_url)
+                        <a href="{{ app(\App\Settings\GeneralSettings::class)->instagram_url }}" class="text-white" target="_blank"><i class="fab fa-instagram"></i></a>
+                    @endif
                 </div>
             </div>
         </div>
