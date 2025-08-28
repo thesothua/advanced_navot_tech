@@ -20,6 +20,7 @@ Route::get('/', function () {
 
 Route::view('/about', 'about')->name('about');
 Route::get('/products', [App\Http\Controllers\ProductController::class, 'index'])->name('products');
+Route::get('/products/{product:slug}', [App\Http\Controllers\ProductController::class, 'show'])->name('products.show');
 Route::view('/contact', 'contact')->name('contact');
 
 // Public category routes

@@ -47,7 +47,7 @@
                             </div>
                             <div class="card-footer bg-white border-top-0 p-4">
                                 <div class="d-flex justify-content-between">
-                                    <a href="#" class="btn btn-outline-danger">View Details</a>
+                                    <a href="{{ route('products.show', $product->slug) }}" class="btn btn-outline-danger">View Details</a>
                                     <button class="btn btn-danger"><i class="fas fa-shopping-cart me-2"></i>Add to Cart</button>
                                 </div>
                             </div>
