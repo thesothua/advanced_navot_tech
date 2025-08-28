@@ -3,7 +3,7 @@
 @section('content')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Manage Permissions</h1>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createPermissionModal">
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#createPermissionModal">
         <i class="fas fa-plus me-2"></i>Create New Permission
     </button>
 </div>
@@ -142,7 +142,7 @@
                 <i class="fas fa-key fa-3x text-muted mb-3"></i>
                 <h5>No Permissions Found</h5>
                 <p class="text-muted">Create your first permission to get started.</p>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createPermissionModal">
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#createPermissionModal">
                     <i class="fas fa-plus me-2"></i>Create Permission
                 </button>
             </div>
@@ -180,7 +180,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Create Permission</button>
+                    <button type="submit" class="btn btn-danger">Create Permission</button>
                 </div>
             </form>
         </div>
