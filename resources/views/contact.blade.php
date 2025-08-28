@@ -3,60 +3,151 @@
 @section('title', 'Contact Us')
 
 @section('content')
-    <div class="container py-5 mt-5">
-        <h2 class="text-center mb-4 text-danger fw-bold">Contact Us</h2>
+    <div class="container py-5">
+        <div class="row justify-content-center mb-5" data-aos="fade-up">
+            <div class="col-lg-6 text-center">
+                <h6 class="text-danger fw-bold text-uppercase">Get In Touch</h6>
+                <h2 class="fw-bold display-5 mb-3">Contact Us</h2>
+                <p class="lead text-muted">We're here to answer your questions and provide assistance</p>
+            </div>
+        </div>
 
-        <div class="row">
+        <div class="row g-5">
             <!-- Contact Form -->
-            <div class="col-md-6">
-                <form>
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Your Name</label>
-                        <input type="text" class="form-control" id="name" placeholder="Enter your name">
-                    </div>
+            <div class="col-lg-6" data-aos="fade-right" data-aos-delay="100">
+                <div class="card border-0 shadow-sm rounded-3 p-4">
+                    <div class="card-body">
+                        <h4 class="fw-bold mb-4">Send Us a Message</h4>
+                        <form>
+                            <div class="mb-4">
+                                <label for="name" class="form-label">Your Name</label>
+                                <input type="text" class="form-control form-control-lg rounded-3" id="name" placeholder="Enter your name">
+                            </div>
 
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="email" placeholder="Enter your email">
-                    </div>
+                            <div class="mb-4">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" class="form-control form-control-lg rounded-3" id="email" placeholder="Enter your email">
+                            </div>
 
-                    <div class="mb-3">
-                        <label for="message" class="form-label">Message</label>
-                        <textarea class="form-control" id="message" rows="5" placeholder="Your message..."></textarea>
-                    </div>
+                            <div class="mb-4">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea class="form-control form-control-lg rounded-3" id="message" rows="5" placeholder="Your message..."></textarea>
+                            </div>
 
-                    <button type="submit" class="btn btn-danger px-4">Send Message</button>
-                </form>
+                            <button type="submit" class="btn btn-danger btn-lg px-5 rounded-pill">Send Message</button>
+                        </form>
+                    </div>
+                </div>
             </div>
 
             <!-- Contact Info + Map -->
-            <div class="col-md-6 mt-4 mt-md-0">
-                <div class="mb-4">
-                    <h5 class="text-danger fw-bold">Our Office</h5>
-                    <p><i class="fas fa-map-marker-alt me-2"></i> Bhubaneswar, Odisha, India</p>
-                    <p><i class="fas fa-envelope me-2"></i> support@firesafety.com</p>
-                    <p><i class="fas fa-phone me-2"></i> +91 98765 43210</p>
-                    <p><i class="fas fa-clock me-2"></i> Mon - Sat: 9:00 AM – 6:00 PM</p>
+            <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
+                <div class="card border-0 shadow-sm rounded-3 mb-4 p-4">
+                    <div class="card-body">
+                        <h4 class="fw-bold mb-4">Our Office</h4>
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="contact-icon bg-danger text-white rounded-circle me-3">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1">Address</h6>
+                                <p class="text-muted mb-0">Bhubaneswar, Odisha, India</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="contact-icon bg-danger text-white rounded-circle me-3">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1">Email</h6>
+                                <p class="text-muted mb-0">support@firesafety.com</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="contact-icon bg-danger text-white rounded-circle me-3">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1">Phone</h6>
+                                <p class="text-muted mb-0">+91 98765 43210</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="contact-icon bg-danger text-white rounded-circle me-3">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1">Working Hours</h6>
+                                <p class="text-muted mb-0">Mon - Sat: 9:00 AM – 6:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="ratio ratio-16x9">
-                    <!-- Replace with your location -->
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14739.352372064746!2d85.8314654!3d20.2960587!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a19a76d4e1cbf07%3A0x1a2fc30deea556dc!2sBhubaneswar%2C%20Odisha!5e0!3m2!1sen!2sin!4v1629200170201!5m2!1sen!2sin"
-                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+                    <div class="ratio ratio-16x9">
+                        <!-- Replace with your location -->
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14739.352372064746!2d85.8314654!3d20.2960587!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a19a76d4e1cbf07%3A0x1a2fc30deea556dc!2sBhubaneswar%2C%20Odisha!5e0!3m2!1sen!2sin!4v1629200170201!5m2!1sen!2sin"
+                            style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Social Links -->
-        <div class="text-center mt-5">
-            <h5 class="text-danger fw-bold">Follow Us</h5>
-            <a href="#" class="btn btn-outline-light btn-floating m-1 bg-danger"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="btn btn-outline-light btn-floating m-1 bg-danger"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="btn btn-outline-light btn-floating m-1 bg-danger"><i
-                    class="fab fa-linkedin-in"></i></a>
-            <a href="#" class="btn btn-outline-light btn-floating m-1 bg-danger"><i class="fab fa-instagram"></i></a>
+        <div class="text-center mt-5" data-aos="fade-up">
+            <h4 class="fw-bold mb-4">Follow Us</h4>
+            <div class="social-links">
+                <a href="#" class="social-link bg-danger text-white"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-link bg-danger text-white"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link bg-danger text-white"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-link bg-danger text-white"><i class="fab fa-instagram"></i></a>
+            </div>
         </div>
     </div>
+
+    <style>
+        .contact-icon {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .social-link {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-control {
+            border: 1px solid #dee2e6;
+            padding: 0.75rem 1.25rem;
+        }
+        
+        .form-control:focus {
+            border-color: var(--bs-danger);
+            box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+        }
+    </style>
 @endsection

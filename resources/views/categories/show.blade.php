@@ -3,55 +3,112 @@
 @section('title', $category->name)
 
 @section('content')
-    <div class="container py-4">
-        <div class="row mb-4">
-            <div class="col-md-12">
-                <h2>{{ $category->name }}</h2>
+    <div class="container py-5">
+        <div class="row justify-content-center mb-5" data-aos="fade-up">
+            <div class="col-lg-6 text-center">
+                <h6 class="text-danger fw-bold text-uppercase">Category</h6>
+                <h2 class="fw-bold display-5 mb-3">{{ $category->name }}</h2>
                 @if($category->description)
-                    <p class="lead">{{ $category->description }}</p>
+                    <p class="lead text-muted">{{ $category->description }}</p>
                 @endif
             </div>
         </div>
 
         @if($products->count() > 0)
-            <div class="row">
+            <div class="row g-4">
                 @foreach($products as $product)
-                    <div class="col-md-4 mb-4">
-                        <div class="card h-100">
+                    <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
+                        <div class="card h-100 border-0 shadow-sm rounded-3 product-card">
                             @php
                                 $media = $product->getFirstMedia('images');
                             @endphp
-                            @if($media)
-                                <img src="{{ $media->getUrl() }}" class="card-img-top" alt="{{ $product->name }}" style="height: 200px; object-fit: cover;">
-                            @else
-                                <img src="https://via.placeholder.com/300x200?text=No+Image" class="card-img-top" alt="No Image">
-                            @endif
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $product->name }}</h5>
-                                <!-- <p class="card-text text-danger fw-bold">₹{{ number_format($product->price, 2) }}</p> -->
-                                @if($product->sale_price)
-                                    <p class="card-text"><span class="text-decoration-line-through">₹{{ number_format($product->price, 2) }}</span> <span class="text-danger fw-bold">₹{{ number_format($product->sale_price, 2) }}</span></p>
+                            <div class="card-img-container">
+                                @if($media)
+                                    <img src="{{ $media->getUrl() }}" class="card-img-top rounded-top" alt="{{ $product->name }}">
+                                @else
+                                    <img src="https://via.placeholder.com/600x400?text={{ urlencode($product->name) }}" class="card-img-top rounded-top" alt="{{ $product->name }}">
                                 @endif
-                                <p class="card-text">{{ Str::limit($product->description, 100) }}</p>
+                                @if($product->sale_price)
+                                    <div class="sale-badge">SALE</div>
+                                @endif
                             </div>
-                            <div class="card-footer bg-white border-top-0">
-                                <a href="#" class="btn btn-sm btn-outline-danger">View Details</a>
-                                <!-- <button class="btn btn-sm btn-danger">Add to Cart</button> -->
+                            <div class="card-body p-4">
+                                @if($product->brand)
+                                    <p class="text-muted small mb-1">{{ $product->brand->name }}</p>
+                                @endif
+                                <h4 class="card-title fw-bold mb-2">{{ $product->name }}</h4>
+                                <div class="mb-3">
+                                    @if($product->sale_price)
+                                        <span class="text-decoration-line-through text-muted me-2">₹{{ number_format($product->price, 2) }}</span>
+                                        <span class="text-danger fw-bold">₹{{ number_format($product->sale_price, 2) }}</span>
+                                    @else
+                                        <span class="text-danger fw-bold">₹{{ number_format($product->price, 2) }}</span>
+                                    @endif
+                                </div>
+                                <p class="card-text text-muted">{{ Str::limit($product->description, 100) }}</p>
+                            </div>
+                            <div class="card-footer bg-white border-top-0 p-4">
+                                <div class="d-flex justify-content-between">
+                                    <a href="#" class="btn btn-outline-danger">View Details</a>
+                                    <button class="btn btn-danger"><i class="fas fa-shopping-cart me-2"></i>Add to Cart</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 @endforeach
             </div>
 
-            <div class="row">
-                <div class="col-md-12">
+            <div class="row mt-5">
+                <div class="col-md-12 d-flex justify-content-center" data-aos="fade-up">
                     {{ $products->links() }}
                 </div>
             </div>
         @else
-            <div class="alert alert-info">
-                No products found in this category.
+            <div class="alert alert-info shadow-sm rounded-3 p-4 text-center" data-aos="fade-up">
+                <i class="fas fa-info-circle fa-2x mb-3 text-info"></i>
+                <h4>No Products Found</h4>
+                <p class="mb-0">There are currently no products available in this category. Please check back soon!</p>
             </div>
         @endif
     </div>
+
+    <style>
+        .product-card {
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .card-img-container {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .card-img-top {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .card-img-top {
+            transform: scale(1.05);
+        }
+        
+        .sale-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--bs-danger);
+            color: white;
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            border-radius: 3px;
+        }
+    </style>
 @endsection

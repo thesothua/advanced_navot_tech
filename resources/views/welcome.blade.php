@@ -3,15 +3,89 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>@yield('title') - MySite</title>
+    <title>@yield('title') - Advanced Nova Tech</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
+        :root {
+            --primary-color: #dc3545;
+            --secondary-color: #212529;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --transition: all 0.3s ease;
+        }
+        
         body {
-            padding-top: 70px;
+            padding-top: 76px;
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark-color);
+        }
+        
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: white;
+            left: 0;
+            bottom: -3px;
+            transition: var(--transition);
+        }
+        
+        .nav-link:hover:after,
+        .nav-link.active:after {
+            width: 100%;
+        }
+        
+        .btn {
+            border-radius: 4px;
+            padding: 8px 20px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .btn-danger {
+            background-color: var(--primary-color);
+        }
+        
+        .card {
+            border-radius: 8px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -19,18 +93,19 @@
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-danger shadow-sm fixed-top py-3 mb-5">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger fixed-top py-3">
         <div class="container">
-            <a class="navbar-brand fw-bold text-white" href="/">
-               <img src="{{ asset('logo/mylogo.png') }}" width="40" alt="logo" class="img-fluid rounded shadow-sm"> <i class="bi bi-shield-shaded me-2"></i>Advanced Nova Tech
+            <a class="navbar-brand d-flex align-items-center" href="/">
+               <img src="{{ asset('logo/mylogo.png') }}" width="40" alt="logo" class="img-fluid rounded shadow-sm me-2"> 
+               <span>Advanced Nova Tech</span>
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarNav">
+                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto gap-2">
+                <ul class="navbar-nav ms-auto gap-3">
 
                     <!-- Home -->
                     <li class="nav-item">
@@ -46,13 +121,15 @@
 
                     <!-- Products Dropdown -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle {{ request()->is('category/*') || request()->is('products') ? 'active fw-semibold text-white' : 'text-white-50' }}"
+                        <a class="nav-link dropdown-toggle {{ request()->is('categories/*') || request()->is('products') ? 'active fw-semibold text-white' : 'text-white-50' }}"
                             href="{{ url('/products') }}" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             Products
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end mt-2 border-0 shadow-sm"
+                        <ul class="dropdown-menu dropdown-menu-end mt-2 border-0 shadow-lg rounded-3"
                             aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item fw-medium" href="{{ url('/products') }}">All Products</a></li>
+                            <li><hr class="dropdown-divider"></li>
                             @forelse($categories ?? [] as $category)
                                 <li>
                                     <a class="dropdown-item" href="{{ url('/categories/' . $category->slug) }}">
@@ -70,6 +147,15 @@
                         <a class="nav-link {{ request()->is('contact') ? 'active fw-semibold text-white' : 'text-white-50' }}"
                             href="{{ url('/contact') }}">Contact Us</a>
                     </li>
+                    
+                    <!-- Login/Admin Button -->
+                    <li class="nav-item ms-lg-2">
+                        @auth
+                            <a href="{{ url('/admin') }}" class="btn btn-sm btn-light fw-medium"><i class="fas fa-user-shield me-1"></i> Admin Panel</a>
+                        @else
+                            <a href="{{ route('login') }}" class="btn btn-sm btn-light fw-medium"><i class="fas fa-sign-in-alt me-1"></i> Login</a>
+                        @endauth
+                    </li>
 
                 </ul>
             </div>
@@ -78,7 +164,7 @@
 
 
     <!-- Page Content -->
-    <main class="container">
+    <main>
         @yield('content')
     </main>
 
@@ -148,7 +234,9 @@
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- AOS Animation Library JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -158,8 +246,26 @@
                 return new bootstrap.Dropdown(dropdownToggleEl);
             });
             
-            // Debug log
-            console.log('Dropdowns initialized:', dropdownList.length);
+            // Initialize AOS animations
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+            
+            // Add smooth scrolling to all links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
         });
     </script>
     
