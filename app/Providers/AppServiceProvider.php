@@ -23,7 +23,10 @@ class AppServiceProvider extends ServiceProvider
         View::composer(['layouts.app', 'admin.layouts.app'], \App\View\Composers\SettingsComposer::class);
         
         View::composer('*', function ($view) {
-            $view->with('categories', \App\Models\Category::where('is_active', 1)->get());
+            $view->with('categories', \App\Models\Category::where('is_active', 1)->with(['children' => function ($q)  {
+                $q->where('is_active', 1);
+                
+            }])->get());
         });
     }
 }

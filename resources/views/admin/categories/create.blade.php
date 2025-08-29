@@ -23,6 +23,35 @@
             </div>
 
             <div class="mb-3">
+                <label for="parent_id" class="form-label">Parent Category</label>
+                <select class="form-select @error('parent_id') is-invalid @enderror" id="parent_id" name="parent_id">
+                    <option value="">None (Top Level Category)</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}" {{ old('parent_id') == $category->id ? 'selected' : '' }}>
+                            {{ $category->name }}
+                        </option>
+                        @if($category->children)
+                            @foreach($category->children as $child)
+                                <option value="{{ $child->id }}" {{ old('parent_id') == $child->id ? 'selected' : '' }}>
+                                    &nbsp;&nbsp;&nbsp;└ {{ $child->name }}
+                                </option>
+                                @if($child->children)
+                                    @foreach($child->children as $grandchild)
+                                        <option value="{{ $grandchild->id }}" {{ old('parent_id') == $grandchild->id ? 'selected' : '' }}>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└ {{ $grandchild->name }}
+                                        </option>
+                                    @endforeach
+                                @endif
+                            @endforeach
+                        @endif
+                    @endforeach
+                </select>
+                @error('parent_id')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
                 <textarea class="form-control @error('description') is-invalid @enderror" 
                           id="description" name="description" rows="3">{{ old('description') }}</textarea>
@@ -72,4 +101,4 @@
         </form>
     </div>
 </div>
-@endsection 
+@endsection

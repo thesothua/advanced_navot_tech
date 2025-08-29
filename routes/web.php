@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AccessControlController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
@@ -25,6 +26,8 @@ Route::view('/contact', 'contact')->name('contact');
 
 // Public category routes
 Route::get('/categories/{category:slug}', [App\Http\Controllers\CategoryController::class, 'show'])->name('categories.show');
+
+Route::post('/contact', [NotificationController::class, 'submitForm'])->name('contact.submit');
 
 // Test route to check if basic functionality works
 

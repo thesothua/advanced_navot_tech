@@ -18,8 +18,10 @@
                     <tr>
                         <th>Image</th>
                         <th>Name</th>
-                        <th>Slug</th>
-                        <th>Products Count</th>
+                        <th>Hierarchy</th>
+                        <th>Parent</th>
+                        <th>Products</th>
+                        <th>Subcategories</th>
                         <th>Status</th>
                         <th>Sort Order</th>
                         <th>Actions</th>
@@ -47,8 +49,10 @@ $(function () {
         columns: [
             { data: 'image', name: 'image', orderable: false, searchable: false },
             { data: 'name', name: 'name' },
-            { data: 'slug', name: 'slug' },
+            { data: 'hierarchy', name: 'hierarchy', orderable: false },
+            { data: 'parent_name', name: 'parent_name', orderable: true },
             { data: 'products_count', name: 'products_count', orderable: true, searchable: false },
+            { data: 'children_count', name: 'children_count', orderable: true, searchable: false },
             { data: 'status', name: 'status' },
             { data: 'sort_order', name: 'sort_order' },
             { data: 'action', name: 'action', orderable: false, searchable: false }
@@ -56,4 +60,4 @@ $(function () {
     });
 });
 </script>
-@endpush 
+@endpush

@@ -19,6 +19,7 @@ class Category extends Model implements HasMedia
         'description',
         'is_active',
         'sort_order',
+        'parent_id',
     ];
 
     protected $casts = [
@@ -54,4 +55,47 @@ class Category extends Model implements HasMedia
             ->height(50)
             ->sharpen(10);
     }
-} 
+
+    public function parent()
+    {
+        return $this->belongsTo(self::class, 'parent_id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(self::class, 'parent_id');
+    }
+
+    public function allChildren()
+    {
+        return $this->children()->with('allChildren');
+    }
+
+    public function allParents()
+    {
+        return $this->parent()->with('allParents');
+    }
+
+    public function isParent(): bool
+    {
+        return $this->children()->count() > 0;
+    }
+
+    public function isChild(): bool
+    {
+        return !is_null($this->parent_id);
+    }
+
+    public function getFullHierarchyAttribute(): string
+    {
+        $hierarchy = collect([$this->name]);
+        $parent = $this->parent;
+
+        while ($parent) {
+            $hierarchy->prepend($parent->name);
+            $parent = $parent->parent;
+        }
+
+        return $hierarchy->join(' > ');
+    }
+}

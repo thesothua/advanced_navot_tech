@@ -24,6 +24,16 @@
                     <div class="col-md-6">
                         <p><strong>Name:</strong> {{ $category->name }}</p>
                         <p><strong>Slug:</strong> {{ $category->slug }}</p>
+                        <p><strong>Full Hierarchy:</strong> {{ $category->full_hierarchy }}</p>
+                        <p><strong>Parent Category:</strong> 
+                            @if($category->parent)
+                                <a href="{{ route('admin.categories.show', $category->parent->slug) }}">
+                                    {{ $category->parent->name }}
+                                </a>
+                            @else
+                                <span class="text-muted">None (Top Level)</span>
+                            @endif
+                        </p>
                         <p><strong>Status:</strong> 
                             @if($category->is_active)
                                 <span class="badge bg-success">Active</span>
@@ -34,6 +44,8 @@
                     </div>
                     <div class="col-md-6">
                         <p><strong>Sort Order:</strong> {{ $category->sort_order }}</p>
+                        <p><strong>Products Count:</strong> {{ $category->products->count() }}</p>
+                        <p><strong>Subcategories:</strong> {{ $category->children->count() }}</p>
                         <p><strong>Created:</strong> {{ $category->created_at->format('M d, Y H:i') }}</p>
                         <p><strong>Updated:</strong> {{ $category->updated_at->format('M d, Y H:i') }}</p>
                     </div>
@@ -47,6 +59,54 @@
                 @endif
             </div>
         </div>
+
+        @if($category->children->count() > 0)
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Subcategories</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Products</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($category->children as $child)
+                            <tr>
+                                <td>
+                                    <i class="fas fa-folder text-warning me-2"></i>
+                                    {{ $child->name }}
+                                </td>
+                                <td>{{ $child->products->count() }}</td>
+                                <td>
+                                    @if($child->is_active)
+                                        <span class="badge bg-success">Active</span>
+                                    @else
+                                        <span class="badge bg-secondary">Inactive</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <a href="{{ route('admin.categories.show', $child->slug) }}" class="btn btn-sm btn-outline-info me-1">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="{{ route('admin.categories.edit', $child->slug) }}" class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        @endif
 
         @if($category->products->count() > 0)
         <div class="card mt-4">
@@ -113,4 +173,4 @@
         </div>
     </div>
 </div>
-@endsection 
+@endsection

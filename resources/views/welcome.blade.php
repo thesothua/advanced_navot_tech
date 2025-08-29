@@ -87,6 +87,44 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
+        
+        /* Dropdown submenu styles */
+        .dropdown-submenu {
+            position: relative;
+        }
+        
+        .dropdown-submenu > .dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-top: -6px;
+            margin-left: -1px;
+            display: none;
+        }
+        
+        .dropdown-submenu:hover > .dropdown-menu {
+            display: block;
+        }
+        
+        /* Arrow for dropdown submenu */
+        .dropdown-submenu > a:after {
+            display: block;
+            content: " ";
+            float: right;
+            width: 0;
+            height: 0;
+            border-color: transparent;
+            border-style: solid;
+            border-width: 5px 0 5px 5px;
+            border-left-color: #ccc;
+            margin-top: 5px;
+            margin-right: -10px;
+        }
+
+
+
+        
+
+
     </style>
 </head>
 
@@ -119,6 +157,7 @@
                             href="{{ url('/about') }}">About Us</a>
                     </li>
 
+                
                     <!-- Products Dropdown -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle {{ request()->is('categories/*') || request()->is('products') ? 'active fw-semibold text-white' : 'text-white-50' }}"
@@ -131,16 +170,41 @@
                             <li><a class="dropdown-item fw-medium" href="{{ url('/products') }}">All Products</a></li>
                             <li><hr class="dropdown-divider"></li>
                             @forelse($categories ?? [] as $category)
-                                <li>
-                                    <a class="dropdown-item" href="{{ url('/categories/' . $category->slug) }}">
-                                        {{ $category->name }}
-                                    </a>
-                                </li>
+                                @if($category->parent_id === null)
+                                    @if($category->children->count() > 0)
+                                        <li class="dropdown-submenu">
+                                            <a class="dropdown-item dropdown-toggle" href="{{ url('/categories/' . $category->slug) }}">
+                                                {{ $category->name }}
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-3">
+                                                @foreach($category->children as $subcategory)
+                                                    <li>
+                                                        <a class="dropdown-item" href="{{ url('/categories/' . $subcategory->slug) }}">
+                                                            {{ $subcategory->name }}
+                                                        </a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </li>
+                                    @else
+                                        <li>
+                                            <a class="dropdown-item" href="{{ url('/categories/' . $category->slug) }}">
+                                                {{ $category->name }}
+                                            </a>
+                                        </li>
+                                    @endif
+                                @endif
                             @empty
                                 <li><span class="dropdown-item text-muted">No categories</span></li>
                             @endforelse
                         </ul>
                     </li>
+
+  
+
+
+
+
 
                     <!-- Contact -->
                     <li class="nav-item">
@@ -258,6 +322,27 @@
             var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
             var dropdownList = dropdownElementList.map(function(dropdownToggleEl) {
                 return new bootstrap.Dropdown(dropdownToggleEl);
+            });
+            
+            // Handle submenu dropdowns on mobile
+            document.querySelectorAll('.dropdown-submenu > a').forEach(function(element) {
+                element.addEventListener('click', function(e) {
+                    // Only prevent default for mobile view
+                    if (window.innerWidth < 992) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        // Toggle the submenu
+                        var submenu = this.nextElementSibling;
+                        if (submenu && submenu.classList.contains('dropdown-menu')) {
+                            if (submenu.style.display === 'block') {
+                                submenu.style.display = 'none';
+                            } else {
+                                submenu.style.display = 'block';
+                            }
+                        }
+                    }
+                });
             });
             
             // Initialize AOS animations

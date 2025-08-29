@@ -274,6 +274,7 @@
         .carousel-control-next {
             width: 5%;
         }
+        
 
         .carousel-control-prev-icon,
         .carousel-control-next-icon {
