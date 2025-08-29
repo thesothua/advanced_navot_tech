@@ -15,7 +15,8 @@
         <!-- Company Introduction -->
         <div class="row align-items-center mb-5">
             <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right" data-aos-delay="100">
-                <img src="{{ asset('images/about-us.jpg') }}" alt="About Us" class="img-fluid rounded-3 shadow" onerror="this.src='https://via.placeholder.com/600x400?text=About+Us'">
+                <img src="https://cdn.pixabay.com/photo/2022/02/27/22/56/construction-7038241_1280.png" alt="About Us" class="img-fluid rounded-3" onerror="this.src='https://via.placeholder.com/600x400?text=About+Us'">
+                <!-- <img src="{{ asset('images/about-us.jpg') }}" alt="About Us" class="img-fluid rounded-3 shadow" onerror="this.src='https://via.placeholder.com/600x400?text=About+Us'"> -->
             </div>
             <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
                 <h3 class="fw-bold mb-4">Your Trusted Fire Safety Partner</h3>

@@ -110,7 +110,9 @@
             </div>
             <div class="row align-items-center">
                 <div class="col-md-6 mb-4 mb-md-0" data-aos="fade-right" data-aos-delay="100">
-                    <img src="{{ asset('images/fire-safety-about.jpg') }}" class="img-fluid rounded-3 shadow"
+                    <!-- <img src="{{ asset('images/fire-safety-about.jpg') }}" class="img-fluid rounded-3 shadow"
+                        alt="About Company" onerror="this.src='https://via.placeholder.com/600x400?text=About+Us'"> -->
+                    <img src="https://cdn.pixabay.com/photo/2025/01/18/20/20/ai-generated-9343174_1280.png" class="img-fluid rounded-3"
                         alt="About Company" onerror="this.src='https://via.placeholder.com/600x400?text=About+Us'">
                 </div>
                 <div class="col-md-6" data-aos="fade-left" data-aos-delay="200">

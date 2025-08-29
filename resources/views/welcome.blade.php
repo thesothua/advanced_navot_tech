@@ -153,7 +153,7 @@
                         @auth
                             <a href="{{ url('/admin') }}" class="btn btn-sm btn-light fw-medium"><i class="fas fa-user-shield me-1"></i> Admin Panel</a>
                         @else
-                            <a href="{{ route('login') }}" class="btn btn-sm btn-light fw-medium"><i class="fas fa-sign-in-alt me-1"></i> Login</a>
+                            <!-- <a href="{{ route('login') }}" class="btn btn-sm btn-light fw-medium"><i class="fas fa-sign-in-alt me-1"></i> Login</a> -->
                         @endauth
                     </li>
 
