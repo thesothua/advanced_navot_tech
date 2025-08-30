@@ -270,7 +270,7 @@
                         @role('super-admin')
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.notifications.*') ? 'active' : '' }}"
-                                    href="{{ route('admin.settings.index') }}">
+                                    href="{{ route('admin.notifications.index') }}">
                                     <i class="fas fa-bell me-2"></i>
                                     Notifications
                                 </a>
@@ -308,7 +308,7 @@
             <main class="col-md-9 ms-sm-auto col-lg-10 main-content">
                 <!-- Top navbar -->
                 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
-                    <div class="container-fluid">
+                    <div class="container-fluid mt-2">
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target=".sidebar">
                             <span class="navbar-toggler-icon"></span>
@@ -318,10 +318,10 @@
 
                         <div class="navbar-nav ms-auto">
                             <div class="position-relative me-3 d-none d-md-block">
-                                <a href="#" class="btn btn-light position-relative" data-bs-toggle="tooltip" title="Notifications">
+                                <a href="{{route('admin.notifications.index')}}" class="btn btn-light position-relative" data-bs-toggle="tooltip" title="Notifications">
                                     <i class="fas fa-bell"></i>
                                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                        3
+                                       {{ $unreadCount}}
                                     </span>
                                 </a>
                             </div>

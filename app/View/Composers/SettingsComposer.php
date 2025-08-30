@@ -1,7 +1,7 @@
 <?php
-
 namespace App\View\Composers;
 
+use App\Models\Notification;
 use App\Settings\GeneralSettings;
 use Illuminate\View\View;
 
@@ -16,6 +16,18 @@ class SettingsComposer
 
     public function compose(View $view)
     {
-        $view->with('globalSettings', $this->settings);
+
+        $unreadCount = 0;
+
+        $unreadCount = Notification::whereNull('read_at')
+
+            ->count();
+
+        // $view->with('globalSettings', $this->settings);
+
+        $view->with([
+            'globalSettings' => $this->settings,
+            'unreadCount'    => $unreadCount,
+        ]);
     }
 }

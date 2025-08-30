@@ -9,7 +9,6 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
-use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 // Public routes
@@ -62,6 +61,14 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
         Route::resource('brands', BrandController::class);
     });
 
+    // Brand Management
+    Route::middleware(['role:super-admin'])->group(function () {
+        // routes/web.php
+        Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+        Route::get('/notification/{id}', [NotificationController::class, 'show'])->name('notification.show');
+
+    });
+
     // Settings Management (Super Admin only)
     Route::middleware(['role:super-admin'])->group(function () {
         Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
@@ -91,5 +98,3 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::get('products/{product:slug}', [ProductController::class, 'show'])->name('products.show');
     Route::get('categories/{category:slug}', [CategoryController::class, 'show'])->name('categories.show');
 });
-
-
