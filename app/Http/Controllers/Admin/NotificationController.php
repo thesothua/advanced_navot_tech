@@ -48,21 +48,23 @@ class NotificationController extends Controller
     {
 
         // // Validate input
-        // $request->validate([
-        //     'name'    => 'required|string|max:100',
-        //     'email'   => 'required|email',
-        //     'subject' => 'required|string|max:150',
-        //     'message' => 'required|string|min:1000',
-        // ]);
+        $request->validate([
+            'name'    => 'required|string|max:100',
+            'email'   => 'required|email',
+            'subject' => 'required|string|max:150',
+            'message' => 'required|string|max:1000',
+        ]);
 
         // dd($request->all());
 
         // Store in DB
-        $contact = Notification::create($request->all());
+        $contact = Notification::create($request->only('name', 'email', 'subject', 'message'));
+
+       
 
         // Send email (optional)
         Mail::raw("New message from {$contact->name}\n\n{$contact->message}", function ($mail) use ($contact) {
-            $mail->to(env('MAIL_FROM_ADDRESS')) // Change to your admin email
+            $mail->to($contact->email) // Change to your admin email
                 ->subject("Contact Form: {$contact->subject}");
         });
 

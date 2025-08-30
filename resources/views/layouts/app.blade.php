@@ -11,8 +11,6 @@
         @if($globalSettings->site_description ?? false)
             <meta name="description" content="{{ $globalSettings->site_description }}">
         @endif
-
-      
         
         <!-- Favicon -->
         @if($globalSettings->favicon ?? false)

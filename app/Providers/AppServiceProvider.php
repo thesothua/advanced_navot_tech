@@ -21,35 +21,35 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(GeneralSettings $settings): void
     {
-        // Register view composer for global settings
-        View::composer(['layouts.app', 'admin.layouts.app'], \App\View\Composers\SettingsComposer::class);
-        
-        View::composer('*', function ($view) {
-            $view->with('categories', \App\Models\Category::where('is_active', 1)->with(['children' => function ($q)  {
-                $q->where('is_active', 1);
-                
-            }])->get());
-        });
-
-
-
-
-        //   // Register view composer for global settings
+        // // Register view composer for global settings
         // View::composer(['layouts.app', 'admin.layouts.app'], \App\View\Composers\SettingsComposer::class);
-
-        //   // Share categories + global settings with all views
-        // View::composer('*', function ($view) use ($settings) {
-        //     $categories = Category::where('is_active', 1)
-        //         ->with(['children' => function ($q) {
-        //             $q->where('is_active', 1);
-        //         }])
-        //         ->get();
-
-        //     $view->with([
-        //         'categories' => $categories,
-        //         'globalSettings' => $settings,
-        //     ]);
+        
+        // View::composer('*', function ($view) {
+        //     $view->with('categories', \App\Models\Category::where('is_active', 1)->with(['children' => function ($q)  {
+        //         $q->where('is_active', 1);
+                
+        //     }])->get());
         // });
+
+
+
+
+          // Register view composer for global settings
+        View::composer(['layouts.app', 'admin.layouts.app'], \App\View\Composers\SettingsComposer::class);
+
+          // Share categories + global settings with all views
+        View::composer('*', function ($view) use ($settings) {
+            $categories = Category::where('is_active', 1)
+                ->with(['children' => function ($q) {
+                    $q->where('is_active', 1);
+                }])
+                ->get();
+
+            $view->with([
+                'categories' => $categories,
+                'globalSettings' => $settings,
+            ]);
+        });
 
     }
 }

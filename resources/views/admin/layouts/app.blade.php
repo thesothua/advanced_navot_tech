@@ -19,16 +19,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <!-- Scripts -->
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 
-    <!-- Google Fonts -->    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <style>
         :root {
             --primary: #0d6efd;
@@ -46,12 +47,12 @@
             --card-border-radius: 0.5rem;
             --transition-speed: 0.3s;
         }
-        
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f5f7fb;
         }
-        
+
         /* Sidebar */
         .sidebar {
             background-color: var(--sidebar-bg);
@@ -59,12 +60,12 @@
             box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
             transition: all var(--transition-speed);
         }
-        
+
         .sidebar-brand {
-            padding: 1.5rem 1rem;
+            /* padding: 1.5rem 1rem; */
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         .sidebar .nav-link {
             color: rgba(255, 255, 255, 0.65);
             padding: 0.75rem 1.25rem;
@@ -74,41 +75,41 @@
             font-weight: 500;
             font-size: 0.9rem;
         }
-        
+
         .sidebar .nav-link:hover {
             color: rgba(255, 255, 255, 0.95);
             background-color: var(--sidebar-hover);
             transform: translateX(5px);
         }
-        
+
         .sidebar .nav-link.active {
             color: #fff;
             background-color: var(--sidebar-active);
             box-shadow: 0 0.125rem 0.25rem rgba(13, 110, 253, 0.2);
         }
-        
+
         .sidebar .nav-link i {
             width: 1.25rem;
             text-align: center;
         }
-        
+
         /* Cards */
         .card {
             border-radius: var(--card-border-radius);
             transition: transform 0.2s, box-shadow 0.2s;
             overflow: hidden;
         }
-        
+
         /* .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
         } */
-        
+
         .card-header {
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
             font-weight: 600;
         }
-        
+
         .icon-circle {
             display: flex;
             align-items: center;
@@ -116,7 +117,7 @@
             width: 3rem;
             height: 3rem;
         }
-        
+
         .icon-square {
             display: flex;
             align-items: center;
@@ -124,48 +125,48 @@
             width: 2rem;
             height: 2rem;
         }
-        
+
         /* Pagination */
         .page-item.active .page-link {
             background-color: var(--danger);
             border-color: var(--danger);
         }
-        
+
         .page-link {
             color: var(--danger);
         }
-        
+
         .page-link:hover {
             /* color: #0a58ca; */
             color: #dc5c68;
         }
-        
+
         /* Buttons */
         .btn {
             font-weight: 500;
             border-radius: 0.375rem;
         }
-        
+
         .btn-primary {
             background-color: var(--primary);
             border-color: var(--primary);
         }
-        
+
         .btn-outline-primary {
             color: var(--primary);
             border-color: var(--primary);
         }
-        
+
         .btn-outline-primary:hover {
             background-color: var(--primary);
             border-color: var(--primary);
         }
-        
+
         /* Tables */
         .table {
             border-color: #f0f0f0;
         }
-        
+
         .table thead th {
             background-color: rgba(0, 0, 0, 0.02);
             font-weight: 600;
@@ -173,12 +174,18 @@
             font-size: 0.75rem;
             letter-spacing: 0.5px;
         }
-        
+
         /* Content wrapper */
         .content-wrapper {
             background-color: #fff;
             border-radius: var(--card-border-radius);
             box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+
+        .img-fluid {
+            filter: invert(1);
+            max-height: 58px;
+            width: 112px;
         }
     </style>
 </head>
@@ -188,14 +195,14 @@
         <div class="row">
             <!-- Sidebar -->
             <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse">
-                <div class="position-sticky pt-3">
+                <div class="position-sticky">
                     <div class="sidebar-brand text-center">
                         @if ($globalSettings->logo ?? false)
                             <img src="{{ asset('storage/' . $globalSettings->logo) }}"
                                 alt="{{ $globalSettings->site_name ?? 'Logo' }}" class="img-fluid mb-2"
                                 style="max-height: 50px;">
                         @endif
-                        <h4 class="text-white fw-bold mb-0">{{ $globalSettings->site_name ?? 'Admin Panel' }}</h4>
+                        {{-- <h4 class="text-white fw-bold mb-0">{{ $globalSettings->site_name ?? 'Admin Panel' }}</h4> --}}
                     </div>
 
                     <ul class="nav flex-column mt-4">
@@ -218,20 +225,21 @@
                         @endrole
 
                         <li class="nav-item mt-2">
-                            <div class="text-uppercase text-white-50 px-3 py-2" style="font-size: 0.75rem; font-weight: 600;">
+                            <div class="text-uppercase text-white-50 px-3 py-2"
+                                style="font-size: 0.75rem; font-weight: 600;">
                                 <i class="fas fa-store me-2"></i> Catalog
                             </div>
                         </li>
 
-                        @can('manage-products') 
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('admin.products.*') ? 'active' : '' }}"
-                                href="{{ route('admin.products.index') }}">
-                                <i class="fas fa-box me-2"></i>
-                                Products
-                            </a>
-                        </li>
-                        @endcan 
+                        @can('manage-products')
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('admin.products.*') ? 'active' : '' }}"
+                                    href="{{ route('admin.products.index') }}">
+                                    <i class="fas fa-box me-2"></i>
+                                    Products
+                                </a>
+                            </li>
+                        @endcan
 
                         @can('manage-categories')
                             <li class="nav-item">
@@ -254,7 +262,8 @@
                         @endcan
 
                         <li class="nav-item mt-2">
-                            <div class="text-uppercase text-white-50 px-3 py-2" style="font-size: 0.75rem; font-weight: 600;">
+                            <div class="text-uppercase text-white-50 px-3 py-2"
+                                style="font-size: 0.75rem; font-weight: 600;">
                                 <i class="fas fa-gear me-2"></i> System
                             </div>
                         </li>
@@ -298,7 +307,8 @@
                             </div>
                             <div class="flex-grow-1 ms-2">
                                 <div class="small fw-semibold">{{ auth()->user()->name }}</div>
-                                <div class="small opacity-75">{{ auth()->user()->roles->first()->name ?? 'User' }}</div>
+                                <div class="small opacity-75">{{ auth()->user()->roles->first()->name ?? 'User' }}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -314,30 +324,33 @@
                             data-bs-target=".sidebar">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                        
+
                         <!-- <h1 class="h4 mb-0 text-primary fw-bold d-none d-sm-block">@yield('title', 'Dashboard')</h1> -->
 
                         <div class="navbar-nav ms-auto">
                             <div class="position-relative me-3 d-none d-md-block">
-                                <a href="{{route('admin.notifications.index')}}" class="btn btn-light position-relative" data-bs-toggle="tooltip" title="Notifications">
+                                <a href="{{ route('admin.notifications.index') }}"
+                                    class="btn btn-light position-relative" data-bs-toggle="tooltip"
+                                    title="Notifications">
                                     <i class="fas fa-bell"></i>
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                       {{ $unreadCount}}
+                                    <span
+                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        {{ $unreadCount }}
                                     </span>
                                 </a>
                             </div>
                             <div class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button"
-                                    data-bs-toggle="dropdown">
+                                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#"
+                                    role="button" data-bs-toggle="dropdown">
                                     <i class="fas fa-user-circle me-2"></i>
                                     <span class="d-none d-md-inline">{{ auth()->user()->name }}</span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end shadow">
                                     <li><a class="dropdown-item" href="{{ route('admin.profile.edit') }}">
-                                        <i class="fas fa-user me-2"></i> Profile</a>
+                                            <i class="fas fa-user me-2"></i> Profile</a>
                                     </li>
                                     <li><a class="dropdown-item" href="#">
-                                        <i class="fas fa-cog me-2"></i> Settings</a>
+                                            <i class="fas fa-cog me-2"></i> Settings</a>
                                     </li>
                                     <li>
                                         <hr class="dropdown-divider">
@@ -359,14 +372,16 @@
                 <!-- Page content -->
                 <div class="container-fluid">
                     @if (session('success'))
-                        <div class="alert alert-success alert-dismissible fade show shadow-sm border-start border-success border-4" role="alert">
+                        <div class="alert alert-success alert-dismissible fade show shadow-sm border-start border-success border-4"
+                            role="alert">
                             <i class="fas fa-check-circle me-2"></i> {{ session('success') }}
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
                     @endif
 
                     @if (session('error'))
-                        <div class="alert alert-danger alert-dismissible fade show shadow-sm border-start border-danger border-4" role="alert">
+                        <div class="alert alert-danger alert-dismissible fade show shadow-sm border-start border-danger border-4"
+                            role="alert">
                             <i class="fas fa-exclamation-circle me-2"></i> {{ session('error') }}
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>

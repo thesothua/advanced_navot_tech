@@ -1,21 +1,19 @@
 @extends('welcome')
 
-@section('title', 'Home - Advanced Nova Tech')
-
-
-
+@section('title', 'Home')
 
 @section('content')
 
     <!-- Hero Section: Bootstrap Carousel -->
-    <section id="hero" class="position-relative">
+    {{-- <section id="hero" class="position-relative">
         <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
             <div class="carousel-indicators">
-                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true"
+                    aria-label="Slide 1"></button>
                 <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
                 <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
             </div>
-            
+
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img src="https://images.pexels.com/photos/176342/pexels-photo-176342.jpeg" class="d-block w-100"
@@ -26,8 +24,9 @@
                                 <div class="col-lg-8 text-start" data-aos="fade-right">
                                     <h1 class="display-4 fw-bold text-white mb-3">Your Trusted Fire & Safety Partner</h1>
                                     <p class="lead mb-4">ISO 9000:2015 Certified | ISI & TAC Approved Products</p>
-                               
-                                    <a href="{{ url('/contact') }}" class="btn btn-light btn-lg me-2">Get a Free Consultation</a>
+
+                                    <a href="{{ url('/contact') }}" class="btn btn-light btn-lg me-2">Get a Free
+                                        Consultation</a>
                                     <a href="{{ url('/products') }}" class="btn btn-outline-light btn-lg">Our Products</a>
                                 </div>
                             </div>
@@ -64,7 +63,8 @@
                                     <h1 class="display-4 fw-bold text-white mb-3">PPE & Safety Equipment</h1>
                                     <p class="lead mb-4">Helmets, Gloves, Face Shields, and More</p>
                                     <a href="{{ url('/contact') }}" class="btn btn-warning btn-lg me-2">Get a Quote</a>
-                                    <a href="{{ url('/products') }}" class="btn btn-outline-light btn-lg">Browse Products</a>
+                                    <a href="{{ url('/products') }}" class="btn btn-outline-light btn-lg">Browse
+                                        Products</a>
                                 </div>
                             </div>
                         </div>
@@ -83,8 +83,91 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-    </section>
-    
+    </section> --}}
+
+
+
+
+
+    <section id="hero" class="position-relative">
+    <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000" data-bs-pause="hover">
+        
+        <!-- Indicators -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+        </div>
+
+        <!-- Slides -->
+        <div class="carousel-inner">
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+                <img src="https://images.pexels.com/photos/176342/pexels-photo-176342.jpeg" class="d-block w-100" style="height: 80vh; object-fit: cover;" alt="Hero 1">
+                <div class="carousel-overlay"></div>
+                <div class="carousel-caption">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-8 text-start">
+                                <h1 class="display-4 fw-bold text-white mb-3">Your Trusted Fire & Safety Partner</h1>
+                                <p class="lead mb-4">ISO 9000:2015 Certified | ISI & TAC Approved Products</p>
+                                <a href="{{ url('/contact') }}" class="btn btn-light me-2">Get a Free Consultation</a>
+                                <a href="{{ url('/products') }}" class="btn btn-outline-light">Our Products</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+                <img src="https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg" class="d-block w-100" style="height: 80vh; object-fit: cover;" alt="Hero 2">
+                <div class="carousel-overlay"></div>
+                <div class="carousel-caption">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-8 text-start">
+                                <h1 class="display-4 fw-bold text-white mb-3">Fire Extinguishers & Hydrant Systems</h1>
+                                <p class="lead mb-4">Sales, Installation & Maintenance by Experts</p>
+                                <a href="{{ url('/products') }}" class="btn  btn-danger me-2">Explore Products</a>
+                                <a href="{{ url('/contact') }}" class="btn btn-outline-light">Contact Us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="carousel-item">
+                <img src="https://images.pexels.com/photos/224924/pexels-photo-224924.jpeg" class="d-block w-100" style="height: 80vh; object-fit: cover;" alt="Hero 3">
+                <div class="carousel-overlay"></div>
+                <div class="carousel-caption">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-8 text-start">
+                                <h1 class="display-4 fw-bold text-white mb-3">PPE & Safety Equipment</h1>
+                                <p class="lead mb-4">Helmets, Gloves, Face Shields, and More</p>
+                                <a href="{{ url('/contact') }}" class="btn btn-warning me-2">Get a Quote</a>
+                                <a href="{{ url('/products') }}" class="btn btn-outline-light">Browse Products</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+</section>
+
+
+
     <style>
         .carousel-overlay {
             position: absolute;
@@ -92,9 +175,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%);
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.1) 100%);
         }
-        
+
         .carousel-caption {
             top: 50%;
             transform: translateY(-50%);
@@ -116,9 +199,10 @@
             <div class="row align-items-center">
                 <div class="col-md-6 mb-4 mb-md-0" data-aos="fade-right" data-aos-delay="100">
                     <!-- <img src="{{ asset('images/fire-safety-about.jpg') }}" class="img-fluid rounded-3 shadow"
-                        alt="About Company" onerror="this.src='https://via.placeholder.com/600x400?text=About+Us'"> -->
-                    <img src="https://cdn.pixabay.com/photo/2025/01/18/20/20/ai-generated-9343174_1280.png" class="img-fluid rounded-3"
-                        alt="About Company" onerror="this.src='https://via.placeholder.com/600x400?text=About+Us'">
+                            alt="About Company" onerror="this.src='https://via.placeholder.com/600x400?text=About+Us'"> -->
+                    <img src="https://cdn.pixabay.com/photo/2025/01/18/20/20/ai-generated-9343174_1280.png"
+                        class="img-fluid rounded-3" alt="About Company"
+                        onerror="this.src='https://via.placeholder.com/600x400?text=About+Us'">
                 </div>
                 <div class="col-md-6" data-aos="fade-left" data-aos-delay="200">
                     <div class="d-flex align-items-start mb-4">
@@ -127,7 +211,8 @@
                         </div>
                         <div>
                             <h5 class="fw-bold">Certified Provider</h5>
-                            <p class="text-muted">ISO 9000:2015, ISI & TAC approved solutions for maximum reliability and compliance.</p>
+                            <p class="text-muted">ISO 9000:2015, ISI & TAC approved solutions for maximum reliability and
+                                compliance.</p>
                         </div>
                     </div>
                     <div class="d-flex align-items-start mb-4">
@@ -136,7 +221,8 @@
                         </div>
                         <div>
                             <h5 class="fw-bold">Full-Service</h5>
-                            <p class="text-muted">Complete sales, installation, servicing & maintenance by trained professionals.</p>
+                            <p class="text-muted">Complete sales, installation, servicing & maintenance by trained
+                                professionals.</p>
                         </div>
                     </div>
                     <div class="d-flex align-items-start mb-4">
@@ -145,7 +231,8 @@
                         </div>
                         <div>
                             <h5 class="fw-bold">Diverse Clientele</h5>
-                            <p class="text-muted">Serving government, hospitals, housing societies & more across the country.</p>
+                            <p class="text-muted">Serving government, hospitals, housing societies & more across the
+                                country.</p>
                         </div>
                     </div>
                     <a href="{{ url('/about') }}" class="btn btn-danger btn-lg mt-2">Learn More</a>
@@ -172,7 +259,8 @@
                                 <i class="fas fa-fire-extinguisher"></i>
                             </div>
                             <h4 class="card-title fw-bold mb-3">Fire Extinguishers</h4>
-                            <p class="card-text text-muted">CO2, Dry Powder, Modular Automatic ABC/BC type extinguishers – ISI marked
+                            <p class="card-text text-muted">CO2, Dry Powder, Modular Automatic ABC/BC type extinguishers –
+                                ISI marked
                                 for every industry.</p>
                             <a href="{{ url('/products') }}" class="btn btn-outline-danger mt-3">View Products</a>
                         </div>
@@ -185,7 +273,8 @@
                                 <i class="fas fa-bell"></i>
                             </div>
                             <h4 class="card-title fw-bold mb-3">Alarm & Detection</h4>
-                            <p class="card-text text-muted">Installation and maintenance of smoke detectors, fire alarms, and complete
+                            <p class="card-text text-muted">Installation and maintenance of smoke detectors, fire alarms,
+                                and complete
                                 hydrant systems.</p>
                             <a href="{{ url('/products') }}" class="btn btn-outline-danger mt-3">View Products</a>
                         </div>
@@ -198,7 +287,8 @@
                                 <i class="fas fa-hard-hat"></i>
                             </div>
                             <h4 class="card-title fw-bold mb-3">Safety & PPE</h4>
-                            <p class="card-text text-muted">Wide range of ISI-approved PPE – helmets, gloves, goggles, nose masks,
+                            <p class="card-text text-muted">Wide range of ISI-approved PPE – helmets, gloves, goggles, nose
+                                masks,
                                 safety shoes, face shields, etc.</p>
                             <a href="{{ url('/products') }}" class="btn btn-outline-danger mt-3">View Products</a>
                         </div>
@@ -207,9 +297,10 @@
             </div>
         </div>
     </section>
-    
+
     <style>
-        .feature-icon, .service-icon {
+        .feature-icon,
+        .service-icon {
             width: 50px;
             height: 50px;
             display: flex;
@@ -217,15 +308,15 @@
             justify-content: center;
             font-size: 1.25rem;
         }
-        
+
         .service-card {
             transition: all 0.3s ease;
         }
-        
+
         .service-card:hover {
             transform: translateY(-10px);
         }
-        
+
         .service-icon {
             width: 80px;
             height: 80px;
@@ -239,15 +330,17 @@
             <div class="row align-items-center" data-aos="fade-up">
                 <div class="col-lg-7 mb-4 mb-lg-0">
                     <h2 class="fw-bold display-5 mb-3">Ready to enhance your fire safety?</h2>
-                    <p class="lead mb-0">Contact us today for a free consultation and personalized quote for your specific needs.</p>
+                    <p class="lead mb-0">Contact us today for a free consultation and personalized quote for your specific
+                        needs.</p>
                 </div>
                 <div class="col-lg-5 text-center text-lg-end">
-                    <a href="{{ url('/contact') }}" class="btn btn-light btn-lg px-4 py-3 fw-bold">Get Free Consultation</a>
+                    <a href="{{ url('/contact') }}" class="btn btn-light btn-lg px-4 py-3 fw-bold">Get Free
+                        Consultation</a>
                 </div>
             </div>
         </div>
     </section>
-    
+
     <style>
         .bg-gradient-danger {
             background: linear-gradient(135deg, var(--bs-danger) 0%, #ff6a5a 100%);
