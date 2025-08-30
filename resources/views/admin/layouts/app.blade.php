@@ -127,16 +127,17 @@
         
         /* Pagination */
         .page-item.active .page-link {
-            background-color: var(--primary);
-            border-color: var(--primary);
+            background-color: var(--danger);
+            border-color: var(--danger);
         }
         
         .page-link {
-            color: var(--primary);
+            color: var(--danger);
         }
         
         .page-link:hover {
-            color: #0a58ca;
+            /* color: #0a58ca; */
+            color: #dc5c68;
         }
         
         /* Buttons */
