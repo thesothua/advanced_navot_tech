@@ -1,13 +1,12 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Illuminate\Support\Str;
 
 class Category extends Model implements HasMedia
 {
@@ -18,7 +17,6 @@ class Category extends Model implements HasMedia
         'slug',
         'description',
         'is_active',
-        'sort_order',
         'parent_id',
     ];
 
@@ -34,7 +32,7 @@ class Category extends Model implements HasMedia
     protected static function boot()
     {
         parent::boot();
-        
+
         static::creating(function ($category) {
             if (empty($category->slug)) {
                 $category->slug = Str::slug($category->name);
@@ -83,13 +81,13 @@ class Category extends Model implements HasMedia
 
     public function isChild(): bool
     {
-        return !is_null($this->parent_id);
+        return ! is_null($this->parent_id);
     }
 
     public function getFullHierarchyAttribute(): string
     {
         $hierarchy = collect([$this->name]);
-        $parent = $this->parent;
+        $parent    = $this->parent;
 
         while ($parent) {
             $hierarchy->prepend($parent->name);

@@ -71,7 +71,7 @@ class ProductController extends Controller
                         // Placeholder with first letter of product name
                         $firstLetter = strtoupper(substr($product->name ?? 'P', 0, 1));
                         return '<img src="https://via.placeholder.com/50x50?text=' . $firstLetter . '" 
-                                    alt="image" width="50" height="50" class="rounded-circle">';
+                                    alt="image" width="50" height="50" class="rounded">';
                     }
     
                     $url =  $media->getFullUrl();
@@ -79,7 +79,7 @@ class ProductController extends Controller
                
                     return '<img src="' . e($url) . '" 
                                 alt="' . e($product->name ?? 'Product') . '" 
-                                width="50" height="50" class="rounded-circle">';
+                                width="50" height="50" class="rounded">';
                 })
                 ->editColumn('price', fn ($product) => '₹ ' . number_format($product->price, 2))
                             ->addColumn('brand', fn ($product) => $product->brand?->name ?? '-')
@@ -126,9 +126,9 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|unique:products,name|string|max:255',
             'description' => 'nullable|string',
-            'price' => 'required|numeric|min:0',
+            'price' => 'nullable|numeric|min:0',
             'sale_price' => 'nullable|numeric|min:0',
-            'stock' => 'required|integer|min:0',
+            'stock' => 'nullable|integer|min:0',
             'sku' => 'nullable|string|unique:products,sku',
             'brand_id' => 'nullable|exists:brands,id',
             'category_ids' => 'array',
@@ -138,18 +138,23 @@ class ProductController extends Controller
             'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
+        // dd($request->all());
+
         $product = Product::create([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
             'description' => $request->description,
-            'price' => $request->price,
-            'sale_price' => $request->sale_price,
-            'stock' => $request->stock,
-            'sku' => $request->sku,
+            'price' => $request->price ?? 0,
+            'sale_price' => $request->sale_price ?? 0,
+            'stock' => $request->stock ?? 0,
+            'sku' => $request->sku ?? null,
             'brand_id' => $request->brand_id ?? null,
             'is_active' => $request->boolean('is_active', true),
             'is_featured' => $request->boolean('is_featured', false),
         ]);
+
+
+      
 
         if ($request->has('category_ids')) {
             $product->categories()->attach($request->category_ids);

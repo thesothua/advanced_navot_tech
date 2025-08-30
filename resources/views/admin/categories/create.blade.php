@@ -61,16 +61,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="sort_order" class="form-label">Sort Order</label>
-                        <input type="number" class="form-control @error('sort_order') is-invalid @enderror" 
-                               id="sort_order" name="sort_order" value="{{ old('sort_order', 0) }}" min="0">
-                        @error('sort_order')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
+     
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="image" class="form-label">Category Image</label>

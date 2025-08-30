@@ -43,7 +43,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                     <div class="mb-3">
                         <label for="sale_price" class="form-label">Sale Price</label>
                         <input type="number" step="0.01" class="form-control @error('sale_price') is-invalid @enderror" 
@@ -52,7 +52,7 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                </div>
+                </div> --}}
             </div>
 
             <div class="row">

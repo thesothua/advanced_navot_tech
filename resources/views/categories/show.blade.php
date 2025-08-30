@@ -28,7 +28,7 @@
                                 @else
                                     <img src="https://via.placeholder.com/600x400?text={{ urlencode($product->name) }}" class="card-img-top rounded-top" alt="{{ $product->name }}">
                                 @endif
-                                @if($product->sale_price)
+                                @if($product->sale_price > 0)
                                     <div class="sale-badge">SALE</div>
                                 @endif
                             </div>
@@ -38,19 +38,21 @@
                                 @endif
                                 <h4 class="card-title fw-bold mb-2">{{ $product->name }}</h4>
                                 <div class="mb-3">
-                                    @if($product->sale_price)
+                                    @if($product->sale_price > 0)
                                         <span class="text-decoration-line-through text-muted me-2">₹{{ number_format($product->price, 2) }}</span>
                                         <span class="text-danger fw-bold">₹{{ number_format($product->sale_price, 2) }}</span>
-                                    @else
+                                    @elseif ($product->price > 0)
                                         <span class="text-danger fw-bold">₹{{ number_format($product->price, 2) }}</span>
                                     @endif
                                 </div>
-                                <p class="card-text text-muted">{{ Str::limit($product->description, 100) }}</p>
+                                <p class="card-text text-muted">{{ Str::limit($product->description, 50) }}</p>
                             </div>
                             <div class="card-footer bg-white border-top-0 p-4">
-                                <div class="d-flex justify-content-between">
-                                    <a href="#" class="btn btn-outline-danger">View Details</a>
-                                    <button class="btn btn-danger"><i class="fas fa-shopping-cart me-2"></i>Add to Cart</button>
+                                <div class="justify-content-between">
+                                    <a href="{{ route('contact') }}" class="btn btn-sm btn-danger">Get Quotation</a>
+
+                                    <a href="{{ route('products.show', $product->slug) }}" class="btn btn-sm btn-outline-danger">Details</a>
+                                    {{-- <button class="btn btn-danger"><i class="fas fa-shopping-cart me-2"></i>Add to Cart</button> --}}
                                 </div>
                             </div>
                         </div>

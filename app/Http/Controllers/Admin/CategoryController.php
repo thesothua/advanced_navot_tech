@@ -26,8 +26,7 @@ class CategoryController extends Controller
                     $url = $media->getUrl();
                     return '<img src="' . $url . '" alt="' . e($category->name ?? 'Category') . '" width="50" height="50" class="rounded">';
                 })
-                ->addColumn('products_count', fn($category) => $category->products_count)
-                ->addColumn('sort_order', fn($category) => $category->sort_order)
+                ->addColumn('products_count', fn($category) => $category->products->count())
                 ->addColumn('status', function ($category) {
                     $badgeClass = $category->is_active ? 'bg-success' : 'bg-secondary';
                     $status     = $category->is_active ? 'ACTIVE' : 'INACTIVE';
@@ -39,9 +38,7 @@ class CategoryController extends Controller
                 ->addColumn('parent_name', function ($category) {
                     return $category->parent ? $category->parent->name : '-';
                 })
-                ->addColumn('children_count', function ($category) {
-                    return $category->children_count;
-                })
+             
                 ->addColumn('action', function ($category) {
                     $show   = '<a href="' . route('admin.categories.show', $category->slug) . '" class="btn btn-sm btn-outline-info me-1">View</a>';
                     $edit   = '<a href="' . route('admin.categories.edit', $category->slug) . '" class="btn btn-sm btn-outline-primary me-1">Edit</a>';
@@ -68,10 +65,10 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'        => 'required|string|max:255',
+            'name'        => 'required|unique:categories,name|string|max:255',
             'description' => 'nullable|string',
             'is_active'   => 'boolean',
-            'sort_order'  => 'nullable|integer|min:0',
+          
             'parent_id'   => 'nullable|exists:categories,id',
             'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -90,7 +87,7 @@ class CategoryController extends Controller
             'description' => $request->description,
             'parent_id'   => $request->parent_id,
             'is_active'   => $request->boolean('is_active', true),
-            'sort_order'  => $request->sort_order ?? 0,
+     
         ]);
 
         if ($request->hasFile('image')) {
@@ -122,10 +119,10 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $request->validate([
-            'name'        => 'required|string|max:255',
+            'name'        => 'required|unique:categories,name|string|max:255',
             'description' => 'nullable|string',
             'is_active'   => 'boolean',
-            'sort_order'  => 'nullable|integer|min:0',
+    
             'parent_id'   => 'nullable|exists:categories,id',
             'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -147,7 +144,7 @@ class CategoryController extends Controller
             'slug'        => Str::slug($request->name),
             'description' => $request->description,
             'is_active'   => $request->boolean('is_active', true),
-            'sort_order'  => $request->sort_order ?? 0,
+      
         ]);
 
         if ($request->hasFile('image')) {

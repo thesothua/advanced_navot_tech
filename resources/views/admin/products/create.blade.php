@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="mb-3">
-                        <label for="price" class="form-label">Price *</label>
+                        <label for="price" class="form-label">Price</label>
                         <input type="number" step="0.01" class="form-control @error('price') is-invalid @enderror" 
                                id="price" name="price" value="{{ old('price') }}" >
                         @error('price')
@@ -44,7 +44,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="mb-3">
-                        <label for="stock" class="form-label">Stock *</label>
+                        <label for="stock" class="form-label">Stock</label>
                         <input type="number" class="form-control @error('stock') is-invalid @enderror" 
                                id="stock" name="stock" value="{{ old('stock', 0) }}" >
                         @error('stock')

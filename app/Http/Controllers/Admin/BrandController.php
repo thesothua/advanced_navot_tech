@@ -27,7 +27,7 @@ class BrandController extends Controller
                     $url = $media->getUrl();
                     return '<img src="' . $url . '" alt="' . e($brand->name ?? 'Brand') . '" width="50" height="50" class="rounded">';
                 })
-                ->addColumn('products_count', fn ($brand) => $brand->products_count)
+                ->addColumn('products_count', fn ($brand) => $brand->products->count())
                 ->addColumn('website', function ($brand) {
                     if ($brand->website) {
                         return '<a href="' . $brand->website . '" target="_blank" class="text-decoration-none">' . $brand->website . '</a>';

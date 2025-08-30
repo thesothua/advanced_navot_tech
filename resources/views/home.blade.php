@@ -2,7 +2,11 @@
 
 @section('title', 'Home - Advanced Nova Tech')
 
+
+
+
 @section('content')
+
     <!-- Hero Section: Bootstrap Carousel -->
     <section id="hero" class="position-relative">
         <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -22,6 +26,7 @@
                                 <div class="col-lg-8 text-start" data-aos="fade-right">
                                     <h1 class="display-4 fw-bold text-white mb-3">Your Trusted Fire & Safety Partner</h1>
                                     <p class="lead mb-4">ISO 9000:2015 Certified | ISI & TAC Approved Products</p>
+                               
                                     <a href="{{ url('/contact') }}" class="btn btn-light btn-lg me-2">Get a Free Consultation</a>
                                     <a href="{{ url('/products') }}" class="btn btn-outline-light btn-lg">Our Products</a>
                                 </div>

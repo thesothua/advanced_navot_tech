@@ -15,19 +15,22 @@
         <!-- Company Introduction -->
         <div class="row align-items-center mb-5">
             <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right" data-aos-delay="100">
-                <img src="https://cdn.pixabay.com/photo/2022/02/27/22/56/construction-7038241_1280.png" alt="About Us" class="img-fluid rounded-3" onerror="this.src='https://via.placeholder.com/600x400?text=About+Us'">
+                <img src="https://cdn.pixabay.com/photo/2022/02/27/22/56/construction-7038241_1280.png" alt="About Us"
+                    class="img-fluid rounded-3" onerror="this.src='https://via.placeholder.com/600x400?text=About+Us'">
                 <!-- <img src="{{ asset('images/about-us.jpg') }}" alt="About Us" class="img-fluid rounded-3 shadow" onerror="this.src='https://via.placeholder.com/600x400?text=About+Us'"> -->
             </div>
             <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
                 <h3 class="fw-bold mb-4">Your Trusted Fire Safety Partner</h3>
                 <p class="mb-4">
                     <strong>U29100OR2020PTC033405</strong> is an ISO 9001:2015 certified company based in Bhubaneswar,
-                    Odisha. We specialize in sales, service, installation, and maintenance of ISI marked fire extinguishers, hydrant
+                    Odisha. We specialize in sales, service, installation, and maintenance of ISI marked fire extinguishers,
+                    hydrant
                     systems, smoke detectors, fire alarms, and a wide range of safety and personal protective equipment.
                 </p>
                 <p>
                     Our clientele spans government, public, and private sector industries, hospitals, institutions, and
-                    housing societies. We pride ourselves on delivering only the highest quality products and services to ensure the safety of
+                    housing societies. We pride ourselves on delivering only the highest quality products and services to
+                    ensure the safety of
                     lives and assets.
                 </p>
             </div>
@@ -46,7 +49,8 @@
                             <i class="fas fa-bullseye"></i>
                         </div>
                         <h4 class="fw-bold mb-3">Our Mission</h4>
-                        <p class="text-muted">To provide innovative, reliable, and affordable fire safety solutions while maintaining top-tier
+                        <p class="text-muted">To provide innovative, reliable, and affordable fire safety solutions while
+                            maintaining top-tier
                             customer service and technical excellence.</p>
                     </div>
                 </div>
@@ -58,7 +62,8 @@
                             <i class="fas fa-eye"></i>
                         </div>
                         <h4 class="fw-bold mb-3">Our Vision</h4>
-                        <p class="text-muted">To be the most trusted and respected fire safety and equipment provider across India, contributing to
+                        <p class="text-muted">To be the most trusted and respected fire safety and equipment provider across
+                            India, contributing to
                             a safer tomorrow.</p>
                     </div>
                 </div>
@@ -130,7 +135,8 @@
                             <i class="fas fa-certificate"></i>
                         </div>
                         <h5 class="fw-bold mb-3">ISO Certified</h5>
-                        <p class="text-muted mb-0">We follow ISO 9001:2015 standards ensuring consistent quality in all our products and services.</p>
+                        <p class="text-muted mb-0">We follow ISO 9001:2015 standards ensuring consistent quality in all our
+                            products and services.</p>
                     </div>
                 </div>
             </div>
@@ -141,7 +147,8 @@
                             <i class="fas fa-users"></i>
                         </div>
                         <h5 class="fw-bold mb-3">Client-Centric</h5>
-                        <p class="text-muted mb-0">Our priority is building long-term relationships through satisfaction, trust and exceptional service.</p>
+                        <p class="text-muted mb-0">Our priority is building long-term relationships through satisfaction,
+                            trust and exceptional service.</p>
                     </div>
                 </div>
             </div>
@@ -152,7 +159,8 @@
                             <i class="fas fa-award"></i>
                         </div>
                         <h5 class="fw-bold mb-3">Proven Track Record</h5>
-                        <p class="text-muted mb-0">Trusted by hospitals, industries, housing societies, and more across the country.</p>
+                        <p class="text-muted mb-0">Trusted by hospitals, industries, housing societies, and more across the
+                            country.</p>
                     </div>
                 </div>
             </div>
@@ -160,7 +168,9 @@
     </div>
 
     <style>
-        .icon-circle, .service-icon, .advantage-icon {
+        .icon-circle,
+        .service-icon,
+        .advantage-icon {
             width: 70px;
             height: 70px;
             display: flex;
@@ -168,12 +178,18 @@
             justify-content: center;
             font-size: 1.5rem;
         }
-        
-        .mission-card, .vision-card, .service-highlight, .advantage-card {
+
+        .mission-card,
+        .vision-card,
+        .service-highlight,
+        .advantage-card {
             transition: all 0.3s ease;
         }
-        
-        .mission-card:hover, .vision-card:hover, .service-highlight:hover, .advantage-card:hover {
+
+        .mission-card:hover,
+        .vision-card:hover,
+        .service-highlight:hover,
+        .advantage-card:hover {
             transform: translateY(-10px);
         }
     </style>

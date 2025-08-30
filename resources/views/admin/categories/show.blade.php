@@ -43,7 +43,7 @@
                         </p>
                     </div>
                     <div class="col-md-6">
-                        <p><strong>Sort Order:</strong> {{ $category->sort_order }}</p>
+                
                         <p><strong>Products Count:</strong> {{ $category->products->count() }}</p>
                         <p><strong>Subcategories:</strong> {{ $category->children->count() }}</p>
                         <p><strong>Created:</strong> {{ $category->created_at->format('M d, Y H:i') }}</p>
