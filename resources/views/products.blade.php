@@ -54,7 +54,8 @@
 
                                     <a href="{{ route('contact') }}" class="btn btn-sm btn-danger">Get Quotation</a>
 
-                                    <a href="{{ route('products.show', $product->slug) }}" class="btn  btn-sm btn-outline-danger">Details</a>
+                                    <a href="{{ route('products.show', $product->slug) }}"
+                                        class="btn  btn-sm btn-outline-danger">Details</a>
 
 
 
@@ -69,10 +70,28 @@
                 @endforeach
             </div>
 
-            <div class="row mt-5">
-                <div class="col-md-12 d-flex justify-content-center" data-aos="fade-up">
-                    {{ $products->links() }}
-                </div>
+            <div class="col-md-12 d-flex justify-content-center gap-3 mt-4" data-aos="fade-up">
+                {{-- Previous Button --}}
+                @if ($products->previousPageUrl())
+                    <a href="{{ $products->previousPageUrl() }}" class="btn btn-outline-danger px-4">
+                        <i class="fas fa-arrow-left me-2"></i> Previous
+                    </a>
+                @else
+                    <button class="btn btn-outline-secondary px-4" disabled>
+                        <i class="fas fa-arrow-left me-2"></i> Previous
+                    </button>
+                @endif
+
+                {{-- Next Button --}}
+                @if ($products->nextPageUrl())
+                    <a href="{{ $products->nextPageUrl() }}" class="btn btn-danger px-4">
+                        Next <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                @else
+                    <button class="btn btn-outline-secondary px-4" disabled>
+                        Next <i class="fas fa-arrow-right ms-2"></i>
+                    </button>
+                @endif
             </div>
         @else
             <div class="alert alert-info shadow-sm rounded-3 p-4 text-center" data-aos="fade-up">

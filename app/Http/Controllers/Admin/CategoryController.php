@@ -20,7 +20,12 @@ class CategoryController extends Controller
                     $media = $category->getFirstMedia('images');
 
                     if (! $media) {
-                        return '<img src="https://via.placeholder.com/50x50?text=No+Image" alt="no image" width="50" height="50" class="rounded">';
+                        // return '<img src="https://via.placeholder.com/50x50?text=No+Image" alt="no image" width="50" height="50" class="rounded">';
+
+                          return '<div class="d-flex justify-content-center align-items-center bg-light text-muted border rounded"
+                                        style="width:50px; height:50px;">
+                                        <i class="fas fa-box fa-lg"></i>
+                                 </div>';
                     }
 
                     $url = $media->getUrl();

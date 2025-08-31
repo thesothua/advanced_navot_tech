@@ -65,8 +65,13 @@ class ProductController extends Controller
                     if (! $media) {
                         // Placeholder with first letter of product name
                         $firstLetter = strtoupper(substr($product->name ?? 'P', 0, 1));
-                        return '<img src="https://via.placeholder.com/50x50?text=' . $firstLetter . '"
-                                    alt="image" width="50" height="50" class="rounded">';
+                        // return '<img src="https://via.placeholder.com/50x50?text=' . $firstLetter . '"
+                        //             alt="image" width="50" height="50" class="rounded">';
+
+                        return '<div class="d-flex justify-content-center align-items-center bg-light text-muted border rounded"
+                                    style="width:50px; height:50px;">
+                                    <i class="fas fa-box fa-lg"></i>
+                                </div>';
                     }
 
                     $url = $media->getFullUrl();
