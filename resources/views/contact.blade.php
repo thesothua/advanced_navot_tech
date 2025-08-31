@@ -135,10 +135,7 @@
                     <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
                         <div class="ratio ratio-16x9">
                             <!-- Replace with your location -->
-                            <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14739.352372064746!2d85.8314654!3d20.2960587!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a19a76d4e1cbf07%3A0x1a2fc30deea556dc!2sBhubaneswar%2C%20Odisha!5e0!3m2!1sen!2sin!4v1629200170201!5m2!1sen!2sin"
-                                style="border:0;" allowfullscreen="" loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade"></iframe>
+                           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3670.2495061563154!2d72.5512174748261!3d23.0879605138859!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e831238329bad%3A0xde66853f796e4777!2sAashray%20Residency!5e0!3m2!1sen!2sin!4v1756590743849!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
                 </div>

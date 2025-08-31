@@ -184,23 +184,30 @@
 
         .img-fluid {
             filter: invert(1);
-            max-height: 58px;
+            max-height: 62px;
             width: 112px;
         }
+
+        .main-content {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+        
     </style>
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="row">
+
+            
             <!-- Sidebar -->
             <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse">
                 <div class="position-sticky">
                     <div class="sidebar-brand text-center">
                         @if ($globalSettings->logo ?? false)
                             <img src="{{ asset('storage/' . $globalSettings->logo) }}"
-                                alt="{{ $globalSettings->site_name ?? 'Logo' }}" class="img-fluid mb-2"
-                                style="max-height: 50px;">
+                                alt="{{ $globalSettings->site_name ?? 'Logo' }}" class="img-fluid">
                         @endif
                         {{-- <h4 class="text-white fw-bold mb-0">{{ $globalSettings->site_name ?? 'Admin Panel' }}</h4> --}}
                     </div>
