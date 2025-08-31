@@ -38,7 +38,7 @@ class CategoryController extends Controller
                 ->addColumn('parent_name', function ($category) {
                     return $category->parent ? $category->parent->name : '-';
                 })
-             
+
                 ->addColumn('action', function ($category) {
                     $show   = '<a href="' . route('admin.categories.show', $category->slug) . '" class="btn btn-sm btn-outline-info me-1">View</a>';
                     $edit   = '<a href="' . route('admin.categories.edit', $category->slug) . '" class="btn btn-sm btn-outline-primary me-1">Edit</a>';
@@ -68,7 +68,7 @@ class CategoryController extends Controller
             'name'        => 'required|unique:categories,name|string|max:255',
             'description' => 'nullable|string',
             'is_active'   => 'boolean',
-          
+
             'parent_id'   => 'nullable|exists:categories,id',
             'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -87,11 +87,18 @@ class CategoryController extends Controller
             'description' => $request->description,
             'parent_id'   => $request->parent_id,
             'is_active'   => $request->boolean('is_active', true),
-     
+
         ]);
 
         if ($request->hasFile('image')) {
-            $category->addMedia($request->file('image'))->toMediaCollection('images', 'public');
+
+            $image = $request->file('image'); // get the file
+
+            $fileName = Str::slug($request->name) . '-' . time() . '.' . $image->getClientOriginalExtension();
+
+            $category->addMedia($request->file('image'))
+                ->usingFileName($fileName)
+                ->toMediaCollection('images', 'public');
         }
 
         return redirect()->route('admin.categories.index')
@@ -122,7 +129,7 @@ class CategoryController extends Controller
             'name'        => 'required|unique:categories,name|string|max:255',
             'description' => 'nullable|string',
             'is_active'   => 'boolean',
-    
+
             'parent_id'   => 'nullable|exists:categories,id',
             'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -144,12 +151,19 @@ class CategoryController extends Controller
             'slug'        => Str::slug($request->name),
             'description' => $request->description,
             'is_active'   => $request->boolean('is_active', true),
-      
+
         ]);
 
         if ($request->hasFile('image')) {
+
+            $image = $request->file('image'); // get the file
+
+            $fileName = Str::slug($request->name) . '-' . time() . '.' . $image->getClientOriginalExtension();
+
             $category->clearMediaCollection('images');
-            $category->addMedia($request->file('image'))->toMediaCollection('images', 'public');
+            $category->addMedia($request->file('image'))
+                ->usingFileName($fileName)
+                ->toMediaCollection('images', 'public');
         }
 
         return redirect()->route('admin.categories.index')
