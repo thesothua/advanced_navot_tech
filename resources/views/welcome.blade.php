@@ -135,16 +135,10 @@
         }
 
         /* ------------- */
-
-
     </style>
 </head>
 
 <body>
-
-
-
-
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-danger fixed-top py-3">
@@ -222,9 +216,6 @@
                         </ul>
                     </li>
 
-
-
-
                     <!-- Contact -->
                     <li class="nav-item">
                         <a class="nav-link {{ request()->is('contact') ? 'active fw-semibold text-white' : 'text-white-50' }}"
@@ -299,7 +290,8 @@
                         <p><i class="fas fa-phone me-2"></i>
                             {{ app(\App\Settings\GeneralSettings::class)->contact_phone }}</p>
                     @endif
-                    <p><i class="fas fa-clock me-2"></i> Mon - Sat: 9:00 AM – 6:00 PM</p>
+                    <p><i class="fas fa-clock me-2"></i>{{ app(\App\Settings\GeneralSettings::class)->working_hours }}
+                    </p>
                 </div>
 
             </div>

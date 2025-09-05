@@ -145,8 +145,8 @@ class ProductController extends Controller
             'stock'       => $request->stock ?? 0,
             'sku'         => $request->sku ?? null,
             'brand_id'    => $request->brand_id ?? null,
-            'is_active'   => $request->boolean('is_active', true),
-            'is_featured' => $request->boolean('is_featured', false),
+            'is_active'   => $request->is_active ?? false,
+            'is_featured' => $request->is_featured ?? false,
         ]);
 
         if ($request->has('category_ids')) {
@@ -206,8 +206,8 @@ class ProductController extends Controller
             'stock'       => $request->stock,
             'sku'         => $request->sku,
             'brand_id'    => $request->brand_id ?? null,
-            'is_active'   => $request->boolean('is_active', true),
-            'is_featured' => $request->boolean('is_featured', false),
+            'is_active'   => $request->is_active ?? false,
+            'is_featured' => $request->is_featured ?? false,
         ]);
 
         if ($request->has('category_ids')) {

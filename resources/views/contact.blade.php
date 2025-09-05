@@ -15,7 +15,7 @@
 
 
 
-        
+
 
         <!-- Page content -->
         <div class="container-fluid">
@@ -36,14 +36,11 @@
             @endif
 
 
-
-
-
             <div class="row g-5">
                 <!-- Contact Form -->
                 <div class="col-lg-6" data-aos="fade-right" data-aos-delay="100">
                     <div class="card border-0 shadow-sm rounded-3 p-4">
-                        <div class="card-body">
+                        {{-- <div class="card-body">
                             <h4 class="fw-bold mb-4">Send Us a Message</h4>
 
                             <form action="{{ route('contact.submit') }}" method="POST">
@@ -72,10 +69,71 @@
                                     <textarea name="message" class="form-control form-control-lg rounded-3" id="message" rows="5"
                                         placeholder="Your message..." required>{{ old('message') }}</textarea>
                                 </div>
+                                <div class="text-center text-lg-start">
+                                    <button type="submit" class="btn btn-danger btn-lg px-5 rounded-pill">
+                                        Send Message
+                                    </button>
+                                </div>
+                            </form>
+                        </div> --}}
 
-                                <button type="submit" class="btn btn-danger btn-lg px-5 rounded-pill">Send Message</button>
+                        <div class="card-body">
+                            <h4 class="fw-bold mb-4">Send Us a Message</h4>
+
+
+                            <form action="{{ route('contact.submit') }}" method="POST">
+                                @csrf
+
+                                <div class="mb-4">
+                                    <label for="name" class="form-label">Your Name</label>
+                                    <input type="text" name="name"
+                                        class="form-control form-control-lg rounded-3 @error('name') is-invalid @enderror"
+                                        id="name" placeholder="Enter your name" value="{{ old('name') }}" required>
+                                    @error('name')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="email" class="form-label">Email Address</label>
+                                    <input type="email" name="email"
+                                        class="form-control form-control-lg rounded-3 @error('email') is-invalid @enderror"
+                                        id="email" placeholder="Enter your email" value="{{ old('email') }}" required>
+                                    @error('email')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="subject" class="form-label">Subject</label>
+                                    <input type="text" name="subject"
+                                        class="form-control form-control-lg rounded-3 @error('subject') is-invalid @enderror"
+                                        id="subject" placeholder="Enter your subject" value="{{ old('subject') }}"
+                                        required>
+                                    @error('subject')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="message" class="form-label">Message</label>
+                                    <textarea name="message" class="form-control form-control-lg rounded-3 @error('message') is-invalid @enderror"
+                                        id="message" rows="5" placeholder="Your message..." required>{{ old('message') }}</textarea>
+                                    @error('message')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="text-center text-lg-start">
+                                    <button type="submit" class="btn btn-danger btn-lg px-5 rounded-pill">
+                                        Send Message
+                                    </button>
+                                </div>
                             </form>
                         </div>
+
+
+
                     </div>
                 </div>
 
@@ -126,18 +184,27 @@
                                 </div>
                                 <div>
                                     <h6 class="fw-bold mb-1">Working Hours</h6>
-                                    <p class="text-muted mb-0">Mon - Sat: 9:00 AM – 6:00 PM</p>
+                                    <p class="text-muted mb-0">
+                                        {{ app(\App\Settings\GeneralSettings::class)->working_hours }}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
-                        <div class="ratio ratio-16x9">
-                            <!-- Replace with your location -->
-                           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3670.2495061563154!2d72.5512174748261!3d23.0879605138859!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e831238329bad%3A0xde66853f796e4777!2sAashray%20Residency!5e0!3m2!1sen!2sin!4v1756590743849!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    @if (app(\App\Settings\GeneralSettings::class)->map_embed_url)
+                        <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+                            <div class="ratio ratio-16x9">
+                                <!-- Replace with your location -->
+                                {{-- <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3670.2495061563154!2d72.5512174748261!3d23.0879605138859!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e831238329bad%3A0xde66853f796e4777!2sAashray%20Residency!5e0!3m2!1sen!2sin!4v1756590743849!5m2!1sen!2sin"
+                                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"></iframe> --}}
+                                <iframe src="{{ app(\App\Settings\GeneralSettings::class)->map_embed_url }}" width="600"
+                                    height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </div>
 
@@ -169,6 +236,7 @@
 
         <style>
             .contact-icon {
+                min-width: 45px;
                 width: 45px;
                 height: 45px;
                 display: flex;

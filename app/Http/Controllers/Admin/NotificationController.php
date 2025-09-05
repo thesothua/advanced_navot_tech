@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
 class NotificationController extends Controller
@@ -47,20 +48,21 @@ class NotificationController extends Controller
     public function submitForm(Request $request)
     {
 
-        // // Validate input
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name'    => 'required|string|max:100',
-            'email'   => 'required|email',
+            'email'   => 'required|email:rfc,dns',
             'subject' => 'required|string|max:150',
             'message' => 'required|string|max:1000',
         ]);
 
-        // dd($request->all());
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         // Store in DB
         $contact = Notification::create($request->only('name', 'email', 'subject', 'message'));
-
-       
 
         // Send email (optional)
         Mail::raw("New message from {$contact->name}\n\n{$contact->message}", function ($mail) use ($contact) {

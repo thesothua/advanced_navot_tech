@@ -20,6 +20,7 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Roles</th>
+                        <th>Status</th>
                         <th>Created</th>
                         <th>Actions</th>
                     </tr>
@@ -48,6 +49,7 @@ $(function () {
             { data: 'name', name: 'name' },
             { data: 'email', name: 'email' },
             { data: 'roles', name: 'roles', orderable: false, searchable: false },
+            { data: 'status', name: 'status', orderable: false, searchable: false },
             { data: 'created_at', name: 'created_at' },
             { data: 'action', name: 'action', orderable: false, searchable: false }
         ]

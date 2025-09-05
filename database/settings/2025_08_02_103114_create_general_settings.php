@@ -17,6 +17,8 @@ return new class extends SettingsMigration
         $this->migrator->add('general.linkedin_url', null);
         $this->migrator->add('general.logo', null);
         $this->migrator->add('general.favicon', null);
+        $this->migrator->add('general.map_embed_url', null);
+        $this->migrator->add('general.working_hours', null);
     }
     
     public function down(): void
@@ -32,5 +34,7 @@ return new class extends SettingsMigration
         $this->migrator->delete('general.linkedin_url');
         $this->migrator->delete('general.logo');
         $this->migrator->delete('general.favicon');
+        $this->migrator->delete('general.map_embed_url');
+        $this->migrator->delete('general.working_hours');
     }
 };

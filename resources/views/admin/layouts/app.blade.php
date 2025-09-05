@@ -289,7 +289,7 @@
                                 <a class="nav-link {{ request()->routeIs('admin.notifications.*') ? 'active' : '' }}"
                                     href="{{ route('admin.notifications.index') }}">
                                     <i class="fas fa-bell me-2"></i>
-                                    Notifications
+                                    Inquiries
                                 </a>
                             </li>
                         @endrole
@@ -356,7 +356,7 @@
                                     <li><a class="dropdown-item" href="{{ route('admin.profile.edit') }}">
                                             <i class="fas fa-user me-2"></i> Profile</a>
                                     </li>
-                                    <li><a class="dropdown-item" href="#">
+                                    <li><a class="dropdown-item" href="{{ route('admin.settings.index') }}">
                                             <i class="fas fa-cog me-2"></i> Settings</a>
                                     </li>
                                     <li>

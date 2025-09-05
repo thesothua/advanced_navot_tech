@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Yajra\DataTables\Facades\DataTables;
 
 class BrandController extends Controller
@@ -39,9 +41,9 @@ class BrandController extends Controller
                     return '<span class="badge ' . $badgeClass . '">' . $status . '</span>';
                 })
                 ->addColumn('action', function ($brand) {
-                    $show   = '<a href="' . route('admin.brands.show', $brand->slug) . '" class="btn btn-sm btn-outline-info me-1">View</a>';
-                    $edit   = '<a href="' . route('admin.brands.edit', $brand->slug) . '" class="btn btn-sm btn-outline-primary me-1">Edit</a>';
-                    $delete = '<form method="POST" action="' . route('admin.brands.destroy', $brand->slug) . '" style="display:inline-block;">'
+                    $show   = '<a href="' . route('admin.brands.show', $brand->id) . '" class="btn btn-sm btn-outline-info me-1">View</a>';
+                    $edit   = '<a href="' . route('admin.brands.edit', $brand->id) . '" class="btn btn-sm btn-outline-primary me-1">Edit</a>';
+                    $delete = '<form method="POST" action="' . route('admin.brands.destroy', $brand->id) . '" style="display:inline-block;">'
                     . csrf_field()
                     . method_field('DELETE')
                         . '<button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm(\'Are you sure?\')">Delete</button>'
@@ -63,7 +65,7 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'        => 'required|string|max:255',
+            'name'        => 'required|string|unique:brands,name|max:255',
             'description' => 'nullable|string',
             'website'     => 'nullable|url',
             'is_active'   => 'boolean',
@@ -75,7 +77,8 @@ class BrandController extends Controller
             'slug'        => Str::slug($request->name),
             'description' => $request->description,
             'website'     => $request->website,
-            'is_active'   => $request->boolean('is_active', true),
+
+            'is_active'   => $request->is_active ?? false,
         ]);
 
         if ($request->hasFile('logo')) {
@@ -105,20 +108,31 @@ class BrandController extends Controller
 
     public function update(Request $request, Brand $brand)
     {
-        $request->validate([
-            'name'        => 'required|string|max:255',
+        $validator = Validator::make($request->all(), [
+            'name'        => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('brands', 'name')->ignore($brand->id),
+            ],
             'description' => 'nullable|string',
             'website'     => 'nullable|url',
             'is_active'   => 'boolean',
             'logo'        => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $brand->update([
             'name'        => $request->name,
             'slug'        => Str::slug($request->name),
             'description' => $request->description,
             'website'     => $request->website,
-            'is_active'   => $request->boolean('is_active', true),
+            'is_active'   => $request->is_active ?? false,
         ]);
 
         if ($request->hasFile('logo')) {

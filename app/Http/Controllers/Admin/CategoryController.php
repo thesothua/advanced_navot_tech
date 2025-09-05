@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Yajra\DataTables\Facades\DataTables;
 
 class CategoryController extends Controller
@@ -22,7 +24,7 @@ class CategoryController extends Controller
                     if (! $media) {
                         // return '<img src="https://via.placeholder.com/50x50?text=No+Image" alt="no image" width="50" height="50" class="rounded">';
 
-                          return '<div class="d-flex justify-content-center align-items-center bg-light text-muted border rounded"
+                        return '<div class="d-flex justify-content-center align-items-center bg-light text-muted border rounded"
                                         style="width:50px; height:50px;">
                                         <i class="fas fa-box fa-lg"></i>
                                  </div>';
@@ -46,8 +48,8 @@ class CategoryController extends Controller
 
                 ->addColumn('action', function ($category) {
                     $show   = '<a href="' . route('admin.categories.show', $category->slug) . '" class="btn btn-sm btn-outline-info me-1">View</a>';
-                    $edit   = '<a href="' . route('admin.categories.edit', $category->slug) . '" class="btn btn-sm btn-outline-primary me-1">Edit</a>';
-                    $delete = '<form method="POST" action="' . route('admin.categories.destroy', $category->slug) . '" style="display:inline-block;">'
+                    $edit   = '<a href="' . route('admin.categories.edit', $category->id) . '" class="btn btn-sm btn-outline-primary me-1">Edit</a>';
+                    $delete = '<form method="POST" action="' . route('admin.categories.destroy', $category->id) . '" style="display:inline-block;">'
                     . csrf_field()
                     . method_field('DELETE')
                         . '<button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm(\'Are you sure? This will affect all child categories.\')">Delete</button>'
@@ -81,7 +83,7 @@ class CategoryController extends Controller
         // Prevent circular reference
         if ($request->parent_id) {
             $parent = Category::find($request->parent_id);
-            if ($parent && $parent->allParents()->count() > 5) {
+            if ($parent && $parent->allParents()->count() > 1) {
                 return back()->withErrors(['parent_id' => 'Maximum nesting level (5) exceeded.']);
             }
         }
@@ -91,7 +93,7 @@ class CategoryController extends Controller
             'slug'        => Str::slug($request->name),
             'description' => $request->description,
             'parent_id'   => $request->parent_id,
-            'is_active'   => $request->boolean('is_active', true),
+            'is_active'   => $request->is_active ?? false,
 
         ]);
 
@@ -130,14 +132,25 @@ class CategoryController extends Controller
 
     public function update(Request $request, Category $category)
     {
-        $request->validate([
-            'name'        => 'required|unique:categories,name|string|max:255',
+
+        $validator = Validator::make($request->all(), [
+            'name'        => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('categories', 'name')->ignore($category->id),
+            ],
             'description' => 'nullable|string',
             'is_active'   => 'boolean',
-
             'parent_id'   => 'nullable|exists:categories,id',
             'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         // Prevent circular reference and self-reference
         if ($request->parent_id) {
@@ -146,7 +159,7 @@ class CategoryController extends Controller
             }
 
             $parent = Category::find($request->parent_id);
-            if ($parent && $parent->allParents()->count() > 5) {
+            if ($parent && $parent->allParents()->count() > 1) {
                 return back()->withErrors(['parent_id' => 'Maximum nesting level (5) exceeded.']);
             }
         }
@@ -155,7 +168,7 @@ class CategoryController extends Controller
             'name'        => $request->name,
             'slug'        => Str::slug($request->name),
             'description' => $request->description,
-            'is_active'   => $request->boolean('is_active', true),
+            'is_active'   => $request->is_active ?? false,
 
         ]);
 
@@ -183,6 +196,6 @@ class CategoryController extends Controller
 
         $category->delete();
         return redirect()->route('admin.categories.index')
-            ->with('success', 'Category deleted successfully. Child categories have been moved up one level.');
+            ->with('success', 'Category deleted successfully.');
     }
 }

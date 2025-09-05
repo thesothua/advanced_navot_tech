@@ -1,9 +1,9 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,9 +24,17 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
 
-        $request->session()->regenerate();
+        if (User::where('email', $request->email)->where('status', 'INACTIVE')->exists()) {
+
+            return back()->withErrors(['email' => 'Your account is inactive. Please contact admin.']);
+            
+        } else {
+
+            $request->authenticate();
+
+            $request->session()->regenerate();
+        }
 
         return redirect()->intended(route('admin.dashboard', absolute: false));
     }
@@ -42,6 +50,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/admin');
     }
 }

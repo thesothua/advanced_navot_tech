@@ -90,81 +90,86 @@
 
 
     <section id="hero" class="position-relative">
-    <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000" data-bs-pause="hover">
-        
-        <!-- Indicators -->
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
-            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+        <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000"
+            data-bs-pause="hover">
+
+            <!-- Indicators -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+            </div>
+
+            <!-- Slides -->
+            <div class="carousel-inner">
+                <!-- Slide 1 -->
+                <div class="carousel-item active">
+                    <img src="https://images.pexels.com/photos/176342/pexels-photo-176342.jpeg" class="d-block w-100"
+                        style="height: 80vh; object-fit: cover;" alt="Hero 1">
+                    <div class="carousel-overlay"></div>
+                    <div class="carousel-caption">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-8 text-start">
+                                    <h1 class="display-4 fw-bold text-white mb-3">Your Trusted Fire & Safety Partner</h1>
+                                    <p class="lead mb-4">ISO 9000:2015 Certified | ISI & TAC Approved Products</p>
+                                    <a href="{{ url('/contact') }}" class="btn mt-2 btn-light me-2">Get a Free
+                                        Consultation</a>
+                                    <a href="{{ url('/products') }}" class="btn mt-2 btn-outline-light">Our Products</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="carousel-item">
+                    <img src="https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg" class="d-block w-100"
+                        style="height: 80vh; object-fit: cover;" alt="Hero 2">
+                    <div class="carousel-overlay"></div>
+                    <div class="carousel-caption">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-8 text-start">
+                                    <h1 class="display-4 fw-bold text-white mb-3">Fire Extinguishers & Hydrant Systems</h1>
+                                    <p class="lead mb-4">Sales, Installation & Maintenance by Experts</p>
+                                    <a href="{{ url('/products') }}" class="btn mt-2  btn-danger me-2">Explore Products</a>
+                                    <a href="{{ url('/contact') }}" class="btn mt-2 btn-outline-light">Contact Us</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="carousel-item">
+                    <img src="https://images.pexels.com/photos/224924/pexels-photo-224924.jpeg" class="d-block w-100"
+                        style="height: 80vh; object-fit: cover;" alt="Hero 3">
+                    <div class="carousel-overlay"></div>
+                    <div class="carousel-caption">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-8 text-start">
+                                    <h1 class="display-4 fw-bold text-white mb-3">PPE & Safety Equipment</h1>
+                                    <p class="lead mb-4">Helmets, Gloves, Face Shields, and More</p>
+                                    <a href="{{ url('/contact') }}" class="btn btn-warning mt-2 me-2">Get a Quote</a>
+                                    <a href="{{ url('/products') }}" class="btn btn-outline-light mt-2">Browse Products</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
         </div>
-
-        <!-- Slides -->
-        <div class="carousel-inner">
-            <!-- Slide 1 -->
-            <div class="carousel-item active">
-                <img src="https://images.pexels.com/photos/176342/pexels-photo-176342.jpeg" class="d-block w-100" style="height: 80vh; object-fit: cover;" alt="Hero 1">
-                <div class="carousel-overlay"></div>
-                <div class="carousel-caption">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-8 text-start">
-                                <h1 class="display-4 fw-bold text-white mb-3">Your Trusted Fire & Safety Partner</h1>
-                                <p class="lead mb-4">ISO 9000:2015 Certified | ISI & TAC Approved Products</p>
-                                <a href="{{ url('/contact') }}" class="btn btn-light me-2">Get a Free Consultation</a>
-                                <a href="{{ url('/products') }}" class="btn btn-outline-light">Our Products</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 2 -->
-            <div class="carousel-item">
-                <img src="https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg" class="d-block w-100" style="height: 80vh; object-fit: cover;" alt="Hero 2">
-                <div class="carousel-overlay"></div>
-                <div class="carousel-caption">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-8 text-start">
-                                <h1 class="display-4 fw-bold text-white mb-3">Fire Extinguishers & Hydrant Systems</h1>
-                                <p class="lead mb-4">Sales, Installation & Maintenance by Experts</p>
-                                <a href="{{ url('/products') }}" class="btn  btn-danger me-2">Explore Products</a>
-                                <a href="{{ url('/contact') }}" class="btn btn-outline-light">Contact Us</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 3 -->
-            <div class="carousel-item">
-                <img src="https://images.pexels.com/photos/224924/pexels-photo-224924.jpeg" class="d-block w-100" style="height: 80vh; object-fit: cover;" alt="Hero 3">
-                <div class="carousel-overlay"></div>
-                <div class="carousel-caption">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-8 text-start">
-                                <h1 class="display-4 fw-bold text-white mb-3">PPE & Safety Equipment</h1>
-                                <p class="lead mb-4">Helmets, Gloves, Face Shields, and More</p>
-                                <a href="{{ url('/contact') }}" class="btn btn-warning me-2">Get a Quote</a>
-                                <a href="{{ url('/products') }}" class="btn btn-outline-light">Browse Products</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Controls -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
-        </button>
-    </div>
-</section>
+    </section>
 
 
 
@@ -199,7 +204,7 @@
             <div class="row align-items-center">
                 <div class="col-md-6 mb-4 mb-md-0" data-aos="fade-right" data-aos-delay="100">
                     <!-- <img src="{{ asset('images/fire-safety-about.jpg') }}" class="img-fluid rounded-3 shadow"
-                            alt="About Company" onerror="this.src='https://via.placeholder.com/600x400?text=About+Us'"> -->
+                                    alt="About Company" onerror="this.src='https://via.placeholder.com/600x400?text=About+Us'"> -->
                     <img src="https://cdn.pixabay.com/photo/2025/01/18/20/20/ai-generated-9343174_1280.png"
                         class="img-fluid rounded-3" alt="About Company"
                         onerror="this.src='https://via.placeholder.com/600x400?text=About+Us'">
@@ -235,7 +240,9 @@
                                 country.</p>
                         </div>
                     </div>
-                    <a href="{{ url('/about') }}" class="btn btn-danger btn-lg mt-2">Learn More</a>
+                    <div class="text-center text-md-start">
+                        <a href="{{ url('/about') }}" class="btn btn-danger btn-lg mt-2">Know More</a>
+                    </div>
                 </div>
             </div>
         </div>

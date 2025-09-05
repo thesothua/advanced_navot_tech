@@ -17,6 +17,8 @@ class GeneralSettings extends Settings
     public ?string $linkedin_url;
     public ?string $logo;
     public ?string $favicon;
+    public ?string $map_embed_url;
+    public ?string $working_hours;
 
     public static function group(): string
     {

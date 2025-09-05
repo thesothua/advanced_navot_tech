@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Notifications</h1>
+    <h1 class="h2">Inquiries</h1>
     <!-- <img src="http://127.0.0.1:8000/storage/9/download-(3).jpg" alt="image"> -->
     {{-- <div class="btn-toolbar mb-2 mb-md-0">
         <a href="{{ route('admin.notifications.create') }}" class="btn btn-sm btn-danger">

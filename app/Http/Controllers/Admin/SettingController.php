@@ -28,6 +28,8 @@ class SettingController extends Controller
             'linkedin_url' => 'nullable|url',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'favicon' => 'nullable|image|mimes:ico,png|max:1024',
+            'map_embed_url' => 'nullable|url',
+            'working_hours' => 'nullable|string|max:255',
         ]);
 
         $settings = app(GeneralSettings::class);
@@ -41,6 +43,8 @@ class SettingController extends Controller
         $settings->twitter_url = $request->twitter_url;
         $settings->instagram_url = $request->instagram_url;
         $settings->linkedin_url = $request->linkedin_url;
+        $settings->map_embed_url = $request->map_embed_url;
+        $settings->working_hours = $request->working_hours;
         
         // Handle logo upload
         if ($request->hasFile('logo')) {

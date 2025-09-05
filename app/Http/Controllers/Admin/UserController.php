@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Password;
 use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -38,18 +38,38 @@ class UserController extends Controller
                         return '<span class="badge bg-danger">' . $role . '</span>';
                     })->implode(' ') ?: '<span class="text-muted">No roles</span>';
                 })
+                ->addColumn('status', function ($user) {
+
+                    if ($user->status == 'ACTIVE') {
+                        return '<span class="badge bg-success">ACTIVE</span>';
+                    } else {
+                        return '<span class="badge bg-secondary">INACTIVE</span>';
+                    }
+                })
                 ->editColumn('created_at', fn($user) => $user->created_at->format('M d, Y'))
                 ->addColumn('action', function ($user) {
-                    $show   = '<a href="' . route('admin.users.show', $user->id) . '" class="btn btn-sm btn-outline-info me-1">View</a>';
-                    $edit   = '<a href="' . route('admin.users.edit', $user->id) . '" class="btn btn-sm btn-outline-danger me-1">Edit</a>';
-                    $delete = '<form method="POST" action="' . route('admin.users.destroy', $user->id) . '" style="display:inline-block;">'
-                    . csrf_field()
-                    . method_field('DELETE')
-                        . '<button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm(\'Are you sure?\')">Delete</button>'
-                        . '</form>';
+                    $show = '<a href="' . route('admin.users.show', $user->id) . '" class="btn btn-sm btn-outline-info me-1">View</a>';
+                    $edit = '<a href="' . route('admin.users.edit', $user->id) . '" class="btn btn-sm btn-outline-danger me-1">Edit</a>';
+
+                    // Hide delete button if super-admin
+                    $delete = '';
+                    if (! $user->hasRole('super-admin')) {
+                        $delete = '<form method="POST" action="' . route('admin.users.destroy', $user->id) . '" style="display:inline-block;">'
+                        . csrf_field()
+                        . method_field('DELETE')
+                            . '<button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm(\'Are you sure?\')">Delete</button>'
+                            . '</form>';
+                    }
+
+                    // $delete = '<form method="POST" action="' . route('admin.users.destroy', $user->id) . '" style="display:inline-block;">'
+                    // . csrf_field()
+                    // . method_field('DELETE')
+                    //     . '<button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm(\'Are you sure?\')">Delete</button>'
+                    //     . '</form>';
+
                     return $show . ' ' . $edit . ' ' . $delete;
                 })
-                ->rawColumns(['avatar', 'roles', 'action'])
+                ->rawColumns(['avatar', 'roles', 'status', 'action'])
                 ->make(true);
         }
 
@@ -65,21 +85,39 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'     => ['required', 'string', 'max:255'],
-            'email'    => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'roles'    => ['array'],
+            'name'   => ['required', 'string', 'max:255'],
+            'email'  => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'status' => ['required', 'in:ACTIVE,INACTIVE'],
+            // 'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'roles'  => ['array'],
         ]);
 
+        function generateStrongPassword($length = 8)
+        {
+            $chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ';   // Uppercase
+            $chars .= 'abcdefghijkmnopqrstuvwxyz'; // Lowercase
+            $chars .= '23456789';                  // Numbers (avoiding 0,1 for confusion)
+            $chars .= '!@#$%^&*()';                // Symbols
+
+            return substr(str_shuffle(str_repeat($chars, 5)), 0, $length);
+        }
+
+        $password = generateStrongPassword(8);
+
         $user = User::create([
-            'name'     => $request->name,
-            'email'    => $request->email,
-            'password' => Hash::make($request->password),
+            'name'              => $request->name,
+            'email'             => $request->email,
+            'status'            => $request->status,
+            'email_verified_at' => now(),
+            'password'          => Hash::make($password),
         ]);
 
         if ($request->has('roles')) {
             $user->assignRole($request->roles);
         }
+
+        // Send reset password link
+        Password::sendResetLink(['email' => $user->email]);
 
         return redirect()->route('admin.users.index')
             ->with('success', 'User created successfully.');
@@ -98,21 +136,26 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
+
+        // dd($request->toArray());
+
         $request->validate([
-            'name'     => ['required', 'string', 'max:255'],
-            'email'    => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
-            'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
-            'roles'    => ['array'],
+            'name'   => ['required', 'string', 'max:255'],
+            // 'email'  => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
+            'status' => ['required', 'in:ACTIVE,INACTIVE'],
+            // 'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
+            'roles'  => ['array'],
         ]);
 
         $user->update([
-            'name'  => $request->name,
-            'email' => $request->email,
+            'name'   => $request->name,
+            // 'email' => $request->email,
+            'status' => $request->status,
         ]);
 
-        if ($request->filled('password')) {
-            $user->update(['password' => Hash::make($request->password)]);
-        }
+        // if ($request->filled('password')) {
+        //     $user->update(['password' => Hash::make($request->password)]);
+        // }
 
         $user->syncRoles($request->roles ?? []);
 
