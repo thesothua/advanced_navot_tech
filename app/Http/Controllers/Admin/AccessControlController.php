@@ -64,11 +64,15 @@ class AccessControlController extends Controller
      */
     public function updateRole(Request $request, Role $role)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255', Rule::unique('roles')->ignore($role->id)],
-            'permissions' => 'array',
-            'permissions.*' => 'exists:permissions,id'
-        ]);
+
+
+        // dd($request->all());
+
+        // $request->validate([
+        //     'name' => ['required', 'string', 'max:255', Rule::unique('roles')->ignore($role->id)],
+        //     'permissions' => 'array',
+        //     'permissions.*' => 'exists:permissions,id'
+        // ]);
 
         $role->update([
             'name' => $request->name

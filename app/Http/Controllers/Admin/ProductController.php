@@ -131,7 +131,7 @@ class ProductController extends Controller
             'category_ids.*' => 'exists:categories,id',
             'is_active'      => 'boolean',
             'is_featured'    => 'boolean',
-            'images.*'       => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'images.*'       => 'image|mimes:jpeg,png,jpg,webp|max:3072',
         ]);
 
         // dd($request->all());
@@ -161,6 +161,7 @@ class ProductController extends Controller
                 $product->addMedia($image)
                     ->usingFileName($fileName)
                     ->toMediaCollection('images', 'public');
+
             }
         }
 
@@ -194,7 +195,7 @@ class ProductController extends Controller
             'category_ids.*' => 'exists:categories,id',
             'is_active'      => 'boolean',
             'is_featured'    => 'boolean',
-            'images.*'       => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'images.*'       => 'image|mimes:jpeg,png,jpg,webp|max:3072',
         ]);
 
         $product->update([

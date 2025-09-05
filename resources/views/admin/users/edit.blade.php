@@ -48,20 +48,26 @@
             </div> --}}
 
 
-                <div class="mb-3">
-                    <label for="roles" class="form-label">Roles</label>
-                    <select class="form-select @error('roles') is-invalid @enderror" id="roles" name="roles[]">
-                        @foreach ($roles as $role)
-                            <option value="{{ $role->name }}"
-                                {{ in_array($role->name, old('roles', $user->roles->pluck('name')->toArray())) ? 'selected' : '' }}>
-                                {{ $role->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('roles')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
+
+     
+
+
+                @if (!$user->hasRole('super-admin'))
+                    <div class="mb-3">
+                        <label for="roles" class="form-label">Roles</label>
+                        <select class="form-select @error('roles') is-invalid @enderror" id="roles" name="roles[]">
+                            @foreach ($roles as $role)
+                                <option value="{{ $role->name }}"
+                                    {{ in_array($role->name, old('roles', $user->roles->pluck('name')->toArray())) ? 'selected' : '' }}>
+                                    {{ $role->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('roles')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                @endif
 
 
                 {{-- ===================  --}}

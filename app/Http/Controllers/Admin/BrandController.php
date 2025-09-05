@@ -69,7 +69,7 @@ class BrandController extends Controller
             'description' => 'nullable|string',
             'website'     => 'nullable|url',
             'is_active'   => 'boolean',
-            'logo'        => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'logo'        => 'nullable|image|mimes:jpeg,png,jpg,webp|max:3072',
         ]);
 
         $brand = Brand::create([
@@ -118,7 +118,7 @@ class BrandController extends Controller
             'description' => 'nullable|string',
             'website'     => 'nullable|url',
             'is_active'   => 'boolean',
-            'logo'        => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'logo'        => 'nullable|image|mimes:jpeg,png,jpg,webp|max:3072',
         ]);
 
         if ($validator->fails()) {

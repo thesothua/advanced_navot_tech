@@ -77,7 +77,7 @@ class CategoryController extends Controller
             'is_active'   => 'boolean',
 
             'parent_id'   => 'nullable|exists:categories,id',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image'       => 'nullable|image|mimes:jpeg,png,jpg,webp|max:3072',
         ]);
 
         // Prevent circular reference
@@ -143,7 +143,7 @@ class CategoryController extends Controller
             'description' => 'nullable|string',
             'is_active'   => 'boolean',
             'parent_id'   => 'nullable|exists:categories,id',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image'       => 'nullable|image|mimes:jpeg,png,jpg,webp|max:3072',
         ]);
 
         if ($validator->fails()) {

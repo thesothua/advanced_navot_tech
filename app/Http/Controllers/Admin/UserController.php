@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Role;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -48,6 +49,7 @@ class UserController extends Controller
                 })
                 ->editColumn('created_at', fn($user) => $user->created_at->format('M d, Y'))
                 ->addColumn('action', function ($user) {
+
                     $show = '<a href="' . route('admin.users.show', $user->id) . '" class="btn btn-sm btn-outline-info me-1">View</a>';
                     $edit = '<a href="' . route('admin.users.edit', $user->id) . '" class="btn btn-sm btn-outline-danger me-1">Edit</a>';
 
@@ -84,13 +86,20 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+
+        $validator = Validator::make($request->all(), [
             'name'   => ['required', 'string', 'max:255'],
             'email'  => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'status' => ['required', 'in:ACTIVE,INACTIVE'],
             // 'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'roles'  => ['array'],
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         function generateStrongPassword($length = 8)
         {

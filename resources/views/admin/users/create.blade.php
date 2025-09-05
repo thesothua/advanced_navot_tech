@@ -61,6 +61,23 @@
                     @enderror
                 </div>
 
+
+                <div class="mb-3">
+                    <label for="status" class="form-label">Status</label>
+                    <select class="form-select @error('status') is-invalid @enderror" id="status" name="status">
+                        <option value="">Select Status</option>
+                        <option value="ACTIVE" {{ old('status', $user->status ?? '') == 'ACTIVE' ? 'selected' : '' }}>
+                            ACTIVE</option>
+                        <option value="INACTIVE" {{ old('status', $user->status ?? '') == 'INACTIVE' ? 'selected' : '' }}>
+                            INACTIVE</option>
+                    </select>
+                    @error('status')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+
+
                 <div class="text-end">
                     <button type="submit" class="btn btn-danger">
                         <i class="fas fa-save"></i> Create User

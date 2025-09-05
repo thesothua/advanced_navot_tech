@@ -182,8 +182,8 @@
             box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
         }
 
-        .img-fluid {
-            filter: invert(1);
+        .dashborad-logo {
+            /* filter: invert(1); */
             max-height: 62px;
             width: 112px;
         }
@@ -192,7 +192,6 @@
             padding-left: 0px;
             padding-right: 0px;
         }
-        
     </style>
 </head>
 
@@ -200,14 +199,14 @@
     <div class="container-fluid">
         <div class="row">
 
-            
+
             <!-- Sidebar -->
             <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse">
                 <div class="position-sticky">
                     <div class="sidebar-brand text-center">
                         @if ($globalSettings->logo ?? false)
                             <img src="{{ asset('storage/' . $globalSettings->logo) }}"
-                                alt="{{ $globalSettings->site_name ?? 'Logo' }}" class="img-fluid">
+                                alt="{{ $globalSettings->site_name ?? 'Logo' }}" class="img-fluid dashborad-logo">
                         @endif
                         {{-- <h4 class="text-white fw-bold mb-0">{{ $globalSettings->site_name ?? 'Admin Panel' }}</h4> --}}
                     </div>
@@ -221,7 +220,7 @@
                             </a>
                         </li>
 
-                        @role('super-admin')
+                        @if (canSuperAdminOr('view-users'))
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}"
                                     href="{{ route('admin.users.index') }}">
@@ -229,7 +228,7 @@
                                     Users
                                 </a>
                             </li>
-                        @endrole
+                        @endif
 
                         <li class="nav-item mt-2">
                             <div class="text-uppercase text-white-50 px-3 py-2"
@@ -238,7 +237,7 @@
                             </div>
                         </li>
 
-                        @can('manage-products')
+                        @if (canSuperAdminOr('view-products'))
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.products.*') ? 'active' : '' }}"
                                     href="{{ route('admin.products.index') }}">
@@ -246,9 +245,11 @@
                                     Products
                                 </a>
                             </li>
-                        @endcan
+                        @endif
 
-                        @can('manage-categories')
+
+
+                        @if (canSuperAdminOr('view-categories'))
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}"
                                     href="{{ route('admin.categories.index') }}">
@@ -256,9 +257,9 @@
                                     Categories
                                 </a>
                             </li>
-                        @endcan
+                        @endif
 
-                        @can('manage-brands')
+                        @if (canSuperAdminOr('view-brands'))
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.brands.*') ? 'active' : '' }}"
                                     href="{{ route('admin.brands.index') }}">
@@ -266,7 +267,8 @@
                                     Brands
                                 </a>
                             </li>
-                        @endcan
+                        @endif
+
 
                         <li class="nav-item mt-2">
                             <div class="text-uppercase text-white-50 px-3 py-2"
@@ -275,7 +277,7 @@
                             </div>
                         </li>
 
-                        @role('super-admin')
+                        @if (canSuperAdminOr('view-settings'))
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}"
                                     href="{{ route('admin.settings.index') }}">
@@ -283,8 +285,10 @@
                                     Settings
                                 </a>
                             </li>
-                        @endrole
-                        @role('super-admin')
+                        @endif
+
+
+                        @if (canSuperAdminOr('view-inquiries'))
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.notifications.*') ? 'active' : '' }}"
                                     href="{{ route('admin.notifications.index') }}">
@@ -292,7 +296,10 @@
                                     Inquiries
                                 </a>
                             </li>
-                        @endrole
+                        @endif
+
+
+
 
                         @role('super-admin')
                             <li class="nav-item">
