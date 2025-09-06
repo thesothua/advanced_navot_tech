@@ -3,7 +3,7 @@
 @section('title', 'About Us')
 
 @section('content')
-    <div class="container py-5">
+    <div class="container py-4 py-lg-5">
         <div class="row justify-content-center mb-5" data-aos="fade-up">
             <div class="col-lg-6 text-center">
                 <h6 class="text-danger fw-bold text-uppercase">Our Story</h6>
@@ -13,8 +13,8 @@
         </div>
 
         <!-- Company Introduction -->
-        <div class="row align-items-center mb-5">
-            <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right" data-aos-delay="100">
+        <div class="row align-items-center mb-4 mb-lg-5 px-2 px-md-0">
+            <div class="col-lg-6 mb-4 mb-lg-0 px-md-3" data-aos="fade-right" data-aos-delay="100">
                 <img src="https://cdn.pixabay.com/photo/2022/02/27/22/56/construction-7038241_1280.png" alt="About Us"
                     class="img-fluid rounded-3" onerror="this.src='https://via.placeholder.com/600x400?text=About+Us'">
                 <!-- <img src="{{ asset('images/about-us.jpg') }}" alt="About Us" class="img-fluid rounded-3 shadow" onerror="this.src='https://via.placeholder.com/600x400?text=About+Us'"> -->
@@ -37,7 +37,7 @@
         </div>
 
         <!-- Mission & Vision -->
-        <div class="row mb-5">
+        <div class="row mb-4 mb-lg-5 px-2 px-md-0">
             <div class="col-12 text-center mb-4" data-aos="fade-up">
                 <h6 class="text-danger fw-bold text-uppercase">Our Purpose</h6>
                 <h2 class="fw-bold mb-0">Mission & Vision</h2>
@@ -179,6 +179,46 @@
             font-size: 1.5rem;
         }
 
+        @media (max-width: 768px) {
+            .icon-circle,
+            .service-icon,
+            .advantage-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.25rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .icon-circle,
+            .service-icon,
+            .advantage-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            h3 {
+                font-size: 1.75rem;
+            }
+
+            h4 {
+                font-size: 1.5rem;
+            }
+
+            h5 {
+                font-size: 1.25rem;
+            }
+
+            .lead {
+                font-size: 1rem;
+            }
+        }
+
         .mission-card,
         .vision-card,
         .service-highlight,
@@ -191,6 +231,32 @@
         .service-highlight:hover,
         .advantage-card:hover {
             transform: translateY(-10px);
+        }
+
+        @media (max-width: 768px) {
+            .mission-card:hover,
+            .vision-card:hover,
+            .service-highlight:hover,
+            .advantage-card:hover {
+                transform: translateY(-5px);
+            }
+        }
+
+        .card {
+            overflow: hidden;
+        }
+
+        .card-body {
+            z-index: 1;
+            position: relative;
+        }
+
+        img.img-fluid {
+            transition: transform 0.3s ease;
+        }
+
+        img.img-fluid:hover {
+            transform: scale(1.05);
         }
     </style>
 @endsection

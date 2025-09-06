@@ -16,7 +16,10 @@ class CheckPermission
     public function handle(Request $request, Closure $next, $permission)
     {
         if (! canSuperAdminOr($permission)) {
+
             abort(403, 'You don’t have permission to access this action.');
+
+            // return redirect()->route('admin.no-permission');
         }
 
         return $next($request);

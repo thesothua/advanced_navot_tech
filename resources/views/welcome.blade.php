@@ -47,11 +47,31 @@
             padding-top: 76px;
             font-family: 'Poppins', sans-serif;
             color: var(--dark-color);
+            overflow-x: hidden;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 62px;
+            }
         }
 
         .navbar {
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             transition: var(--transition);
+        }
+
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                background: var(--primary-color);
+                padding: 1rem;
+                border-radius: 8px;
+                margin-top: 0.5rem;
+            }
+
+            .navbar-nav .nav-item {
+                margin: 0.5rem 0;
+            }
         }
 
         .navbar-brand {
@@ -64,20 +84,13 @@
             transition: var(--transition);
         }
 
-        .nav-link:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: white;
-            left: 0;
-            bottom: -3px;
-            transition: var(--transition);
+        .nav-link {
+            transition: color var(--transition);
         }
 
-        .nav-link:hover:after,
-        .nav-link.active:after {
-            width: 100%;
+        .nav-link:hover,
+        .nav-link.active {
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .btn {
@@ -246,7 +259,7 @@
     <!-- Footer -->
     <footer class="bg-dark text-white pt-5 pb-4 mt-5">
         <div class="container text-md-left">
-            <div class="row text-md-left">
+            <div class="row text-md-left gy-4">
 
                 <!-- Company Info -->
                 <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-3">
@@ -298,7 +311,7 @@
 
             <hr class="my-4 text-white-50">
 
-            <div class="row align-items-center">
+            <div class="row align-items-center gy-3">
                 <div class="col-md-7 col-lg-8">
                     <p class="text-white-50 mb-0">
                         &copy; {{ now()->year }} Fire & Safety Solutions. All rights reserved.

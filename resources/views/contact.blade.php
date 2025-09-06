@@ -3,7 +3,7 @@
 @section('title', 'Contact Us')
 
 @section('content')
-    <div class="container py-5">
+    <div class="container py-4 py-lg-5">
         <div class="row justify-content-center mb-5" data-aos="fade-up">
             <div class="col-lg-6 text-center">
                 <h6 class="text-danger fw-bold text-uppercase">Get In Touch</h6>
@@ -36,10 +36,10 @@
             @endif
 
 
-            <div class="row g-5">
+            <div class="row g-4 g-lg-5 px-2 px-md-0">
                 <!-- Contact Form -->
                 <div class="col-lg-6" data-aos="fade-right" data-aos-delay="100">
-                    <div class="card border-0 shadow-sm rounded-3 p-4">
+                    <div class="card border-0 shadow-sm rounded-3 p-3 p-lg-4">
                         {{-- <div class="card-body">
                             <h4 class="fw-bold mb-4">Send Us a Message</h4>
 
@@ -139,7 +139,7 @@
 
                 <!-- Contact Info + Map -->
                 <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
-                    <div class="card border-0 shadow-sm rounded-3 mb-4 p-4">
+                    <div class="card border-0 shadow-sm rounded-3 mb-4 p-3 p-lg-4">
                         <div class="card-body">
                             <h4 class="fw-bold mb-4">Our Office</h4>
                             @if (app(\App\Settings\GeneralSettings::class)->address)
@@ -245,9 +245,56 @@
                 font-size: 1.2rem;
             }
 
+            @media (max-width: 768px) {
+                .contact-icon {
+                    min-width: 40px;
+                    width: 40px;
+                    height: 40px;
+                    font-size: 1rem;
+                }
+
+                .form-control-lg {
+                    font-size: 1rem;
+                    padding: 0.5rem 1rem;
+                }
+
+                .btn-lg {
+                    font-size: 1rem;
+                    padding: 0.5rem 1.5rem;
+                }
+
+                h2 {
+                    font-size: 2rem;
+                }
+
+                h4 {
+                    font-size: 1.5rem;
+                }
+
+                .lead {
+                    font-size: 1rem;
+                }
+            }
+
+            @media (max-width: 576px) {
+                .contact-icon {
+                    min-width: 35px;
+                    width: 35px;
+                    height: 35px;
+                    font-size: 0.9rem;
+                }
+
+                .px-5 {
+                    padding-left: 1.5rem !important;
+                    padding-right: 1.5rem !important;
+                }
+            }
+
             .social-links {
                 display: flex;
                 justify-content: center;
+                flex-wrap: wrap;
+                gap: 1rem;
                 gap: 15px;
             }
 

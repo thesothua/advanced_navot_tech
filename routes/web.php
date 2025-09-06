@@ -20,13 +20,13 @@ Route::get('/', function () {
 
 Route::view('/about', 'about')->name('about');
 Route::get('/products', [App\Http\Controllers\ProductController::class, 'index'])->name('products');
-Route::get('/products/{product:slug}', [App\Http\Controllers\ProductController::class, 'show'])->name('products.show');
 Route::view('/contact', 'contact')->name('contact');
+Route::post('/contact', [NotificationController::class, 'submitForm'])->name('contact.submit');
 
 // Public category routes
+Route::get('/products/{product:slug}', [App\Http\Controllers\ProductController::class, 'show'])->name('products.show');
 Route::get('/categories/{category:slug}', [App\Http\Controllers\CategoryController::class, 'show'])->name('categories.show');
 
-Route::post('/contact', [NotificationController::class, 'submitForm'])->name('contact.submit');
 
 // Test route to check if basic functionality works
 
@@ -35,8 +35,11 @@ require __DIR__ . '/auth.php';
 
 // Admin routes (protected by auth and permissions)
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
-
+    
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/no-permission', [DashboardController::class, 'noPermission'])->name('no-permission');
+
+
 
     // User Management (Super Admin only)
     // Route::middleware(['role:super-admin'])->group(function () {

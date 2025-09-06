@@ -80,6 +80,16 @@ class ProductController extends Controller
                                 alt="' . e($product->name ?? 'Product') . '"
                                 width="50" height="50" class="rounded">';
                 })
+
+                ->addColumn('name', function ($product) {
+                    return '<a href="' . route('admin.products.show', $product->slug) . '"
+                style="color:#212529; text-decoration:none; font-weight:400;"
+                onmouseover="this.style.color=\'#dc3545\'"
+                onmouseout="this.style.color=\'#212529\'">'
+                    . e($product->name) .
+                        '</a>';
+                })
+
                 ->editColumn('price', fn($product) => '₹ ' . number_format($product->price, 2))
                 ->addColumn('brand', fn($product) => $product->brand?->name ?? '-')
                 ->addColumn('categories', function ($product) {
@@ -103,7 +113,7 @@ class ProductController extends Controller
                         . '</form>';
                     return $show . $edit . $delete;
                 })
-                ->rawColumns(['image', 'status', 'action'])
+                ->rawColumns(['image', 'name', 'status', 'action'])
                 ->make(true);
         }
 

@@ -34,4 +34,12 @@ class DashboardController extends Controller
 
         return view('admin.dashboard.index', compact('stats', 'recent_products', 'recent_users'));
     }
+
+
+    public function noPermission()
+    {
+
+     
+        return view('admin.errors.403');
+    }
 } 

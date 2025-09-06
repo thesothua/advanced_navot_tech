@@ -110,12 +110,14 @@
                     <div class="carousel-caption">
                         <div class="container">
                             <div class="row">
-                                <div class="col-lg-8 text-start">
-                                    <h1 class="display-4 fw-bold text-white mb-3">Your Trusted Fire & Safety Partner</h1>
-                                    <p class="lead mb-4">ISO 9000:2015 Certified | ISI & TAC Approved Products</p>
-                                    <a href="{{ url('/contact') }}" class="btn mt-2 btn-light me-2">Get a Free
-                                        Consultation</a>
-                                    <a href="{{ url('/products') }}" class="btn mt-2 btn-outline-light">Our Products</a>
+                                <div class="col-lg-8 col-md-10 text-start">
+                    <h1 class="display-4 fw-bold text-white mb-3">Your Trusted Fire & Safety Partner</h1>
+                    <p class="lead mb-4 d-none d-sm-block">ISO 9000:2015 Certified | ISI & TAC Approved Products</p>
+                    <p class="mb-4 d-block d-sm-none">ISO 9000:2015 Certified</p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="{{ url('/contact') }}" class="btn btn-light">Get a Free Consultation</a>
+                        <a href="{{ url('/products') }}" class="btn btn-outline-light">Our Products</a>
+                    </div>
                                 </div>
                             </div>
                         </div>
@@ -183,11 +185,42 @@
             background: linear-gradient(to right, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.1) 100%);
         }
 
+        @media (max-width: 768px) {
+            .carousel-overlay {
+                background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.6) 100%);
+            }
+        }
+
         .carousel-caption {
             top: 50%;
             transform: translateY(-50%);
             bottom: auto;
             text-align: left;
+            width: 100%;
+            left: 0;
+            right: 0;
+            padding: 0 15px;
+        }
+
+        @media (max-width: 768px) {
+            .carousel-caption h1 {
+                font-size: 2rem;
+            }
+            .carousel-caption .lead {
+                font-size: 1rem;
+            }
+            .carousel-item img {
+                height: 60vh !important;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .carousel-caption h1 {
+                font-size: 1.75rem;
+            }
+            .carousel-item img {
+                height: 50vh !important;
+            }
         }
     </style>
 
@@ -318,6 +351,7 @@
 
         .service-card {
             transition: all 0.3s ease;
+            height: 100%;
         }
 
         .service-card:hover {
@@ -328,6 +362,25 @@
             width: 80px;
             height: 80px;
             font-size: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .service-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            .service-card:hover {
+                transform: translateY(-5px);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .feature-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
         }
     </style>
 

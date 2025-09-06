@@ -51,6 +51,7 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f5f7fb;
+            overflow-x: hidden;
         }
 
         /* Sidebar */
@@ -59,6 +60,38 @@
             min-height: 100vh;
             box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
             transition: all var(--transition-speed);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 250px;
+        }
+
+        @media (max-width: 767.98px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: -250px;
+                bottom: 0;
+                z-index: 1000;
+                transition: 0.3s;
+            }
+
+            .sidebar.show {
+                left: 0;
+            }
+
+            .main-content {
+                margin-left: 0 !important;
+                width: 100% !important;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .main-content {
+                margin-left: 250px;
+                width: calc(100% - 250px);
+            }
         }
 
         .sidebar-brand {
@@ -191,6 +224,7 @@
         .main-content {
             padding-left: 0px;
             padding-right: 0px;
+            transition: margin-left var(--transition-speed);
         }
     </style>
 </head>
@@ -201,8 +235,8 @@
 
 
             <!-- Sidebar -->
-            <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse">
-                <div class="position-sticky">
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse" style="z-index: 1000;">
+                <div class="position-sticky pt-3">
                     <div class="sidebar-brand text-center">
                         @if ($globalSettings->logo ?? false)
                             <img src="{{ asset('storage/' . $globalSettings->logo) }}"
@@ -332,10 +366,10 @@
             <!-- Main content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 main-content">
                 <!-- Top navbar -->
-                <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
-                    <div class="container-fluid mt-2">
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target=".sidebar">
+                <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4 position-sticky top-0" style="z-index: 900;">
+                    <div class="container-fluid py-2">
+                        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                            data-bs-target=".sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
 
@@ -409,6 +443,38 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarToggle = document.querySelector('.navbar-toggler');
+            const sidebar = document.querySelector('.sidebar');
+            const mainContent = document.querySelector('.main-content');
+
+            if (sidebarToggle && sidebar) {
+                sidebarToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    sidebar.classList.toggle('show');
+                });
+
+                // Close sidebar when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!sidebar.contains(e.target) && 
+                        !sidebarToggle.contains(e.target) && 
+                        window.innerWidth < 768 && 
+                        sidebar.classList.contains('show')) {
+                        sidebar.classList.remove('show');
+                    }
+                });
+
+                // Handle window resize
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth >= 768) {
+                        sidebar.classList.remove('show');
+                    }
+                });
+            }
+        });
+    </script>
 
     @stack('scripts')
 </body>
