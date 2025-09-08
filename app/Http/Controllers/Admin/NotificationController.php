@@ -15,7 +15,7 @@ class NotificationController extends Controller
     {
         if ($request->ajax()) {
 
-            $notifications = Notification::get();
+            $notifications = Notification::orderByDesc('created_at')->get();
 
             return DataTables::of($notifications)
                 ->addIndexColumn()

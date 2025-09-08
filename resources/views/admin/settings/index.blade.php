@@ -34,6 +34,15 @@
                             @enderror
                         </div>
 
+                        <div class="mb-3">
+                            <label for="footer_description" class="form-label">Footer Description</label>
+                            <textarea class="form-control @error('footer_description') is-invalid @enderror" id="footer_description"
+                                name="footer_description" rows="3">{{ old('footer_description', $settings->footer_description ?? '') }}</textarea>
+                            @error('footer_description')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
@@ -137,6 +146,17 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="youtube_url" class="form-label">Youtube URL</label>
+                                    <input type="url" class="form-control @error('youtube_url') is-invalid @enderror"
+                                        id="youtube_url" name="youtube_url"
+                                        value="{{ old('youtube_url', $settings->youtube_url ?? '') }}">
+                                    @error('youtube_url')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
 
                         <h6 class="mt-4">Media</h6>
@@ -157,6 +177,67 @@
                                     <input type="file" class="form-control @error('favicon') is-invalid @enderror"
                                         id="favicon" name="favicon" accept="image/*">
                                     @error('favicon')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="about_image_1" class="form-label">Home Image</label>
+                                    <input type="file"
+                                        class="form-control @error('about_image_1') is-invalid @enderror"
+                                        id="about_image_1" name="about_image_1" accept="image/*">
+                                    @error('about_image_1')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="about_image_2" class="form-label">About Image</label>
+                                    <input type="file"
+                                        class="form-control @error('about_image_2') is-invalid @enderror"
+                                        id="about_image_2" name="about_image_2" accept="image/*">
+                                    @error('about_image_2')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="hero_image_1" class="form-label">Slider 1</label>
+                                    <input type="file"
+                                        class="form-control @error('hero_image_1') is-invalid @enderror"
+                                        id="hero_image_1" name="hero_image_1" accept="image/*">
+                                    @error('hero_image_1')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="hero_image_2" class="form-label">Slider 2</label>
+                                    <input type="file"
+                                        class="form-control @error('hero_image_2') is-invalid @enderror"
+                                        id="hero_image_2" name="hero_image_2" accept="image/*">
+                                    @error('hero_image_2')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="hero_image_3" class="form-label">Slider 3</label>
+                                    <input type="file"
+                                        class="form-control @error('hero_image_3') is-invalid @enderror"
+                                        id="hero_image_3" name="hero_image_3" accept="image/*">
+                                    @error('hero_image_3')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -196,6 +277,49 @@
                             <strong>Current Favicon:</strong><br>
                             <img src="{{ asset('storage/' . $settings->favicon) }}" alt="Current Favicon"
                                 class="img-thumbnail mt-2" style="max-height: 32px;">
+                        </div>
+                    @endif
+                    <hr>
+
+                    @if ($settings->about_image_1 ?? false)
+                        <div class="mb-3">
+                            <strong>Home Image:</strong><br>
+                            <img src="{{ asset('storage/' . $settings->about_image_1) }}" alt="Home Image"
+                                class="img-thumbnail mt-2" style="max-height: 100px;">
+                        </div>
+                    @endif
+
+                    @if ($settings->about_image_2 ?? false)
+                        <div class="mb-3">
+                            <strong>About Image:</strong><br>
+                            <img src="{{ asset('storage/' . $settings->about_image_2) }}" alt="Home Image"
+                                class="img-thumbnail mt-2" style="max-height: 100px;">
+                        </div>
+                    @endif
+
+                    <hr>
+
+                    @if ($settings->hero_image_1 ?? false)
+                        <div class="mb-3">
+                            <strong>Slider 1:</strong><br>
+                            <img src="{{ asset('storage/' . $settings->hero_image_1) }}" alt="Slider 1"
+                                class="img-thumbnail mt-2" style="max-height: 100px;">
+                        </div>
+                    @endif
+
+                    @if ($settings->hero_image_2 ?? false)
+                        <div class="mb-3">
+                            <strong>Slider 2:</strong><br>
+                            <img src="{{ asset('storage/' . $settings->hero_image_2) }}" alt="Slider 2"
+                                class="img-thumbnail mt-2" style="max-height: 100px;">
+                        </div>
+                    @endif
+
+                    @if ($settings->hero_image_3 ?? false)
+                        <div class="mb-3">
+                            <strong>Slider 3:</strong><br>
+                            <img src="{{ asset('storage/' . $settings->hero_image_3) }}" alt="Slider 3"
+                                class="img-thumbnail mt-2" style="max-height: 100px;">
                         </div>
                     @endif
                 </div>

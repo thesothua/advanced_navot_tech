@@ -59,3 +59,46 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+<!-- =======================  -->
+
+
+/home/u265390710/domains/advancednovatech.com/
+├── advanced_novat_tech/     (Laravel root - contains app, bootstrap, storage, etc.)
+└── public_html/             (Public files - contains index.php, build, favicon, etc.)
+
+1. Create the storage symlink from public_html to advanced_novat_tech:
+bash
+cd /home/u265390710/domains/advancednovatech.com/public_html
+ln -s ../advanced_novat_tech/storage/app/public storage
+
+
+2. Verify the symlink:
+bash
+ls -la /home/u265390710/domains/advancednovatech.com/public_html/
+You should see: storage -> ../advanced_novat_tech/storage/app/public
+
+3. Set proper permissions:
+bash
+chmod -R 755 /home/u265390710/domains/advancednovatech.com/advanced_novat_tech/storage/
+chmod -R 755 /home/u265390710/domains/advancednovatech.com/public_html/storage/
+4. Update your Laravel configuration:
+Make sure your .env file in advanced_novat_tech/ has:
+
+env
+APP_URL=https://advancednovatech.com
+FILESYSTEM_DISK=public
+5. Also check the public_html/index.php file:
+Ensure it points to the correct Laravel autoload and app files:
+
+php
+require __DIR__.'/../advanced_novat_tech/vendor/autoload.php';
+$app = require_once __DIR__.'/../advanced_novat_tech/bootstrap/app.php';
+6. Verify the symlink works:
+bash
+# Check if symlink points correctly
+readlink /home/u265390710/domains/advancednovatech.com/public_html/storage
+
+# Test if files are accessible
+ls -la /home/u265390710/domains/advancednovatech.com/public_html/storage/
+This setup will allow Spatie Media Library to store files in advanced_novat_tech/storage/app/public while making them accessible through https://advancednovatech.com/storage/

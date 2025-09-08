@@ -54,7 +54,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $products = Product::with(['brand', 'categories', 'media'])->select('products.*');
+            $products = Product::with(['brand', 'categories', 'media'])->select('products.*')->latest();
 
             return DataTables::of($products)
                 ->addIndexColumn()
@@ -141,7 +141,7 @@ class ProductController extends Controller
             'category_ids.*' => 'exists:categories,id',
             'is_active'      => 'boolean',
             'is_featured'    => 'boolean',
-            'images.*'       => 'image|mimes:jpeg,png,jpg,webp|max:3072',
+            'images.*'       => 'image|mimes:jpeg,png,jpg,webp|max:5072',
         ]);
 
         // dd($request->all());

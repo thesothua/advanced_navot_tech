@@ -14,7 +14,7 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $categories = Category::with(['media', 'parent'])->withCount(['products', 'children'])->select('categories.*');
+            $categories = Category::with(['media', 'parent'])->withCount(['products', 'children'])->select('categories.*')->latest();
 
             return DataTables::of($categories)
                 ->addIndexColumn()

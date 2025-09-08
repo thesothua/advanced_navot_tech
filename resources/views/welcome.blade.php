@@ -157,9 +157,9 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-danger fixed-top py-3">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="/">
-                <img src="{{ asset('logo/mylogo.png') }}" width="40" alt="logo"
-                    class="img-fluid rounded shadow-sm me-2">
-                <span>Advanced Nova Tech</span>
+                <img src="{{ asset('storage/' . $globalSettings->logo) }}" style="max-width: 100px; max-height: 50px;"
+                    alt="logo" class="img-fluid rounded shadow-sm me-2">
+                {{-- <span>Advanced Nova Tech</span> --}}
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -258,83 +258,109 @@
 
     <!-- Footer -->
     <footer class="bg-dark text-white pt-5 pb-4 mt-5">
-        <div class="container text-md-left">
-            <div class="row text-md-left gy-4">
+        <div class="container">
+            <div class="row gy-4">
 
                 <!-- Company Info -->
-                <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-3">
-                    <h5 class="text-uppercase fw-bold text-danger">Fire & Safety Solutions</h5>
-                    <p>
-                        A professionally managed ISO 9001:2015 certified company in Odisha providing high-quality fire
-                        safety products and services to government, public and private sectors.
+                <div class="col-md-4 col-lg-4">
+                    <h5 class="text-uppercase fw-bold text-danger border-bottom pb-2">AdvancedNova Pvt Ltd</h5>
+                    <p class="text-white-50 mt-3">
+                        AdvancedNova is a safety solutions provider based in Ahmedabad Gujarat.
+                        We specialize in globally certified PPE, integrated fire & fall protection systems, emergency
+                        equipment, and custom-engineered safety solutions for high-risk environments.
+                    </p>
+                    <p class="text-white-50 mb-0"><em>"Every worker deserves to go home safe, every single day."</em>
                     </p>
                 </div>
 
-                <!-- Useful Links -->
-                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                    <h5 class="text-uppercase fw-bold text-danger">Quick Links</h5>
-                    <p><a href="{{ url('/') }}" class="text-white text-decoration-none">Home</a></p>
-                    <p><a href="{{ url('/about') }}" class="text-white text-decoration-none">About Us</a></p>
-                    <p><a href="{{ url('/products') }}" class="text-white text-decoration-none">Products</a></p>
-                    <p><a href="{{ url('/contact') }}" class="text-white text-decoration-none">Contact Us</a></p>
+                <!-- Quick Links -->
+                <div class="col-md-2 col-lg-2">
+                    <h5 class="text-uppercase fw-bold text-danger border-bottom pb-2">Quick Links</h5>
+                    <ul class="list-unstyled mt-3">
+                        <li><a href="{{ url('/') }}"
+                                class="text-white-50 text-decoration-none d-block mb-2">Home</a></li>
+                        <li><a href="{{ url('/about') }}" class="text-white-50 text-decoration-none d-block mb-2">About
+                                Us</a></li>
+                        <li><a href="{{ url('/products') }}"
+                                class="text-white-50 text-decoration-none d-block mb-2">Products</a></li>
+                        <li><a href="{{ url('/contact') }}" class="text-white-50 text-decoration-none d-block">Contact
+                                Us</a></li>
+                    </ul>
                 </div>
 
                 <!-- Services -->
-                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                    <h5 class="text-uppercase fw-bold text-danger">Our Services</h5>
-                    <p class="text-white-50">Fire Extinguishers (CO₂, ABC, DCP)</p>
-                    <p class="text-white-50">Fire Alarm Systems</p>
-                    <p class="text-white-50">Hydrant Accessories</p>
-                    <p class="text-white-50">Safety Equipment & PPEs</p>
+                <div class="col-md-3 col-lg-3">
+                    <h5 class="text-uppercase fw-bold text-danger border-bottom pb-2">Our Solutions</h5>
+                    <ul class="list-unstyled mt-3 text-white-50">
+                        <li class="mb-2">✔️ Certified PPE & Safety Equipment</li>
+                        <li class="mb-2">✔️ Fire Extinguishers & Alarm Systems</li>
+                        <li class="mb-2">✔️ Fall Protection & Emergency Equipment</li>
+                        <li class="mb-2">✔️ Hydrant Systems & Accessories</li>
+                        <li class="mb-2">✔️ On-Site Training & Safety Consulting</li>
+                        <li>✔️ Custom Safety Solutions</li>
+                    </ul>
                 </div>
 
                 <!-- Contact -->
-                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                    <h5 class="text-uppercase fw-bold text-danger">Contact Us</h5>
-                    @if (app(\App\Settings\GeneralSettings::class)->address)
-                        <p><i class="fas fa-map-marker-alt me-2"></i>
-                            {{ app(\App\Settings\GeneralSettings::class)->address }}</p>
-                    @endif
-                    @if (app(\App\Settings\GeneralSettings::class)->contact_email)
-                        <p><i class="fas fa-envelope me-2"></i>
-                            {{ app(\App\Settings\GeneralSettings::class)->contact_email }}</p>
-                    @endif
-                    @if (app(\App\Settings\GeneralSettings::class)->contact_phone)
-                        <p><i class="fas fa-phone me-2"></i>
-                            {{ app(\App\Settings\GeneralSettings::class)->contact_phone }}</p>
-                    @endif
-                    <p><i class="fas fa-clock me-2"></i>{{ app(\App\Settings\GeneralSettings::class)->working_hours }}
-                    </p>
-                </div>
+                <div class="col-md-3 col-lg-3">
+                    <h5 class="text-uppercase fw-bold text-danger border-bottom pb-2">Contact Us</h5>
+                    <ul class="list-unstyled mt-3 text-white-50">
+                        @if (app(\App\Settings\GeneralSettings::class)->address)
+                            <li class="mb-2"><i
+                                    class="fas fa-map-marker-alt me-2"></i>{{ app(\App\Settings\GeneralSettings::class)->address }}
+                            </li>
+                        @endif
+                        @if (app(\App\Settings\GeneralSettings::class)->contact_email)
+                            <li class="mb-2"><i
+                                    class="fas fa-envelope me-2"></i>{{ app(\App\Settings\GeneralSettings::class)->contact_email }}
+                            </li>
+                        @endif
+                        @if (app(\App\Settings\GeneralSettings::class)->contact_phone)
+                            <li class="mb-2">
+                                @php
+                                    $phones = explode(',', app(\App\Settings\GeneralSettings::class)->contact_phone);
+                                @endphp
 
+                                @foreach ($phones as $phone)
+                                    <div>
+                                        <i class="fas fa-phone me-2"></i> {{ trim($phone) }}
+                                    </div>
+                                @endforeach
+                            </li>
+                        @endif
+                        <li><i
+                                class="fas fa-clock me-2"></i>{{ app(\App\Settings\GeneralSettings::class)->working_hours }}
+                        </li>
+                    </ul>
+                </div>
             </div>
 
             <hr class="my-4 text-white-50">
 
+            <!-- Bottom Row -->
             <div class="row align-items-center gy-3">
                 <div class="col-md-7 col-lg-8">
                     <p class="text-white-50 mb-0">
-                        &copy; {{ now()->year }} Fire & Safety Solutions. All rights reserved.
+                        &copy; {{ now()->year }} <strong>AdvancedNova Pvt Ltd</strong>. All rights reserved.
                     </p>
                 </div>
-
-                <div class="col-md-5 col-lg-4 text-md-right">
+                <div class="col-md-5 col-lg-4 text-md-end">
                     <!-- Social icons -->
                     @if (app(\App\Settings\GeneralSettings::class)->facebook_url)
                         <a href="{{ app(\App\Settings\GeneralSettings::class)->facebook_url }}"
-                            class="text-white me-3" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                            class="text-white-50 me-3 fs-5" target="_blank"><i class="fab fa-facebook-f"></i></a>
                     @endif
                     @if (app(\App\Settings\GeneralSettings::class)->twitter_url)
                         <a href="{{ app(\App\Settings\GeneralSettings::class)->twitter_url }}"
-                            class="text-white me-3" target="_blank"><i class="fab fa-twitter"></i></a>
+                            class="text-white-50 me-3 fs-5" target="_blank"><i class="fab fa-twitter"></i></a>
                     @endif
                     @if (app(\App\Settings\GeneralSettings::class)->linkedin_url)
                         <a href="{{ app(\App\Settings\GeneralSettings::class)->linkedin_url }}"
-                            class="text-white me-3" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            class="text-white-50 me-3 fs-5" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                     @endif
                     @if (app(\App\Settings\GeneralSettings::class)->instagram_url)
-                        <a href="{{ app(\App\Settings\GeneralSettings::class)->instagram_url }}" class="text-white"
-                            target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="{{ app(\App\Settings\GeneralSettings::class)->instagram_url }}"
+                            class="text-white-50 fs-5" target="_blank"><i class="fab fa-instagram"></i></a>
                     @endif
                 </div>
             </div>
