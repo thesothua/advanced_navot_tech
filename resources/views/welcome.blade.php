@@ -22,7 +22,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700,800,900,1000&display=swap"
         rel="stylesheet">
 
     <!-- Bootstrap CSS -->
@@ -158,16 +158,46 @@
             position: relative;
         }
 
-        .dropdown-submenu>.dropdown-menu {
-            top: 0;
-            left: 100%;
-            margin-top: -6px;
-            margin-left: -1px;
-            display: none;
+        @media (min-width: 992px) {
+            .dropdown-submenu>.dropdown-menu {
+                top: 0;
+                left: 100%;
+                margin-top: -6px;
+                margin-left: -1px;
+                display: none;
+            }
+
+            .dropdown-submenu:hover>.dropdown-menu {
+                display: block;
+            }
         }
 
-        .dropdown-submenu:hover>.dropdown-menu {
-            display: block;
+        @media (max-width: 991px) {
+            .dropdown-submenu>.dropdown-menu {
+                position: static;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                border: none;
+                box-shadow: none;
+                background-color: transparent;
+            }
+
+            .dropdown-menu {
+                background-color: transparent;
+                border: none;
+                padding-left: 20px;
+            }
+
+            .dropdown-item {
+                color: rgba(255, 255, 255, 0.7);
+                padding: 0.5rem 1rem;
+            }
+
+            .dropdown-item:hover {
+                color: #fff;
+                background-color: transparent;
+            }
         }
 
         /* Arrow for dropdown submenu */
@@ -289,15 +319,49 @@
     </nav>
 
 
+    <style>
+        @media (min-width: 768px) and (max-width: 900px) {
+            main {
+                overflow-x: hidden;
+                max-width: 100vw;
+            }
+
+            /* .main-content {
+                padding-right: 15px;
+                padding-left: 15px;
+            } */
+
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+        }
+    </style>
     <!-- Page Content -->
     <main>
-        @yield('content')
+        <div class="main-content">
+            @yield('content')
+        </div>
     </main>
 
     <!-- Footer -->
+    <style>
+        @media (min-width: 768px) and (max-width: 900px) {
+            .footer-container {
+                padding-right: 15px;
+                padding-left: 15px;
+            }
+
+            .footer-row {
+                margin-right: 0;
+                margin-left: 0;
+            }
+        }
+    </style>
     <footer class="bg-dark footer-bg text-white pt-5 pb-4 mt-5">
-        <div class="container">
-            <div class="row gy-4">
+        <div class="container footer-container">
+            <div class="row footer-row gy-4">
+
 
                 <!-- Company Info -->
                 <div class="col-md-4 col-lg-4">

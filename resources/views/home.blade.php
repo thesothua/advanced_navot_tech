@@ -157,7 +157,7 @@
                                     <h1 class="display-4 fw-bold text-white mb-3">Your Trusted Safety Partner</h1>
                                     <p class="lead mb-4">Delivering world-class equipment, training, and sustainable
                                         workplace solutions.</p>
-                                    <a href="{{ url('/contact') }}" class="btn btn-warning mt-2 me-2">Get a Quote</a>
+                                    <a href="{{ url('/contact') }}" class="btn btn-light mt-2 me-2">Get a Quote</a>
                                     <a href="{{ url('/products') }}" class="btn btn-outline-light mt-2">Browse Products</a>
                                 </div>
                             </div>
