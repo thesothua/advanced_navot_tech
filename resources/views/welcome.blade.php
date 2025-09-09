@@ -43,8 +43,45 @@
             --transition: all 0.3s ease;
         }
 
+
+        /* ====================== new css ========================= */
+        .bg-danger,
+        .btn-danger {
+            background-color: #0a192f !important;
+            border: none !important;
+
+        }
+
+        .bg-gradient-danger {
+            background: linear-gradient(90deg, #0a192f 0%, #122a4f 100%) !important;
+        }
+
+        .btn-outline-danger {
+            border-color: #0a192f !important;
+            color: #0a192f !important;
+        }
+        
+        .btn-outline-danger:hover {
+            background-color: #0a192f !important;
+            color: #fff !important;
+        } 
+
+        .text-uppercase {
+            color: #0a192f !important;
+        }
+
+        .footer-bg {
+            background: linear-gradient(90deg, #0a192f 0%, #122a4f 100%) !important;
+        }
+
+        .footer-heading {
+            color: #FFFF !important;
+        }
+
+        /* ======================= new css end ========================= */
+
         body {
-            padding-top: 76px;
+            /* padding-top: 76px; */
             font-family: 'Poppins', sans-serif;
             color: var(--dark-color);
             overflow-x: hidden;
@@ -52,7 +89,7 @@
 
         @media (max-width: 768px) {
             body {
-                padding-top: 62px;
+                /* padding-top: 62px; */
             }
         }
 
@@ -63,7 +100,8 @@
 
         @media (max-width: 991px) {
             .navbar-collapse {
-                background: var(--primary-color);
+                /* background: var(--primary-color); */
+                background: #0a192f;
                 padding: 1rem;
                 border-radius: 8px;
                 margin-top: 0.5rem;
@@ -154,7 +192,7 @@
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-danger fixed-top py-3">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger stiky-top py-3">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="/">
                 <img src="{{ asset('storage/' . $globalSettings->logo) }}" style="max-width: 100px; max-height: 50px;"
@@ -257,25 +295,23 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white pt-5 pb-4 mt-5">
+    <footer class="bg-dark footer-bg text-white pt-5 pb-4 mt-5">
         <div class="container">
             <div class="row gy-4">
 
                 <!-- Company Info -->
                 <div class="col-md-4 col-lg-4">
-                    <h5 class="text-uppercase fw-bold text-danger border-bottom pb-2">AdvancedNova Pvt Ltd</h5>
+                    <h5 class="text-uppercase fw-bold text-danger border-bottom pb-2 footer-heading">AdvancedNova Pvt Ltd</h5>
                     <p class="text-white-50 mt-3">
-                        AdvancedNova is a safety solutions provider based in Ahmedabad Gujarat.
-                        We specialize in globally certified PPE, integrated fire & fall protection systems, emergency
-                        equipment, and custom-engineered safety solutions for high-risk environments.
+                        {{ app(\App\Settings\GeneralSettings::class)->footer_description ?? '' }}
                     </p>
-                    <p class="text-white-50 mb-0"><em>"Every worker deserves to go home safe, every single day."</em>
+                    <p class="text-white-50 mb-0"><em>"Every person deserves to go home safe, every single day."</em>
                     </p>
                 </div>
 
                 <!-- Quick Links -->
                 <div class="col-md-2 col-lg-2">
-                    <h5 class="text-uppercase fw-bold text-danger border-bottom pb-2">Quick Links</h5>
+                    <h5 class="text-uppercase fw-bold text-danger border-bottom pb-2 footer-heading">Quick Links</h5>
                     <ul class="list-unstyled mt-3">
                         <li><a href="{{ url('/') }}"
                                 class="text-white-50 text-decoration-none d-block mb-2">Home</a></li>
@@ -290,7 +326,7 @@
 
                 <!-- Services -->
                 <div class="col-md-3 col-lg-3">
-                    <h5 class="text-uppercase fw-bold text-danger border-bottom pb-2">Our Solutions</h5>
+                    <h5 class="text-uppercase fw-bold text-danger border-bottom pb-2 footer-heading">Our Solutions</h5>
                     <ul class="list-unstyled mt-3 text-white-50">
                         <li class="mb-2">✔️ Certified PPE & Safety Equipment</li>
                         <li class="mb-2">✔️ Fire Extinguishers & Alarm Systems</li>
@@ -303,7 +339,7 @@
 
                 <!-- Contact -->
                 <div class="col-md-3 col-lg-3">
-                    <h5 class="text-uppercase fw-bold text-danger border-bottom pb-2">Contact Us</h5>
+                    <h5 class="text-uppercase fw-bold text-danger border-bottom pb-2 footer-heading">Contact Us</h5>
                     <ul class="list-unstyled mt-3 text-white-50">
                         @if (app(\App\Settings\GeneralSettings::class)->address)
                             <li class="mb-2"><i
@@ -360,7 +396,11 @@
                     @endif
                     @if (app(\App\Settings\GeneralSettings::class)->instagram_url)
                         <a href="{{ app(\App\Settings\GeneralSettings::class)->instagram_url }}"
-                            class="text-white-50 fs-5" target="_blank"><i class="fab fa-instagram"></i></a>
+                            class="text-white-50 fs-5 me-3" target="_blank"><i class="fab fa-instagram"></i></a>
+                    @endif
+                    @if (app(\App\Settings\GeneralSettings::class)->youtube_url)
+                        <a href="{{ app(\App\Settings\GeneralSettings::class)->youtube_url }}"
+                            class="text-white-50 fs-5" target="_blank"><i class="fab fa-youtube"></i></a>   
                     @endif
                 </div>
             </div>

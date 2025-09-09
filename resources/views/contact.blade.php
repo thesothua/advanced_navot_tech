@@ -162,7 +162,11 @@
                                     <div>
                                         <h6 class="fw-bold mb-1">Email</h6>
                                         <p class="text-muted mb-0">
-                                            {{ app(\App\Settings\GeneralSettings::class)->contact_email }}</p>
+                                            <a href="mailto:{{ app(\App\Settings\GeneralSettings::class)->contact_email }}"
+                                                class="text-decoration-none text-muted cursor-pointer">
+                                                {{ app(\App\Settings\GeneralSettings::class)->contact_email }}
+                                            </a>
+                                        </p>
                                     </div>
                                 </div>
                             @endif
@@ -199,8 +203,8 @@
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3670.2495061563154!2d72.5512174748261!3d23.0879605138859!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e831238329bad%3A0xde66853f796e4777!2sAashray%20Residency!5e0!3m2!1sen!2sin!4v1756590743849!5m2!1sen!2sin"
                                 width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade"></iframe> --}}
-                                <iframe src="{{ app(\App\Settings\GeneralSettings::class)->map_embed_url }}" width="600"
-                                    height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                                <iframe src="{{ app(\App\Settings\GeneralSettings::class)->map_embed_url }}"
+                                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                                     referrerpolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                         </div>
@@ -214,21 +218,28 @@
                 <div class="social-links">
                     @if (app(\App\Settings\GeneralSettings::class)->facebook_url)
                         <a href="{{ app(\App\Settings\GeneralSettings::class)->facebook_url }}"
-                            class="social-link bg-danger text-white" target="_blank"><i
+                            class="social-link bg-danger text-white text-decoration-none" target="_blank"><i
                                 class="fab fa-facebook-f"></i></a>
                     @endif
                     @if (app(\App\Settings\GeneralSettings::class)->twitter_url)
                         <a href="{{ app(\App\Settings\GeneralSettings::class)->twitter_url }}"
-                            class="social-link bg-danger text-white" target="_blank"><i class="fab fa-twitter"></i></a>
+                            class="social-link bg-danger text-white text-decoration-none" target="_blank"><i
+                                class="fab fa-twitter"></i></a>
                     @endif
                     @if (app(\App\Settings\GeneralSettings::class)->linkedin_url)
                         <a href="{{ app(\App\Settings\GeneralSettings::class)->linkedin_url }}"
-                            class="social-link bg-danger text-white" target="_blank"><i
+                            class="social-link bg-danger text-white text-decoration-none" target="_blank"><i
                                 class="fab fa-linkedin-in"></i></a>
                     @endif
                     @if (app(\App\Settings\GeneralSettings::class)->instagram_url)
                         <a href="{{ app(\App\Settings\GeneralSettings::class)->instagram_url }}"
-                            class="social-link bg-danger text-white" target="_blank"><i class="fab fa-instagram"></i></a>
+                            class="social-link bg-danger text-white text-decoration-none" target="_blank"><i
+                                class="fab fa-instagram"></i></a>
+                    @endif
+                    @if (app(\App\Settings\GeneralSettings::class)->youtube_url)
+                        <a href="{{ app(\App\Settings\GeneralSettings::class)->youtube_url }}"
+                            class="social-link bg-danger text-white text-decoration-none" target="_blank"><i
+                                class="fab fa-youtube"></i></a>
                     @endif
                 </div>
             </div>
