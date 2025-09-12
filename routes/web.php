@@ -9,13 +9,44 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
+use Spatie\Sitemap\Sitemap;
+use Spatie\Sitemap\Tags\Url;
 
 // Public routes
 Route::get('/', function () {
     // return view('home');
     return view('home');
     // Route::view('/', 'home')->name('home');
+});
+
+Route::get('/sitemap.xml', function () {
+
+    set_time_limit(300);
+
+    $sitemap = Sitemap::create()
+        ->add(Url::create('/')->setPriority(1.0)->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY))
+
+    // Static Pages
+        ->add(Url::create('/about')
+                ->setPriority(0.8)
+                ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
+        ->add(Url::create('/contact')
+                ->setPriority(0.6)
+                ->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY));
+
+    Product::all()->each(function ($product) use ($sitemap) {
+        $sitemap->add(
+            Url::create("/products/{$product->slug}")
+                ->setLastModificationDate($product->updated_at)
+                ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
+                ->setPriority(0.7)
+        );
+    });
+
+    $sitemap->writeToFile(public_path('sitemap.xml'));
+    return response()->file(public_path('sitemap.xml'));
 });
 
 Route::view('/about', 'about')->name('about');
@@ -27,7 +58,6 @@ Route::post('/contact', [NotificationController::class, 'submitForm'])->name('co
 Route::get('/products/{product:slug}', [App\Http\Controllers\ProductController::class, 'show'])->name('products.show');
 Route::get('/categories/{category:slug}', [App\Http\Controllers\CategoryController::class, 'show'])->name('categories.show');
 
-
 // Test route to check if basic functionality works
 
 // Authentication routes (handled by Breeze)
@@ -35,11 +65,9 @@ require __DIR__ . '/auth.php';
 
 // Admin routes (protected by auth and permissions)
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
-    
+
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/no-permission', [DashboardController::class, 'noPermission'])->name('no-permission');
-
-
 
     // User Management (Super Admin only)
     // Route::middleware(['role:super-admin'])->group(function () {
