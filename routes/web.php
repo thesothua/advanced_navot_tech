@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\QuotationController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
@@ -57,6 +58,10 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::middleware(['permission:manage-brands'])->group(function () {
         Route::resource('brands', BrandController::class);
     });
+
+    // Quotation Management
+    Route::resource('quotations', QuotationController::class)->only(['index','create','store','show']);
+    Route::get('quotations/product/{product}', [QuotationController::class, 'productDetails'])->name('quotations.product');
 
     // Settings Management (Super Admin only)
     Route::middleware(['role:super-admin'])->group(function () {
