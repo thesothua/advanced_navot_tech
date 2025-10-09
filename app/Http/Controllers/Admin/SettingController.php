@@ -10,6 +10,9 @@ class SettingController extends Controller
     public function index()
     {
         $settings = app(GeneralSettings::class);
+
+        // dd($settings);
+
         return view('admin.settings.index', compact('settings'));
     }
 
@@ -39,6 +42,8 @@ class SettingController extends Controller
             'favicon'            => 'nullable|image|mimes:ico,png|max:1024',
             'map_embed_url'      => 'nullable|url',
             'working_hours'      => 'nullable|string|max:255',
+            'terms_and_conditions' => 'nullable|array',
+            'terms_and_conditions.*' => 'nullable|string|max:500',
         ]);
 
         $settings = app(GeneralSettings::class);
@@ -56,6 +61,7 @@ class SettingController extends Controller
         $settings->youtube_url        = $request->youtube_url;
         $settings->map_embed_url      = $request->map_embed_url;
         $settings->working_hours      = $request->working_hours;
+        $settings->terms_and_conditions = $request->terms_and_conditions;
 
         // Handle logo upload
         if ($request->hasFile('logo')) {

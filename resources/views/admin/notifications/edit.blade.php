@@ -68,7 +68,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="mb-3">
-                        <label for="sku" class="form-label">SKU</label>
+                        <label for="sku" class="form-label">Product Code</label>
                         <input type="text" class="form-control @error('sku') is-invalid @enderror" 
                                id="sku" name="sku" value="{{ old('sku', $product->sku) }}">
                         @error('sku')

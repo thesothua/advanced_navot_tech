@@ -11,6 +11,21 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ProductController extends Controller
 {
+    // Get products by category for AJAX
+    public function getByCategory(Request $request)
+    {
+        $categoryId = $request->category_id;
+        if (!$categoryId) {
+            return response()->json([]);
+        }
+        $products = Product::whereHas('categories', function($q) use ($categoryId) {
+                $q->where('categories.id', $categoryId);
+            })
+            ->select('id','name')
+            ->orderBy('name')
+            ->get();
+        return response()->json($products);
+    }
     // public function index(Request $request)
     // {
     //     if ($request->ajax()) {

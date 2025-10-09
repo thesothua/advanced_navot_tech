@@ -20,11 +20,10 @@
 
 
     <!-- Google Fonts -->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    {{-- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">  --}}
-
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&family=Source+Sans+Pro&family=Noto+Sans&family=Lato&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -83,9 +82,7 @@
 
         body {
             /* padding-top: 76px; */
-            /* font-family: "sans-serif"; */
-
-            font-family:  "Lato", sans-serif;
+            font-family: 'Poppins', sans-serif;
             color: var(--dark-color);
             overflow-x: hidden;
         }
@@ -161,46 +158,16 @@
             position: relative;
         }
 
-        @media (min-width: 992px) {
-            .dropdown-submenu>.dropdown-menu {
-                top: 0;
-                left: 100%;
-                margin-top: -6px;
-                margin-left: -1px;
-                display: none;
-            }
-
-            .dropdown-submenu:hover>.dropdown-menu {
-                display: block;
-            }
+        .dropdown-submenu>.dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-top: -6px;
+            margin-left: -1px;
+            display: none;
         }
 
-        @media (max-width: 991px) {
-            .dropdown-submenu>.dropdown-menu {
-                position: static;
-                width: 100%;
-                margin: 0;
-                padding: 0;
-                border: none;
-                box-shadow: none;
-                background-color: transparent;
-            }
-
-            .dropdown-menu {
-                background-color: transparent;
-                border: none;
-                padding-left: 20px;
-            }
-
-            .dropdown-item {
-                color: rgba(255, 255, 255, 0.7);
-                padding: 0.5rem 1rem;
-            }
-
-            .dropdown-item:hover {
-                color: #fff;
-                background-color: transparent;
-            }
+        .dropdown-submenu:hover>.dropdown-menu {
+            display: block;
         }
 
         /* Arrow for dropdown submenu */
@@ -322,49 +289,15 @@
     </nav>
 
 
-    <style>
-        @media (min-width: 768px) and (max-width: 900px) {
-            main {
-                overflow-x: hidden;
-                max-width: 100vw;
-            }
-
-            /* .main-content {
-                padding-right: 15px;
-                padding-left: 15px;
-            } */
-
-            img {
-                max-width: 100%;
-                height: auto;
-            }
-        }
-    </style>
     <!-- Page Content -->
     <main>
-        <div class="main-content">
-            @yield('content')
-        </div>
+        @yield('content')
     </main>
 
     <!-- Footer -->
-    <style>
-        @media (min-width: 768px) and (max-width: 900px) {
-            .footer-container {
-                padding-right: 15px;
-                padding-left: 15px;
-            }
-
-            .footer-row {
-                margin-right: 0;
-                margin-left: 0;
-            }
-        }
-    </style>
     <footer class="bg-dark footer-bg text-white pt-5 pb-4 mt-5">
-        <div class="container footer-container">
-            <div class="row footer-row gy-4">
-
+        <div class="container">
+            <div class="row gy-4">
 
                 <!-- Company Info -->
                 <div class="col-md-4 col-lg-4">

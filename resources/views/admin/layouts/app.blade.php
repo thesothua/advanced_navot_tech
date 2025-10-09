@@ -258,8 +258,18 @@
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}"
                                     href="{{ route('admin.users.index') }}">
-                                    <i class="fas fa-users-gear me-2"></i>
+                                    <i class="fas fa-user-gear me-2"></i>
                                     Users
+                                </a>
+                            </li>
+                        @endif
+
+                        @if (canSuperAdminOr('view-customers'))
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('admin.customers.*') ? 'active' : '' }}"
+                                    href="{{ route('admin.customers.index') }}">
+                                    <i class="fas fa-users-gear me-2"></i>
+                                    Customers
                                 </a>
                             </li>
                         @endif
@@ -281,7 +291,15 @@
                             </li>
                         @endif
 
-
+                        @if (canSuperAdminOr('view-quotations'))
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('admin.quotations.*') ? 'active' : '' }}"
+                                    href="{{ route('admin.quotations.index') }}">
+                                    <i class="fas fa-file-invoice-dollar me-2"></i>
+                                    Quotations
+                                </a>
+                            </li>
+                        @endif
 
                         @if (canSuperAdminOr('view-categories'))
                             <li class="nav-item">
@@ -292,6 +310,16 @@
                                 </a>
                             </li>
                         @endif
+
+                        {{-- @if (canSuperAdminOr('view-quotations'))
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('admin.quotations.*') ? 'active' : '' }}"
+                                    href="{{ route('admin.quotations.index') }}">
+                                    <i class="fas fa-file-invoice-dollar me-2"></i>
+                                    Quotations
+                                </a>
+                            </li>
+                        @endif --}}
 
                         @if (canSuperAdminOr('view-brands'))
                             <li class="nav-item">

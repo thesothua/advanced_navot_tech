@@ -26,6 +26,7 @@ class GeneralSettings extends Settings
     public ?string $about_image_2;
     public ?string $map_embed_url;
     public ?string $working_hours;
+    public ?array $terms_and_conditions;
 
     public static function group(): string
     {

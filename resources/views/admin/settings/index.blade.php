@@ -95,6 +95,40 @@
                             @enderror
                         </div>
 
+                        <h6 class="mt-4">Terms & Conditions</h6>
+                        <div class="mb-3">
+                            <label class="form-label">Quotation Terms & Conditions</label>
+                            <div id="terms-container">
+                                @php
+                                    $terms = old('terms_and_conditions', $settings->terms_and_conditions ?? []);
+                                    if (empty($terms)) {
+                                        $terms = [
+                                            "This quotation is valid for 30 days from the date of issue.",
+                                            "Prices are subject to change without prior notice.",
+                                            "Payment terms: Net 30 days.",
+                                            "Delivery will be made within 7-14 business days after order confirmation.",
+                                            "All disputes are subject to jurisdiction of local courts."
+                                        ];
+                                    }
+                                @endphp
+                                @foreach($terms as $index => $term)
+                                    <div class="input-group mb-2 term-item">
+                                        <input type="text" class="form-control @error('terms_and_conditions.'.$index) is-invalid @enderror"
+                                            name="terms_and_conditions[]" value="{{ $term }}" placeholder="Enter term and condition">
+                                        <button type="button" class="btn btn-outline-danger remove-term" @if(count($terms) <= 1) disabled @endif>
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                        @error('terms_and_conditions.'.$index)
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                @endforeach
+                            </div>
+                            <button type="button" class="btn btn-sm btn-success" id="add-term">
+                                <i class="fas fa-plus"></i> Add Term
+                            </button>
+                        </div>
+
                         <h6 class="mt-4">Social Media Links</h6>
                         <div class="row">
                             <div class="col-md-6">
@@ -333,4 +367,49 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
     @endif
+
+    @push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const termsContainer = document.getElementById('terms-container');
+            const addTermBtn = document.getElementById('add-term');
+
+            // Add new term
+            addTermBtn.addEventListener('click', function() {
+                const termItem = document.createElement('div');
+                termItem.className = 'input-group mb-2 term-item';
+                termItem.innerHTML = `
+                    <input type="text" class="form-control" name="terms_and_conditions[]" placeholder="Enter term and condition">
+                    <button type="button" class="btn btn-outline-danger remove-term">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                `;
+                termsContainer.appendChild(termItem);
+                updateRemoveButtons();
+            });
+
+            // Remove term
+            termsContainer.addEventListener('click', function(e) {
+                if (e.target.closest('.remove-term')) {
+                    const termItem = e.target.closest('.term-item');
+                    termItem.remove();
+                    updateRemoveButtons();
+                }
+            });
+
+            // Update remove buttons state
+            function updateRemoveButtons() {
+                const termItems = termsContainer.querySelectorAll('.term-item');
+                const removeButtons = termsContainer.querySelectorAll('.remove-term');
+                
+                removeButtons.forEach(btn => {
+                    btn.disabled = termItems.length <= 1;
+                });
+            }
+
+            // Initialize
+            updateRemoveButtons();
+        });
+    </script>
+    @endpush
 @endsection
