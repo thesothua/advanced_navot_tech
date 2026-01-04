@@ -185,12 +185,8 @@
         <div class="company-info">
             <h1>{{ app(\App\Settings\GeneralSettings::class)->site_name }}</h1>
             <p>{{ app(\App\Settings\GeneralSettings::class)->address }}</p>
-            <p>Phone:
-            <p class="mb-2">
-                {{ app(\App\Settings\GeneralSettings::class)->contact_phone }};
-            </p>
-
-            </p> Email: {{ app(\App\Settings\GeneralSettings::class)->contact_email }}</p>
+            <p>Phone: {{ app(\App\Settings\GeneralSettings::class)->contact_phone }}</p>
+            <p>Email: {{ app(\App\Settings\GeneralSettings::class)->contact_email }}</p>
             <p>Website: {{ env('APP_URL') }}</p>
         </div>
         <div class="quotation-info">
@@ -198,9 +194,9 @@
             <p><strong>Quotation No:</strong> {{ $quotation->quotation_no }}</p>
             <p><strong>Date:</strong> {{ $quotation->quotation_date->format('d M Y') }}</p>
             <p><strong>Currency:</strong> {{ $quotation->currency }}</p>
-            @if ($quotation->make)
+            {{-- @if ($quotation->make)
                 <p><strong>Make:</strong> {{ $quotation->make }}</p>
-            @endif
+            @endif --}}
         </div>
     </div>
 

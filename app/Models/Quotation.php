@@ -24,7 +24,7 @@ class Quotation extends Model
         'quotation_no',
         'quotation_date',
         'currency',
-        'make',
+        // 'make',
         'subtotal',
         'total_gst',
         'total_discount',

@@ -27,6 +27,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+
+        
         // Ensure the product is active
         if (! $product->is_active) {
             abort(404);
